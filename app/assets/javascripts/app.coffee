@@ -1,0 +1,2 @@
+teamBoard = angular.module('teamboard',[
+])
