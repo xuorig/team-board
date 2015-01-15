@@ -9,10 +9,13 @@
 <body>
 
   <div class="container-fluid text-center">
-    <%= image_tag 'teamboard-logo.png', class: 'logo-splash', alt: 'a face that is unnervingly happy'%>
-    <h2 class="tagline">TeamBoard is a new way to organise tasks, ideas and reminders and share them with your team.</h2>
-    <div><a class="btn btn-sign-up">Sign up - For free.</a><div>
-    <div class="login-link"><a href="#">Or log in.</a></div>
+    <div class="row">
+      <div class="col-md-12">
+        <%= image_tag 'teamboard-logo.png', class: 'logo-splash', alt: 'a face that is unnervingly happy'%>
+        <h2 class="tagline">TeamBoard is a new way to organise tasks, ideas and reminders and share them with your team.</h2>
+        <div><%= link_to "Sign in with Google", "/auth/google_oauth2", id: "sign_in", class: "btn btn-sign-up" %></div>
+      </div>
+    </div>
 
   </div>
 
