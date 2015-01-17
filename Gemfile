@@ -26,7 +26,10 @@ gem 'sass'
 gem 'bower-rails'
 gem 'omniauth'
 gem 'omniauth-facebook'
-gem "omniauth-google-oauth2"
+gem 'omniauth-google-oauth2'
+gem 'unicorn'
+gem 'font-awesome-sass'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

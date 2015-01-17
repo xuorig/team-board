@@ -19,10 +19,10 @@
 .btn-sign-up {
   margin-top: 15px;
   height: 42px;
-  width: 190px;
+  width: auto;
   font-size: 21px !important;
   color: white;
-  background-color: #db5a78;
+  background-color: #2980b9;
   border-color: #db5a78;
 }
 
@@ -31,4 +31,98 @@
     color: #999;
   }
   padding-top: 15px;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  overflow-x: hidden;
+  overflow-y: auto;
+  height: inherit;
+}
+
+/* Sidebar stuff */
+.main-logo {
+  height: 180px;
+  width: 240px;
+  position: fixed;
+  background: image-url("tb.png") no-repeat scroll 50% 50% transparent;
+  background-size: 180px auto;
+  left: 0;
+  top: 0;
+  -webkit-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  transform: translateZ(0);
+}
+
+.signoutlink {
+  color: black;
+}
+
+.sidebar {
+  left: 0;
+  background-color: #f2f2f2;
+  top: 180px;
+  overflow-y: auto !important;
+  overflow-x: hidden;
+  box-sizing: content-box;
+  display: block;
+  position: fixed;
+  bottom: 0;
+  right: auto;
+  width: 240px;
+  margin: 0 !important;
+  padding: 0px;
+
+  font-size: 15px;
+  line-height: 1.6em;
+  outline: 0;
+  list-style: none;
+
+  a {
+    display: block;
+    padding: 6px 12px;
+    text-decoration: none;
+    color: #9b9b9b;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
+  a:hover {
+    color:#494949;
+    text-decoration: none;
+    .glyphicon {
+      color: #2980b9;
+    }
+  }
+
+  li {
+    font-size: 1.2em;
+    line-height: 2.33333333em;
+    padding:5px;
+  }
+}
+
+/* main content */
+
+#wrap {
+  margin-left: 240px;
+  margin-right: 0;
+  width: auto;
+  background-color: #fff;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  height: inherit;
+  padding: 0 !important;
+  position: relative;
+}
+
+#main {
+  height: 100%;
+  position: relative;
+}
+
+.content {
+  padding-left: 10px;
 }
