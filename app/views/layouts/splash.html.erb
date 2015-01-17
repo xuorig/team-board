@@ -10,6 +10,12 @@
 
   <div class="container-fluid text-center">
     <div class="row">
+      <% if current_user %>
+        Signed in as <strong><%= current_user.name %></strong>!
+        <%= link_to "Sign out", signout_path, id: "sign_out" %>
+      <% end %>
+    </div>
+    <div class="row">
       <div class="col-md-12">
         <%= image_tag 'teamboard-logo.png', class: 'logo-splash', alt: 'a face that is unnervingly happy'%>
         <h2 class="tagline">TeamBoard is a new way to organise tasks, ideas and reminders and share them with your team.</h2>
