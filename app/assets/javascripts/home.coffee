@@ -1,3 +1,8 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://coffeescript.org/
+$ ->
+  $("#toggle-user-menu").on "click", ->
+    console.log("YO");
+    submenu = $("#user-menu .sidebar-submenu")
+    if submenu.hasClass("active")
+      submenu.removeClass("active")
+    else
+      submenu.addClass("active")
