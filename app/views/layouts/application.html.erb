@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="teamboard" class="bluebackbround">
+<html class="bluebackbround">
 <head>
   <title>TeamBoard</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
@@ -12,7 +12,8 @@
     <li id="user-menu" class="sidebar-item">
       <a id="toggle-user-menu" href="#">
           <i class="glyphicon glyphicon-user"></i>
-          <%= current_user.name %>
+          <!--%= current_user.name %-->
+          Marc-Andre Giroux
       </a>
       <ul class="sidebar-submenu">
         <li class="sidebar-submenu-item">
@@ -49,16 +50,11 @@
     <li class="sidebar-item">
       <a href="#"><i class="glyphicon glyphicon-info-sign"></i> About</a>
     </li>
-    <li class="sidebar-item">
-      <a class="signoutlink" href="signout"><i class="glyphicon glyphicon-off"></i> Sign Out</a>
-    </li>
     
   </ul>
 
   <div id="wrap">
-    <div id="main" class="container">
-      <% yield %>
-    </div>
+    <div id="main" class="container"><%= yield %></div>
   </div>
 
 </body>
