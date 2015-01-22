@@ -2,13 +2,14 @@
 <html class="bluebackbround">
 <head>
   <title>TeamBoard</title>
+  <base href="/" />
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
-<body style="background-color: #2980b9 !important;">
+<body  ng-app="teamboard" style="background-color: #2980b9 !important;">
   <div class="main-logo"></div>
-  <ul class="sidebar">
+  <ul class="sidebar" ng-controller="MenuController">
     <li id="user-menu" class="sidebar-item">
       <a id="toggle-user-menu" href="#">
           <i class="glyphicon glyphicon-user"></i>
@@ -35,26 +36,27 @@
         </li>
       </ul>
     </li>
-    <li class="sidebar-item">  
-      <a href="#"><i class="glyphicon glyphicon-th-list"></i> Projects</a>
+    <li ng-class="{current: isCurrentPath('/projects')}" class="sidebar-item">  
+      <a href="#/projects"><i class="glyphicon glyphicon-th-list"></i> Projects</a>
     </li>
-    <li class="sidebar-item">
-      <a href="#"><i class="glyphicon glyphicon-globe"></i> My Team</a>
+    <li ng-class="{current: isCurrentPath('/teams')}" class="sidebar-item">
+      <a href="#/teams"><i class="glyphicon glyphicon-globe"></i> My Team</a>
     </li>
-    <li class="sidebar-item">
-      <a href="#"><i class="glyphicon glyphicon-th"></i> Boards</a>
+    <li ng-class="{current: isCurrentPath('/boards')}" class="sidebar-item">
+      <a href="#/boards"><i class="glyphicon glyphicon-th"></i> Boards</a>
     </li>
-    <li class="sidebar-item">
-      <a href="#"><i class="glyphicon glyphicon-calendar"></i> Calendar</a>
+    <li ng-class="{current: isCurrentPath('/calendar')}" class="sidebar-item">
+      <a href="#/calendar"><i class="glyphicon glyphicon-calendar"></i> Calendar</a>
     </li>
-    <li class="sidebar-item">
-      <a href="#"><i class="glyphicon glyphicon-info-sign"></i> About</a>
+    <li ng-class="{current: isCurrentPath('/about')}" class="sidebar-item">
+      <a href="#/about"><i class="glyphicon glyphicon-info-sign"></i> About</a>
     </li>
     
   </ul>
 
   <div id="wrap">
-    <div id="main" class="container"><%= yield %></div>
+    <div id="main" class="container">
+      <div class="col-md-12" ng-view></div>
   </div>
 
 </body>

@@ -81,7 +81,7 @@ body {
   outline: 0;
   list-style: none;
 
-  a {
+  a, a:visited, a:active {
     display: block;
     padding: 6px 12px;
     text-decoration: none;
@@ -96,10 +96,6 @@ body {
     .glyphicon {
       color: #2980b9;
     }
-  }
-
-  a:active {
-    text-decoration: none;
   }
 
   li {
@@ -125,6 +121,13 @@ body {
     -webkit-transition: max-height 0.5s linear;
     -moz-transition: max-height 0.5s linear;
     transition: max-height 0.5s linear;
+  }
+
+  .current {
+    background-color: white;
+    .glyphicon {
+      color: #2980b9;
+    }
   }
 
 
