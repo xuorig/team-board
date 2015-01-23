@@ -1,7 +1,7 @@
 class HomeController < ApplicationController
   def index
     if current_user.nil?
-      render :layout => "application"
+      render :layout => "splash"
     else
       render :layout => "application"
     end
