@@ -1,9 +1,8 @@
 Rails.application.routes.draw do
-  # The priority is based upon order of creation: first created -> highest priority.
-  # See how all your routes lay out with "rake routes".
-
-  # You can have the root of your site routed with "root"
-  get "*path" => "home#index"
+  scope :api do
+    get "/teams(.:format)" => "teams#index"
+    get "/teams/:id(.:format)" => "teams#show"
+  end
 
   get 'auth/:provider/callback' => 'sessions#create'
   get 'auth/failure' => redirect('/')
@@ -11,6 +10,7 @@ Rails.application.routes.draw do
 
   resources :sessions, only: [:create, :destroy]
 
+  get "*path" => "home#index"
   root 'home#index'
 
   # Example of regular route:
