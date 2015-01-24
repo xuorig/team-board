@@ -11,4 +11,14 @@ class TeamsController < ApplicationController
   def show
     render json: current_user.teams.find(params[:id])
   end
+
+  # POST /teams
+  def create
+  	team = Team.create!(safe_params)
+  	render json: task, status: 201
+  end
+
+  def safe_params
+	params.require(:name).permit(:description)
+  end
 end

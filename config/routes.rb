@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   scope :api do
     get "/teams(.:format)" => "teams#index"
     get "/teams/:id(.:format)" => "teams#show"
+    post "teams(.:format)" => "teams#create"
   end
 
   get 'auth/:provider/callback' => 'sessions#create'
