@@ -9,7 +9,7 @@ class TeamsController < ApplicationController
   # GET /teams/:id
   # GET /teams/:id.json
   def show
-    render json: current_user.teams.find(params[:id])
+    render json: current_user.teams.find(params[:id]).to_json(:include => [:owner, :users, :admins])
   end
 
   # POST /teams

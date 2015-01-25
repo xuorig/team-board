@@ -24,3 +24,70 @@
   background-color: #F7F7F7;
   cursor: pointer;
 }
+
+.team-page {
+  .title {
+    font-weight: bold;
+    color: #4d4d4d;
+    font-size: 18px;
+  }
+
+  .section {
+      padding: 20px;
+      border-bottom: 1px solid #e0e0e0;
+  }
+
+  .transfer {
+    color: #9b9b9b;
+    text-decoration: none;
+    font-size: 16px;
+  }
+  .transfer:hover {
+    color: #2980b9;
+    text-decoration: none;
+  }
+
+  .remove-user {
+    margin-left: 5px;
+    color: #9b9b9b;
+    font-size: 16px;
+  }
+  .remove-user:hover {
+    color: #F27474;
+    text-decoration: none;
+  }
+
+  .add-user {
+    font-size: 20px;
+    color: #A5DC86;
+  }
+
+  .add {
+    color: #9b9b9b;
+    font-size: 23px;
+    cursor: pointer;
+  }
+  .add:hover {
+    color: #A5DC86;
+  }
+
+
+  .user-list {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-bottom: 0px;
+    .hidden-link {
+      transition: opacity 0.4s cubic-bezier(0.7, 0, 0.175, 1) 0s;
+      opacity: 0;
+    }
+    font-size: 18px;
+    color: #4d4d4d;
+  }
+
+  .user-list:hover {
+    .hidden-link {
+      transition: opacity 0.4s cubic-bezier(0.7, 0, 0.175, 1) 0s;
+      opacity: 1;
+    }
+  }
+}

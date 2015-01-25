@@ -25,6 +25,10 @@ teamboard.config([ '$routeProvider', '$locationProvider',
         templateUrl: "teams.html",
         controller: "TeamsController"
       })
+      .when('/teams/:team_id', {
+        templateUrl: "team.html",
+        controller: "TeamController"
+      })      
       .when('/calendar', {
         templateUrl: "calendar.html",
         controller: "BoardController"
@@ -51,6 +55,12 @@ controllers.controller("TeamsController", [ '$scope','$resource'
   ($scope, $resource)->
     teams = $resource('/api/teams/', {format: 'json' })
     $scope.teams = teams.query()
+])
+
+controllers.controller("TeamController", [ '$scope','$resource','$routeParams'
+  ($scope, $resource, $routeParams)->
+    team = $resource('/api/teams/' + $routeParams.team_id, {format: 'json' })
+    $scope.team = team.get()
 ])
 
 controllers.controller("BoardController", [ '$scope',

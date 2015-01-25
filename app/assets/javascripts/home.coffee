@@ -13,3 +13,6 @@ $ ->
       body.removeClass("ham-menu-active")
     else
       body.addClass("ham-menu-active")
+
+  $(".sidebar a").on "click", ->
+    $("body").removeClass("ham-menu-active")
