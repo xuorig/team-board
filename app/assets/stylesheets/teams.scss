@@ -1,0 +1,26 @@
+.team {
+  padding: 20px;
+  border-bottom: 1px solid #e0e0e0;
+  .icon-col {
+    text-align: center;
+    .team-icon {
+      font-size: 58px;
+      color:#9b9b9b;
+    }
+  }
+  .name {
+    font-size: 18px;
+    font-weight: bold;
+    color: #4d4d4d;
+  }
+  .description {
+    font-size: 12px;
+    font-weight: normal;
+    color:#9b9b9b;
+  }
+}
+
+.team:hover {
+  background-color: #F7F7F7;
+  cursor: pointer;
+}

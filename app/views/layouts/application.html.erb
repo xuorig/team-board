@@ -7,14 +7,21 @@
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
-<body  ng-app="teamboard" style="background-color: #2980b9 !important;">
+<body ng-app="teamboard" style="background-color: #f2f2f2 !important;">
+  <nav class="navbar navbar-default navbar-fixed-top mobile-navbar">
+    <div class="container-fluid">
+      <div class="navbar-icons pull-left">
+        <a id="toggle-ham-menu"><i class="ham glyphicon glyphicon-menu-hamburger"></i></a>
+        <%= image_tag 'tb.png', class: 'logo', alt: 'Teamboard Logo'%>
+      </div>
+    </div>
+  </nav>
   <div class="main-logo"></div>
   <ul class="sidebar" ng-controller="MenuController">
-    <li id="user-menu" class="sidebar-item">
+    <li id="user-menu" class="sidebar-item first-element">
       <a id="toggle-user-menu" href="#">
-          <i class="glyphicon glyphicon-user"></i>
-          <!--%= current_user.name %-->
-          Marc-Andre Giroux
+        <i class="glyphicon glyphicon-user"></i>
+        <%= current_user.name %>
       </a>
       <ul class="sidebar-submenu">
         <li class="sidebar-submenu-item">
@@ -55,9 +62,9 @@
   </ul>
 
   <div id="wrap">
-    <div id="main" class="container">
+    <div class="main container-fluid">
       <div class="col-md-12" ng-view></div>
-  </div>
+    </div>
 
-</body>
-</html>
+  </body>
+  </html>

@@ -2,6 +2,8 @@ teamboard = angular.module('teamboard',[
   'templates',
   'ngRoute',
   'controllers',
+  'ngResource',
+  'ngAnimate',
 ])
 
 teamboard.config([ '$routeProvider', '$locationProvider',
@@ -13,7 +15,7 @@ teamboard.config([ '$routeProvider', '$locationProvider',
       })
       .when('/boards', {
         templateUrl: "boards.html",
-        controller: "BoardController"
+        controller: "BoardController" 
       })
       .when('/projects', {
         templateUrl: "projects.html",
@@ -21,7 +23,7 @@ teamboard.config([ '$routeProvider', '$locationProvider',
       })
       .when('/teams', {
         templateUrl: "teams.html",
-        controller: "BoardController"
+        controller: "TeamsController"
       })
       .when('/calendar', {
         templateUrl: "calendar.html",
@@ -43,6 +45,12 @@ controllers.controller("MenuController", [ '$scope','$location'
 
 controllers.controller("HomeController", [ '$scope',
   ($scope)->
+])
+
+controllers.controller("TeamsController", [ '$scope','$resource'
+  ($scope, $resource)->
+    teams = $resource('/api/teams/', {format: 'json' })
+    $scope.teams = teams.query()
 ])
 
 controllers.controller("BoardController", [ '$scope',

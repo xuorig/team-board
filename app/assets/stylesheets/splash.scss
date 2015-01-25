@@ -1,0 +1,47 @@
+.logo-splash {
+  height: 90px;
+  margin-top: 80px;
+  margin-bottom: 20px
+}
+
+.tagline {
+  margin: auto;
+  color: #4d4d4d;
+  max-width: 900px;
+  font-weight: bold;
+  font-size: 28px;
+  padding: 20px;
+}
+
+.btn-sign-up {
+  margin-top: 15px;
+  height: 42px;
+  width: auto;
+  font-size: 21px !important;
+  color: white;
+  background: #2980b9;
+  background-image: -webkit-linear-gradient(top, #2980b9, #216d9c);
+  background-image: -moz-linear-gradient(top, #2980b9, #216d9c);
+  background-image: -ms-linear-gradient(top, #2980b9, #216d9c);
+  background-image: -o-linear-gradient(top, #2980b9, #216d9c);
+  background-image: linear-gradient(to bottom, #2980b9, #216d9c);
+  border-color: #db5a78;
+}
+
+.btn-sign-up:hover {
+  background: #227eb3;
+  background-image: -webkit-linear-gradient(top, #227eb3, #0d78bf);
+  background-image: -moz-linear-gradient(top, #227eb3, #0d78bf);
+  background-image: -ms-linear-gradient(top, #227eb3, #0d78bf);
+  background-image: -o-linear-gradient(top, #227eb3, #0d78bf);
+  background-image: linear-gradient(to bottom, #227eb3, #0d78bf);
+  text-decoration: none;
+  color: white !important;
+}
+
+.login-link {
+  a {
+    color: #999;
+  }
+  padding-top: 15px;
+}

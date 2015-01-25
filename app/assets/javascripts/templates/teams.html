@@ -1,3 +1,19 @@
 <div class="row">
-  <h1>Teams</h1>
+  <div class="section-header">
+    <h1>Teams</h1>
+    <h2>Create a team or invite your peers to join an existing team.</h2>
+  </div>
+
+  <div class="col-md-12 col-sm-12">
+  <div class="row team" ng-repeat="team in teams">
+    <div class="col-md-2 col-sm-3 icon-col">
+      <i class="team-icon glyphicon glyphicon-globe"></i>
+    </div>
+    <div class="col-md-10 col-sm-9">
+      <p class="name">{{team.name}}</p>
+      <p class="description">{{team.description}}</p>
+    </div>
+  </div>
+
+  </div>
 </div>
