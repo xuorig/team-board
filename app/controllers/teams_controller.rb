@@ -3,7 +3,7 @@ class TeamsController < ApplicationController
   # GET /teams
   # GET /teams.json
   def index
-    render json: current_user.teams
+    render json: current_user.teams, status: 200
   end
 
   # GET /teams/:id

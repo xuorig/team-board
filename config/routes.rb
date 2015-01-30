@@ -1,13 +1,12 @@
 Rails.application.routes.draw do
+  get 'auth/:provider/callback' => 'sessions#create'
+  get 'auth/failure' => redirect('/')
+  get 'signout', to: 'sessions#destroy', as: 'signout'
   scope :api do
     get "/teams(.:format)" => "teams#index"
     get "/teams/:id(.:format)" => "teams#show"
     post "teams(.:format)" => "teams#create"
   end
-
-  get 'auth/:provider/callback' => 'sessions#create'
-  get 'auth/failure' => redirect('/')
-  get 'signout', to: 'sessions#destroy', as: 'signout'
 
   resources :sessions, only: [:create, :destroy]
 
