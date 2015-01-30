@@ -11,10 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150123221815) do
+ActiveRecord::Schema.define(version: 20150130160339) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "admins_projects", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "project_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "admins_projects", ["project_id"], name: "index_admins_projects_on_project_id", using: :btree
+  add_index "admins_projects", ["user_id"], name: "index_admins_projects_on_user_id", using: :btree
 
   create_table "admins_teams", force: :cascade do |t|
     t.integer  "user_id"
@@ -25,6 +35,33 @@ ActiveRecord::Schema.define(version: 20150123221815) do
 
   add_index "admins_teams", ["team_id"], name: "index_admins_teams_on_team_id", using: :btree
   add_index "admins_teams", ["user_id"], name: "index_admins_teams_on_user_id", using: :btree
+
+  create_table "boards", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
+    t.string   "color"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "project_id"
+    t.integer  "owner_id"
+  end
+
+  create_table "projects", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "owner_id"
+    t.integer  "team_id"
+  end
+
+  create_table "projects_users", id: false, force: :cascade do |t|
+    t.integer "user_id",    null: false
+    t.integer "project_id", null: false
+  end
+
+  add_index "projects_users", ["project_id", "user_id"], name: "index_projects_users_on_project_id_and_user_id", using: :btree
+  add_index "projects_users", ["user_id", "project_id"], name: "index_projects_users_on_user_id_and_project_id", using: :btree
 
   create_table "teams", force: :cascade do |t|
     t.string   "name"

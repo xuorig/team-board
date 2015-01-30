@@ -14,8 +14,12 @@ class TeamsController < ApplicationController
 
   # POST /teams
   def create
-  	team = Team.create!(safe_params)
-  	render json: task, status: 201
+  	team = Team.new(safe_params)
+    team.owner = current_user
+    team.users << current_user
+    team.admins << current_user
+    team.save!
+  	render json: team, status: 201
   end
 
   def safe_params
