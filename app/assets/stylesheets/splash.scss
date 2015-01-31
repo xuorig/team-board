@@ -13,11 +13,11 @@
   padding: 20px;
 }
 
-.btn-sign-up {
-  margin-top: 15px;
-  height: 42px;
+.tb-btn {
+  line-height: 19px !important;
+  height: 32px;
   width: auto;
-  font-size: 21px !important;
+  font-size: 16px !important;
   color: white;
   background: #2980b9;
   background-image: -webkit-linear-gradient(top, #2980b9, #216d9c);
@@ -28,7 +28,11 @@
   border-color: #db5a78;
 }
 
-.btn-sign-up:hover {
+.btn-sign-up {
+  margin-top: 15px;
+}
+
+.tb-btn:hover {
   background: #227eb3;
   background-image: -webkit-linear-gradient(top, #227eb3, #0d78bf);
   background-image: -moz-linear-gradient(top, #227eb3, #0d78bf);

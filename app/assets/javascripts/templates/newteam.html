@@ -1,0 +1,32 @@
+<div class="row" ng-controller="NewTeamController">
+  <div class="col-md-12 col-sm-12">
+    <div class="section-header row">
+      <h1>New Team</h1>
+      <h2>Create a team by setting a name and a description</h2>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <form ng-submit="createTeam()">
+          <!-- NAME -->
+          <div class="form-group">
+            <label>Name</label>
+            <input type="text" name="name" class="form-control" placeholder="Awesome Team" ng-model="formData.name">
+            <span class="help-block"></span>
+          </div>
+
+          <div class="form-group">
+            <label>Description</label>
+            <input type="text" name="superheroAlias" class="form-control" placeholder="This is the best team ever." ng-model="formData.description">
+            <span class="help-block"></span>
+          </div>
+
+          <button type="submit" class="btn tb-btn">
+            Submit
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
