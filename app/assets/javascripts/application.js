@@ -19,4 +19,5 @@
 //= require angular-sweetalert/SweetAlert
 //= require angular-rails-templates
 //= require angularjs/rails/resource
+//= require sweetalert/lib/sweet-alert
 //= require_tree .

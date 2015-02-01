@@ -6,6 +6,7 @@
     "angular-resource": "latest",
     "angular-animate": "latest",
     "bootstrap-sass-official": "latest",
+    "sweetalert": "latest",
     "angular-sweetalert": "latest"
   }
 }

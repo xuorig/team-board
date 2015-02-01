@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     get "/teams(.:format)" => "teams#index"
     get "/teams/:id(.:format)" => "teams#show"
     post "teams(.:format)" => "teams#create"
+    delete "/teams/:id(.:format)" => "teams#destroy"
   end
 
   resources :sessions, only: [:create, :destroy]

@@ -24,6 +24,19 @@ class TeamsController < ApplicationController
   	render json: team, status: 201
   end
 
+  def destroy
+    @team = current_user.teams.find(params[:id])
+    respond_to do |format|
+      if @team.destroy
+        format.json { head :no_content, status: :ok }
+      else
+        format.json { render json: @team.errors, status: :unprocessable_entity }
+      end
+    end
+
+
+  end
+
   def safe_params
 	  params.require(:team).permit(:name, :description)
   end
