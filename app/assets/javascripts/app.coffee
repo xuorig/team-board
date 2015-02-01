@@ -5,6 +5,7 @@ angular.module('teamboard',[
   'teamboard.controllers',
   'ngResource',
   'ngAnimate',
+  'oitozero.ngSweetAlert',
 ])
 
 angular.module('teamboard').config ["$httpProvider", ($httpProvider) ->

@@ -21,21 +21,27 @@
       <div class="col-md-4 ">
         <i class="glyphicon glyphicon-king"></i>
         <span class="title">Owners </span>
-        <p class="user-list">{{team.owner.name}} <a class="transfer hidden-link" href="#">Transfer Ownership</a></p>
+        <p class="user-list">{{team.owner.name}} <a ng-if="team.isOwner" class="transfer hidden-link" href="#">Transfer Ownership</a></p>
       </div>
 
       <div class="col-md-4">
         <i class="glyphicon glyphicon-user"></i>
         <span class="title">Administrators </span>
-        <p ng-repeat="admin in team.admins" class="user-list">{{admin.name}} <a href="#" class="remove-user hidden-link">Remove</a></p>
+        <p ng-repeat="admin in team.admins" class="user-list">{{admin.name}} <a href="#" ng-if="team.isOwner" class="remove-user hidden-link">Remove</a></p>
         <p class=""><i class="add glyphicon glyphicon-plus-sign"></i></p>
       </div>
 
       <div class="col-md-4">
         <i class="glyphicon glyphicon-user"></i>
         <span class="title">All Users </span>
-        <p ng-repeat="user in team.users" class="user-list">{{user.name}} <a href="#" class="remove-user hidden-link">Remove</a></p>
+        <p ng-repeat="user in team.users" class="user-list">{{user.name}} <a href="#" ng-if="team.isOwner" class="remove-user hidden-link">Remove</a></p>
         <p class=""><i class="add glyphicon glyphicon-plus-sign"></i></p>
+      </div>
+    </div>
+
+    <div ng-if="team.isOwner" class="row section">
+      <div class="col-md-4 user-list">
+        <a href="#" class="btn btn-danger">Delete Team</a>
       </div>
     </div>
 
