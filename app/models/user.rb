@@ -1,8 +1,8 @@
 class User < ActiveRecord::Base
   # Teams
-  has_many :memberships
+  has_many :memberships, :dependent => :destroy
   has_many :teams, :through => :memberships
-  has_many :managership, :foreign_key => :manager_id
+  has_many :managership, :foreign_key => :manager_id, :dependent => :destroy
   has_many :managed_teams, :through => :managership, :source => :team
   has_many :owned, :class_name => "Team", :foreign_key => "owner_id"
 

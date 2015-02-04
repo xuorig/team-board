@@ -6,6 +6,7 @@ angular.module('teamboard',[
   'ngResource',
   'ngAnimate',
   'oitozero.ngSweetAlert',
+  'ui-bootstrap',
 ])
 
 angular.module('teamboard').config ["$httpProvider", ($httpProvider) ->

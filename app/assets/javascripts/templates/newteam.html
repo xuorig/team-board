@@ -10,7 +10,7 @@
         <form name="newTeamForm" ng-submit="createTeam()">
           <!-- NAME -->
           <div class="form-group">
-            <label>Name</label>
+            <label>Team Name</label>
             <input type="text" name="name" class="form-control" placeholder="Awesome Team" ng-model="formData.name" required>
             <span class="help-block"></span>
           </div>
@@ -21,20 +21,28 @@
             <span class="help-block"></span>
           </div>
 
-          <div class="form-group form-inline">
+          <div ng-class="{'has-error': newTeamForm.member.$error.email}"class="form-group form-inline">
             <label>Add Team Members (Optional)</label>
             <ul class="member-list">
-              <li ng-repeat="member in formData.members"><i class="glyphicon glyphicon-user"></i> {{ member }}</Li>
+              <li ng-repeat="member in formData.members">
+                <div class="member-info">
+                  <i class="glyphicon glyphicon-user"></i> {{ member.email }} 
+                  <i ng-if="member.registered" class="exists glyphicon glyphicon-ok exists-icon"></i>
+                  <i ng-if="!member.registered" class="glyphicon glyphicon-time exists-icon"></i>       
+                  <i ng-click="removeMemberFromList(member.email)" class="pull-right glyphicon glyphicon-remove remove-user"></i>
+                </div>
+              </Li>
             </ul>
             <div>
             <input type="email" name="member" ng-model="member" class="form-control" placeholder="angryhypo@gmail.com">
-            <button ng-disabled="newTeamForm.$invalid" ng-click="appendMemberToList()" class="btn tb-btn add-member-btn">Add</button><a ng-click="userExists('mgiroux0@gmail.com')">exists?</a></div>
+            <a href="" ng-click="appendMemberToList()" class="btn tb-btn add-member-btn">Add</a>
+            </div>
              <span class="error" ng-show="newTeamForm.member.$error.email">Please enter a valid email!</span>
           </div>
 
 
-          <button ng-disabled="newTeamForm.$invalid" type="submit" class="btn tb-btn">
-            Submit
+          <button ng-disabled="newTeamForm.$invalid" type="submit" class="btn tb-btn create-team-btn">
+            Create Team!
           </button>
         </form>
       </div>

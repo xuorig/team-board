@@ -7,9 +7,45 @@
     padding:0;
     margin:0;
     li {
-      padding: 5px;
+      padding: 8px;
+      color: #4d4d4d;
+      font-size: 16px;
+    }
+    .exists {
+      color: #A5DC86;
+    }
+    .exists-icon {
+      padding-left: 8px;
+    }
+    .remove-user {
+      line-height: 23px;
+    }
+    .remove-user:hover {
+      color: #F27474;
+      cursor: pointer;
+    }
+    .member-info {
+      width: 290px;
+      overflow-x: hidden;
+      white-space: nowrap;
+      line-height: 0px;
+    }
+  }
+  form {
+    padding-top: 15px;
+  }
+  .form-group {
+    padding-top: 10px;
+    label {
+      font-size: 22px;
       color: #4d4d4d;
     }
+    input {
+      width: 240px;
+    }
+  }
+  .create-team-btn {
+    margin-top: 10px;
   }
 }
 

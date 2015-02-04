@@ -10,16 +10,26 @@ class TeamsController < ApplicationController
   # GET /teams/:id.json
   def show
     team = current_user.teams.find(params[:id]).to_json(:current_user => current_user,
-                                                          :include => [:owner, :users, :admins])
+                                                          :include => [:owner, :users, :managers])
     render json: team
   end
 
   # POST /teams
   def create
-  	team = Team.new(safe_params)
+  	team = Team.new(safe_params.slice(:name, :description))
     team.owner = current_user
     team.users << current_user
     team.managers << current_user
+
+    # Append all specified users to the team
+    # TODO: Send email and register them after if user doenst exist
+    params[:team][:users].each do |email|
+      user = User.where(email: email)
+      if not user.blank? and user != current_user
+        team.users << user
+      end
+    end
+
     team.save!
   	render json: team, status: 201
   end
@@ -36,6 +46,6 @@ class TeamsController < ApplicationController
   end
 
   def safe_params
-	  params.require(:team).permit(:name, :description, :users)
+	  params.require(:team).permit(:name, :description, :users => [])
   end
 end

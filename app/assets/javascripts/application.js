@@ -20,4 +20,6 @@
 //= require angular-rails-templates
 //= require angularjs/rails/resource
 //= require sweetalert/lib/sweet-alert
+//= require underscore/underscore
+//= require angular-bootstrap/ui-bootstrap
 //= require_tree .
