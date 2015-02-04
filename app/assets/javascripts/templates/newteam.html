@@ -1,4 +1,4 @@
-<div class="row" ng-controller="NewTeamController">
+<div class="row new-team" ng-controller="NewTeamController">
   <div class="col-md-12 col-sm-12">
     <div class="section-header row">
       <h1>New Team</h1>
@@ -7,11 +7,11 @@
 
     <div class="row">
       <div class="col-md-12">
-        <form ng-submit="createTeam()">
+        <form name="newTeamForm" ng-submit="createTeam()">
           <!-- NAME -->
           <div class="form-group">
             <label>Name</label>
-            <input type="text" name="name" class="form-control" placeholder="Awesome Team" ng-model="formData.name">
+            <input type="text" name="name" class="form-control" placeholder="Awesome Team" ng-model="formData.name" required>
             <span class="help-block"></span>
           </div>
 
@@ -21,18 +21,19 @@
             <span class="help-block"></span>
           </div>
 
-          <div class="form-group">
+          <div class="form-group form-inline">
             <label>Add Team Members (Optional)</label>
             <ul class="member-list">
-              <li ng-repeat="member in formData.members">{{ member }}</Li>
+              <li ng-repeat="member in formData.members"><i class="glyphicon glyphicon-user"></i> {{ member }}</Li>
             </ul>
-            <input type="text" name="team-members" class="form-control" placeholder="angryhypo@gmail.com">
-            <span class="help-block"></span>
-            <a href="" class="btn tb-btn">Add</a>
+            <div>
+            <input type="email" name="member" ng-model="member" class="form-control" placeholder="angryhypo@gmail.com">
+            <button ng-disabled="newTeamForm.$invalid" ng-click="appendMemberToList()" class="btn tb-btn add-member-btn">Add</button><a ng-click="userExists('mgiroux0@gmail.com')">exists?</a></div>
+             <span class="error" ng-show="newTeamForm.member.$error.email">Please enter a valid email!</span>
           </div>
 
 
-          <button type="submit" class="btn tb-btn">
+          <button ng-disabled="newTeamForm.$invalid" type="submit" class="btn tb-btn">
             Submit
           </button>
         </form>
@@ -40,4 +41,3 @@
     </div>
   </div>
 </div>
-

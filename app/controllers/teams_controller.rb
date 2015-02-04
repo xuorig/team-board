@@ -9,9 +9,9 @@ class TeamsController < ApplicationController
   # GET /teams/:id
   # GET /teams/:id.json
   def show
-    team = current_user.teams.find(params[:id])
-    json_response = team.to_json(:current_user => current_user, :include => [:owner, :users, :admins])
-    render json: json_response
+    team = current_user.teams.find(params[:id]).to_json(:current_user => current_user,
+                                                          :include => [:owner, :users, :admins])
+    render json: team
   end
 
   # POST /teams
@@ -19,7 +19,7 @@ class TeamsController < ApplicationController
   	team = Team.new(safe_params)
     team.owner = current_user
     team.users << current_user
-    team.admins << current_user
+    team.managers << current_user
     team.save!
   	render json: team, status: 201
   end
@@ -33,8 +33,6 @@ class TeamsController < ApplicationController
         format.json { render json: @team.errors, status: :unprocessable_entity }
       end
     end
-
-
   end
 
   def safe_params
