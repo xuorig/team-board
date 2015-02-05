@@ -1,5 +1,5 @@
 # TeamBoard
-## Mini Project Management / Shareable Web Whiteboards
+## Mini Project Management Tool And Shareable Web Whiteboard
 
 ### Built With
 
