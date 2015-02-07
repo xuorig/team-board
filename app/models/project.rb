@@ -1,7 +1,11 @@
 class Project < ActiveRecord::Base
-	belongs_to :team
-	has_and_belongs_to_many :users, :join_table => 'users_projects', :class_name => 'User'
-	has_and_belongs_to_many :admins, :join_table => 'admins_projects', :class_name => 'User'
-	belongs_to :owner, :class_name => "User", :foreign_key => "project_owner_id"
-	has_many :boards
+  belongs_to :team
+  
+  has_many :user_projects, :dependent => :destroy
+  has_many :users, :through => :user_projects
+
+  has_many :manager_projects, :dependent => :destroy
+  has_many :managers, :through => :manager_projects, :source => :user
+
+  has_many :boards
 end

@@ -69,7 +69,7 @@
     font-size: 12px;
     font-weight: normal;
     color:#9b9b9b;
-  }
+  } 
 }
 
 .team:hover {
@@ -88,6 +88,21 @@
       padding: 20px;
       border-bottom: 1px solid #e0e0e0;
   }
+
+  .new-member-container {
+    position: relative;
+    .new-member {
+      width: 200px;
+      display: inline-block;
+    }
+    i {
+      top: 5px;
+      left: 205px;
+      position: absolute;
+      display: inline-block;
+    }
+  }
+
 
   .transfer {
     color: #9b9b9b;

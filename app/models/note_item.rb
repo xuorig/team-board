@@ -1,0 +1,2 @@
+class NoteItem < BoardItem
+end

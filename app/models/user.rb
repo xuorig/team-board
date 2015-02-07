@@ -7,15 +7,19 @@ class User < ActiveRecord::Base
   has_many :owned, :class_name => "Team", :foreign_key => "owner_id"
 
   # Projects
-  #has_and_belongs_to_many :projects,  :join_table => 'users_projects', :class_name => 'Project' 
-  #has_and_belongs_to_many :administrated_teams, :join_table => 'admins_projects', :class_name => 'Project' 
-  #has_many :project_owned, :class_name => "Project", :foreign_key => "project_owner_id"
+  has_many :user_projects, :dependent => :destroy
+  has_many :projects, :through => :user_projects
+  has_many :manager_projects, :foreign_key => :manager_id, :dependent => :destroy
+  has_many :managed_projects, :through => :manager_projects, :source => :project
+  has_many :owned_projects, :class_name => "Project", :foreign_key => "project_owner_id"
 
   # Boards
-  has_many :boards
+  has_many :owned_boards, :class_name => "Board"
+  has_many :board_items
 
   def self.from_omniauth(auth)
-    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+    where(email: auth.info.email).first_or_create do |user|
+      user.active = true
       user.provider = auth.provider 
       user.uid      = auth.uid
       user.name     = auth.info.name

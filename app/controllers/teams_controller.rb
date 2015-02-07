@@ -21,11 +21,16 @@ class TeamsController < ApplicationController
     team.users << current_user
     team.managers << current_user
 
-    # Append all specified users to the team
-    # TODO: Send email and register them after if user doenst exist
     params[:team][:users].each do |email|
       user = User.where(email: email)
-      if not user.blank? and user != current_user
+      if user.blank?
+        user = User.new
+        user.email = email
+        user.save!
+      else
+        user = user.first
+      end
+      if user != current_user
         team.users << user
       end
     end

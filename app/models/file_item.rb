@@ -1,0 +1,2 @@
+class FileItem < BoardItem
+end

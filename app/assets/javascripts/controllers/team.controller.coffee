@@ -1,12 +1,14 @@
 angular
   .module('teamboard.controllers')
-  .controller("TeamController", [ '$scope','$location','$resource','$routeParams', 'Team', 'Membership', 'SweetAlert',
-    ($scope, $location, $resource, $routeParams, Team, Membership, SweetAlert)->
-      Team.get($routeParams.team_id).then ((results) ->
-        $scope.team = results
-        return
-      ), (error) ->
-        return
+  .controller("TeamController", [ '$scope','$location','$resource','$routeParams','Membership','Team','SweetAlert',
+    ($scope, $location, $resource, $routeParams, Membership, Team, SweetAlert)->
+      getTeam = () ->
+        Team.get($routeParams.team_id).then ((results) ->
+          $scope.team = results
+          return
+        ), (error) ->
+          return
+      getTeam()
       $scope.onDelete = () ->
         SweetAlert.swal {
           title: 'Watch out!'
@@ -26,33 +28,16 @@ angular
             return
           return
 
-      $scope.addUserToTeam = (email) ->
+      $scope.addUserToTeam = () ->
         new Membership({
           team_id: $routeParams.team_id,
-          email: email
+          email: $scope.newUser
         })
         .create()
         .then ((result) ->
-          console.log(result)
-          # fetch and render
+          getTeam()
           return
         ), (error) ->
           console.log(error)
           return
-
-      $scope.open = (size) ->
-        modalInstance = $modal.open(
-          templateUrl: 'myModalContent.html'
-          controller: 'ModalInstanceCtrl'
-          size: size
-          resolve: items: ->
-            $scope.items
-        )
-        modalInstance.result.then ((selectedItem) ->
-          $scope.selected = selectedItem
-          return
-        ), ->
-          $log.info 'Modal dismissed at: ' + new Date
-          return
-        return
   ])

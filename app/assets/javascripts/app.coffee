@@ -6,12 +6,14 @@ angular.module('teamboard',[
   'ngResource',
   'ngAnimate',
   'oitozero.ngSweetAlert',
-  'ui-bootstrap',
+  'ui.bootstrap',
 ])
 
 angular.module('teamboard').config ["$httpProvider", ($httpProvider) ->
   $httpProvider.defaults.headers.common['X-CSRF-Token'] = $('meta[name=csrf-token]').attr('content')
 ]
+
+angular.module('teamboard.services', ['rails']);
 
 controllers = angular.module('teamboard.controllers',[])
 

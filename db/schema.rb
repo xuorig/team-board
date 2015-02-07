@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150203171937) do
+ActiveRecord::Schema.define(version: 20150207153648) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,6 +26,15 @@ ActiveRecord::Schema.define(version: 20150203171937) do
   add_index "admins_projects", ["project_id"], name: "index_admins_projects_on_project_id", using: :btree
   add_index "admins_projects", ["user_id"], name: "index_admins_projects_on_user_id", using: :btree
 
+  create_table "board_items", force: :cascade do |t|
+    t.integer  "position"
+    t.string   "color"
+    t.string   "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string   "type"
+  end
+
   create_table "boards", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
@@ -34,6 +43,19 @@ ActiveRecord::Schema.define(version: 20150203171937) do
     t.datetime "updated_at",  null: false
     t.integer  "project_id"
     t.integer  "owner_id"
+  end
+
+  create_table "file_items", force: :cascade do |t|
+    t.string   "file_url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "manager_projects", force: :cascade do |t|
+    t.integer  "manager_id"
+    t.integer  "project_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "managerships", force: :cascade do |t|
@@ -46,6 +68,12 @@ ActiveRecord::Schema.define(version: 20150203171937) do
   create_table "memberships", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "team_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "note_items", force: :cascade do |t|
+    t.string   "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -76,15 +104,23 @@ ActiveRecord::Schema.define(version: 20150203171937) do
     t.integer  "owner_id"
   end
 
+  create_table "user_projects", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "project_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string   "provider"
     t.string   "uid"
     t.string   "name"
     t.string   "oauth_token"
     t.datetime "oauth_expires_at"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
     t.string   "email"
+    t.boolean  "active",           default: false
   end
 
 end
