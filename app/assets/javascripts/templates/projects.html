@@ -1,3 +1,26 @@
-<div class="row">
-  <h1>Projects</h1>
+<div class="row projects" ng-controller="ProjectsController">
+  <div class="col-md-12 col-sm-12">
+    <div class="section-header row">
+      <h1>Projects</h1>
+      <h2><a href="#/projects/new" class="pull-right btn tb-btn">Add Project</a></h2>
+    </div>
+
+    <div class="row" ng-if="projects.length == 0">
+      <div class="col-md-12">
+        <h1>You have no projects as of now.</h1>
+        <a href="#/projects/new" class="create-project">Create one now</a>
+      </div>
+    </div>
+    <div class="row project" ng-repeat="project in projects">
+      <a href="#/projects/{{project.id}}">
+      <div class="col-md-2 col-xs-4 icon-col">
+        <i class="team-icon glyphicon glyphicon-globe"></i>
+      </div>
+      <div class="col-md-10 col-xs-8">
+        <p class="name">{{project.name}}</p>
+        <p class="description">{{project.description}}</p>
+      </div>
+      </a>
+    </div>
+  </div>
 </div>
