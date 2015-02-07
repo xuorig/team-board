@@ -2,7 +2,7 @@
   <div class="col-md-12 col-sm-12">
     <div class="section-header row">
       <h1>Projects</h1>
-      <h2><a href="#/projects/new" class="pull-right btn tb-btn">Add Project</a></h2>
+      <h2>Create and Edit Existing Projects<a href="#/projects/new" class="pull-right btn tb-btn">Add Project</a></h2>
     </div>
 
     <div class="row" ng-if="projects.length == 0">
@@ -11,7 +11,7 @@
         <a href="#/projects/new" class="create-project">Create one now</a>
       </div>
     </div>
-    <div class="row project" ng-repeat="project in projects">
+    <div class="row tb-list-item" ng-repeat="project in projects">
       <a href="#/projects/{{project.id}}">
       <div class="col-md-2 col-xs-4 icon-col">
         <i class="team-icon glyphicon glyphicon-globe"></i>

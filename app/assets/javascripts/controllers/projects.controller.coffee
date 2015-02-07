@@ -1,9 +1,9 @@
 angular
   .module('teamboard.controllers')
-  .controller("TeamsController", [ '$scope','$resource', 'Project',
+  .controller("ProjectsController", [ '$scope','$resource','Project',
     ($scope, $resource, Project)->
       Project.query().then ((results) ->
-        $scope.teams = results
+        $scope.projects = results
         return
       ), (error) ->
         # do something about the error

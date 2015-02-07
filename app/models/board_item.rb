@@ -5,6 +5,7 @@ class BoardItem < ActiveRecord::Base
 end
 
 class FileItem < BoardItem
+	def content
 end
 
 class NoteItem < BoardItem

@@ -5,14 +5,25 @@ angular.module('teamboard').config([ '$routeProvider', '$locationProvider',
         templateUrl: "index.html",
         controller: 'HomeController'
       })
+      # BOARDS
       .when('/boards', {
         templateUrl: "boards.html",
         controller: "BoardController" 
       })
+      # PROJECTS
       .when('/projects', {
         templateUrl: "projects.html",
-        controller: "BoardController"
+        controller: "ProjectsController"
       })
+      .when('/projects/new', {
+        templateUrl: "newproject.html",
+        controller: "NewProjectController"
+      })
+      .when('/projects/:project_id', {
+        templateUrl: "project.html",
+        controller: "ProjectController"
+      })
+      # TEAMS
       .when('/teams', {
         templateUrl: "teams.html",
         controller: "TeamsController"

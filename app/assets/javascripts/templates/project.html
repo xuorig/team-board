@@ -1,0 +1,63 @@
+<div class="row project-page" ng-controller="ProjectController">
+  <div class="col-md-12 col-sm-12">
+    <div ng-model="project" class="section-header row">
+      <h1>{{project.name}}</h1>
+      <h2>Edit Project</h2>
+    </div>
+
+    <div class="row section">
+      <div class="col-md-4">
+        <span class="title">Description</span> <p class="team-desc">{{project.description}}</p>
+      </div>
+    </div>
+
+    <div class="row section">
+      <div class="col-md-4 user-list">
+        <span class="title">Boards</span> <p class="team-project"></p>
+      </div>
+    </div>
+
+    <div class="row section">
+      <div class="col-md-12">
+        <i class="glyphicon glyphicon-king"></i>
+        <span class="title">Owners </span>
+        <p class="user-list">{{project.owner.name}} <a ng-if="project.isOwner" class="transfer hidden-link" href="#">Transfer Ownership</a></p>
+      </div>
+    </div>
+
+    <div class="row section">
+      <div class="col-md-12">
+        <i class="glyphicon glyphicon-user"></i>
+        <span class="title">Managers </span>
+        <p ng-repeat="manager in project.managers" class="user-list">{{manager.name}} <a href="#" ng-if="project.isOwner" class="remove-user hidden-link">Remove</a></p>
+        <div class="new-member-container">
+          <input type="text" name="newManager" class="form-control new-member" placeholder="sadelephant@zoo.com" ng-model="newManager">
+          <i ng-click="addUserToProject()" class="add glyphicon glyphicon-plus-sign"></i>
+        </div>
+      </div>
+    </div>
+
+    <div class="row section">
+      <div class="col-md-12">
+        <i class="glyphicon glyphicon-user"></i>
+        <span class="title">All Users </span>
+        <p ng-repeat="user in project.users" class="user-list">
+          <span ng-if="user.active">{{user.name}}</span>
+          <span ng-if="!user.active">{{user.email}} (Invitation Sent)</span>
+          <a href="#" ng-if="project.isOwner" class="remove-user hidden-link">Remove</a>
+        </p>
+        <div class="new-member-container">
+          <input type="text" name="newUser" class="form-control new-member" placeholder="sadelephant@zoo.com" ng-model="newUser">
+          <i ng-click="addUserToProject()" class="add glyphicon glyphicon-plus-sign"></i>
+        </div>
+      </div>
+    </div>
+
+    <div ng-if="project.isOwner" class="row section">
+      <div class="col-md-4 user-list">
+        <a href="" ng-click="onDelete()" class="btn btn-danger">Delete Project</a>
+      </div>
+    </div>
+
+  </div>
+</div>
