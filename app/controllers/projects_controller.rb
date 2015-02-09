@@ -9,7 +9,7 @@ class ProjectsController < ApplicationController
   # GET /projects/:id
   def show
     @project = current_user.projects.find(params[:id]).to_json(:current_user => current_user,
-                                                          :include => [:owner, :users, :managers])
+                                                          :include => [:owner, :users, :managers, :boards])
     render json: @project
   end
 

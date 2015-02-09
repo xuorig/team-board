@@ -1,4 +1,4 @@
-<div class="row project-page" ng-controller="ProjectController">
+<div class="row item-page" ng-controller="ProjectController">
   <div class="col-md-12 col-sm-12">
     <div ng-model="project" class="section-header row">
       <h1>{{project.name}}</h1>
@@ -13,7 +13,12 @@
 
     <div class="row section">
       <div class="col-md-4 user-list">
-        <span class="title">Boards</span> <p class="team-project"></p>
+        <span class="title">Boards</span>
+        <div class="row">
+          <div class="col-md-4" ng-repeat="board in project.boards">
+            <div class="board-name"><a href="#/boards/{{board.id}}">{{board.name}}</a></div>
+          </div>
+        </div>
       </div>
     </div>
 
