@@ -12,11 +12,15 @@
     </div>
 
     <div class="row section">
-      <div class="col-md-4 user-list">
+      <div class="col-md-12">
         <span class="title">Boards</span>
         <div class="row">
           <div class="col-md-4" ng-repeat="board in project.boards">
-            <div class="board-name"><a href="#/boards/{{board.id}}">{{board.name}}</a></div>
+            <div class="board">
+              <div class="board-name">
+                <i class="glyphicon glyphicon-th"></i><a href="#/boards/{{board.id}}">{{board.name}}</a>
+              </div>
+            </div>
           </div>
         </div>
       </div>

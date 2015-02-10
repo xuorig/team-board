@@ -8,6 +8,10 @@ angular.module('teamboard').config([ '$routeProvider', '$locationProvider',
       # BOARDS
       .when('/boards', {
         templateUrl: "boards.html",
+        controller: "BoardsController" 
+      })
+      .when('/boards/:board_id', {
+        templateUrl: "board.html",
         controller: "BoardController" 
       })
       # PROJECTS

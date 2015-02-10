@@ -6,9 +6,10 @@ Rails.application.routes.draw do
   resources :sessions, only: [:create, :destroy]
   scope :api do
     resources :teams
-    resources :projects
+    resources :projects do
+      resources :boards
+    end
     resources :users
-    resources :boards
     resources :memberships
   end
 

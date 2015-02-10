@@ -1,4 +1,4 @@
-html, body
+html
 {
     height: 100%;
 }
@@ -6,7 +6,7 @@ html, body
 body {
   overflow-x: hidden;
   overflow-y: auto;
-  height: inherit;
+  min-height: 100%;
 }
 
 
