@@ -5,12 +5,12 @@ Rails.application.routes.draw do
 
   resources :sessions, only: [:create, :destroy]
   scope :api do
-    resources :teams
+    resources :teams, defaults: { format: 'json' }
     resources :projects do
-      resources :boards
+      resources :boards, defaults: { format: 'json' }
     end
-    resources :users
-    resources :memberships
+    resources :users, defaults: { format: 'json' }
+    resources :memberships, defaults: { format: 'json' }
   end
 
   #Catch all route for angularjs

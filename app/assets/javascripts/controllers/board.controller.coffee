@@ -3,7 +3,7 @@ angular
   .controller("BoardController", [ '$scope','$location','$resource','$routeParams','Board','SweetAlert',
     ($scope, $location, $resource, $routeParams, Board, SweetAlert)->
       getBoard = () ->
-        Project.get($routeParams.board_id).then ((results) ->
+        Board.get($routeParams.board_id).then ((results) ->
           $scope.board = results
           return
         ), (error) ->
