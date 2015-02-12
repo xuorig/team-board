@@ -1,5 +1,5 @@
 angular.module('teamboard.services').factory 'Board', ['railsResourceFactory', (railsResourceFactory) ->
   railsResourceFactory
-    url: "/api/projects/{{project_id}}/boards/{{id}}"
+    url: "/api/boards"
     name: 'board'
 ]

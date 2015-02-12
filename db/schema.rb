@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150207153648) do
+ActiveRecord::Schema.define(version: 20150212000233) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,9 +30,11 @@ ActiveRecord::Schema.define(version: 20150207153648) do
     t.integer  "position"
     t.string   "color"
     t.string   "title"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
     t.string   "type"
+    t.integer  "note_item_id"
+    t.integer  "file_item_id"
   end
 
   create_table "boards", force: :cascade do |t|
@@ -43,12 +45,6 @@ ActiveRecord::Schema.define(version: 20150207153648) do
     t.datetime "updated_at",  null: false
     t.integer  "project_id"
     t.integer  "owner_id"
-  end
-
-  create_table "file_items", force: :cascade do |t|
-    t.string   "file_url"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "manager_projects", force: :cascade do |t|
@@ -68,12 +64,6 @@ ActiveRecord::Schema.define(version: 20150207153648) do
   create_table "memberships", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "team_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "note_items", force: :cascade do |t|
-    t.string   "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

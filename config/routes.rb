@@ -5,10 +5,11 @@ Rails.application.routes.draw do
 
   resources :sessions, only: [:create, :destroy]
   scope :api do
-    resources :teams, defaults: { format: 'json' }
+    resources :teams
     resources :projects do
-      resources :boards, defaults: { format: 'json' }
+      resources :boards, only: [:index, :new, :create], defaults: { format: 'json' }
     end
+    resources :boards, only: [:show, :edit, :update, :destroy]
     resources :users, defaults: { format: 'json' }
     resources :memberships, defaults: { format: 'json' }
   end

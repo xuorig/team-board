@@ -3,8 +3,14 @@ class BoardsController < ApplicationController
   before_filter :get_project
 
   def get_project
-    @project = Project.find(params[:project_id])
-    return @project if @project.users.include?(current_user)
+    if params[:project_id]
+      project = Project.find(params[:project_id])
+      if project.users.include?(current_user)
+        @project = project
+      else
+        @project = nil
+      end
+    end
   end
 
   def index
@@ -15,10 +21,13 @@ class BoardsController < ApplicationController
   end
 
   def show
-    @board = @project.boards.find(params[:id])
-    respond_to do |format|
-      format.json {render json: @board}
-    end
+    @board = Board.find(params[:id])
+    # Check if user is allwowed to see board
+    if @board.project.users.include?(current_user)
+      render json: @board, :status => 200
+    else
+      render :nothing => true, :status => 404
+  end
   end
 
   def create
