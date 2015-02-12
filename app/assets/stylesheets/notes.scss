@@ -1,0 +1,118 @@
+$color: rgb(52, 152, 219);
+$colorDark: darken($color, 10%) transparent;
+
+.items {
+  margin-top: 20px;
+  ul {
+    list-style-type: none;
+    padding: 0;
+    margin:0;
+  }
+  .item-column {
+    min-height:100px;
+    padding-bottom:100px;
+  }
+}
+
+.note-item {
+  h3 {
+    margin-top: 0px;
+    font-weight: bold;
+  }
+  .editable-click {
+    color: #333 !important;
+    text-decoration: none !important;
+    border: none !important;
+  }
+  .editable-click:hover {
+    color: #333 !important;
+    text-decoration: none !important;
+    border: none !important;
+  }
+  cursor:pointer;
+  margin: auto;
+  width: 90%;
+  font-size: 20px;
+  padding: 10px;
+  background: $color;
+  position: relative;
+  min-height: 1em;
+  margin-bottom: 65px;
+}
+.note-item:after {
+  content: "";
+  position: absolute;
+  bottom: -2em;
+  left: 0;
+  right: 2em;
+  border-width: 1em;
+  border-style: solid;
+  border-color: $color;
+}
+.note-item:before {
+  content: "";
+  position: absolute;
+  bottom: -2em;
+  right: 0;
+  border-width: 2em 2em 0 0;
+  border-style: solid;
+  border-color: $colorDark;
+}
+
+
+
+.notepad {
+    background: #f6f6f6;
+    box-shadow: 0 1px 4px hsla(0,0%,0%,.25);
+    margin: 15px auto;
+    position: relative;
+    width: 492px;
+    background-image: -webkit-radial-gradient(#e6e6e6 21%, transparent 21%),
+                      -we2bkit-radial-gradient(hsla(0,0%,0%,.25) 21%, transparent 26%),
+                      -webkit-linear-gradient(top, hsla(0,0%,0%,0) 0%, hsla(0,0%,0%,0) 95%,
+                                                   hsla(180,25%,50%,.1) 95%, hsla(180,25%,50%,.1) 100%);
+    background-image: -moz-radial-gradient(#e6e6e6 21%, transparent 21%),
+                      -moz-radial-gradient(#e6e6e6 10%, transparent 12%),
+                      -moz-linear-gradient(top, hsla(0,0%,0%,0) 0%, hsla(0,0%,0%,0) 95%,
+                                                   hsla(180,25%,50%,.1) 95%, hsla(180,25%,50%,.1) 100%);
+    background-image: radial-gradient(#e6e6e6 21%, transparent 21%),
+                      radial-gradient(#e6e6e6 10%, transparent 12%), 
+                      linear-gradient(top, hsla(0,0%,0%,0) 0%, hsla(0,0%,0%,0) 95%,
+                                                   hsla(180,25%,50%,.1) 95%, hsla(180,25%,50%,.1) 100%);
+    background-position: 6px 6px, 6px 5px, 50% 18px;
+    background-repeat: repeat-y, repeat-y, repeat;
+    background-size: 48px 48px, 48px 48px, 24px 24px;
+    padding: 20px 24px 15px 85px;
+}
+.notepad:after {
+    border-left: 1px solid hsla(0,75%,50%,.2);
+    border-right: 1px solid hsla(0,75%,50%,.2);
+    bottom: 0;
+    content: '';
+    left: 58px;
+    position: absolute;
+    top: 0;
+    width: 2px;
+}
+.notepad:before {
+    bottom: 8px;
+    border-radius: 4px;
+    box-shadow: 0 10px 10px hsla(0,0%,0%,.25);
+    content: '';
+    height: 100px;
+    max-width: 300px;
+    position: absolute;
+    right: 5px;
+    width: 300px;
+    z-index: -10; 
+    -webkit-transform: rotate(2deg);    
+       -moz-transform: rotate(2deg);   
+        -ms-transform: rotate(2deg);   
+         -o-transform: rotate(2deg);
+            transform: rotate(2deg);
+}
+p {
+    color: #333;
+    width: 60%;
+    margin-left: 56px;
+}

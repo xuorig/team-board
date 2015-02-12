@@ -7,11 +7,17 @@ angular.module('teamboard',[
   'ngAnimate',
   'oitozero.ngSweetAlert',
   'ui.bootstrap',
+  'ui.sortable',
+  'xeditable',
 ])
 
 angular.module('teamboard').config ["$httpProvider", ($httpProvider) ->
   $httpProvider.defaults.headers.common['X-CSRF-Token'] = $('meta[name=csrf-token]').attr('content')
 ]
+
+angular.module('teamboard').run( (editableOptions) ->
+  editableOptions.theme = 'bs3'
+)
 
 angular.module('teamboard.services', ['rails']);
 

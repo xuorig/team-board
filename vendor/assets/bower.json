@@ -9,6 +9,9 @@
     "sweetalert": "latest",
     "angular-sweetalert": "latest",
     "underscore": "latest",
-    "angular-bootstrap": "latest"
+    "angular-bootstrap": "latest",
+    "jquery.ui": "latest",
+    "angular-ui-sortable": "latest",
+    "angular-xeditable": "latest"
   }
 }

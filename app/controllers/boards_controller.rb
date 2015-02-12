@@ -24,10 +24,11 @@ class BoardsController < ApplicationController
     @board = Board.find(params[:id])
     # Check if user is allwowed to see board
     if @board.project.users.include?(current_user)
+      @board = @board.to_json(:include => [:items])
       render json: @board, :status => 200
     else
       render :nothing => true, :status => 404
-  end
+    end
   end
 
   def create

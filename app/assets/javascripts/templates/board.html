@@ -1,9 +1,45 @@
 <div class="row" ng-controller="BoardController">
     <div class="section-header">
       <h1>{{board.name}}</h1>
+      <h2>{{board.description}} <a href="" ng-click="onAddNote()" class="pull-right btn tb-btn">Pin a note</a></h2>
     </div>
 
+    <!-- Column 1 -->
     <div class="row">
-    	
+    	<div class="col-md-4 items">
+        <ul ui-sortable="sortableOptions" ng-model="splitItems[0]" class="item-column">
+          <li ng-repeat="item in splitItems[0]">
+            <div class="note-item">
+              <h3 editable-text="item.title" class="note-title">{{ item.title }}</h3>
+              <p editable-textarea="item.noteContent" class="note-content">{{ item.position }} {{ item.noteContent }}</p>
+            </div>
+          </li>
+        </ul>
+    	</div>
+
+      <!-- Column 2 -->
+      <div class="col-md-4 items">
+        <ul ui-sortable="sortableOptions" ng-model="splitItems[1]" class="item-column">
+          <li ng-repeat="item in splitItems[1]">
+            <div class="note-item">
+              <h3 editable-text="item.title" class="note-title">{{ item.title }}</h3>
+              <p editable-textarea="item.noteContent" class="note-content">{{ item.position }} {{ item.noteContent }}</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Column 3 -->
+      <div class="col-md-4 items">
+        <ul ui-sortable="sortableOptions" ng-model="splitItems[2]" class="item-column">
+          <li ng-repeat="item in splitItems[2]">
+            <div class="note-item">
+              <h3 editable-text="item.title" class="note-title">{{ item.title }}</h3>
+              <p editable-textarea="item.noteContent" class="note-content">{{ item.position }} {{ item.noteContent }}</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+
     </div>
 </div>

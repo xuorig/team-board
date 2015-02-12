@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery-ui/jquery-ui
 //= require angular/angular
 //= require angular-route/angular-route
 //= require angular-resource/angular-resource
@@ -22,4 +23,6 @@
 //= require sweetalert/lib/sweet-alert
 //= require underscore/underscore
 //= require angular-bootstrap/ui-bootstrap-tpls
+//= require angular-ui-sortable/sortable
+//= require angular-xeditable/dist/js/xeditable.js
 //= require_tree .
