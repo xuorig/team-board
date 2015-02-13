@@ -9,6 +9,7 @@ angular.module('teamboard',[
   'ui.bootstrap',
   'ui.sortable',
   'xeditable',
+  'ng-context-menu'
 ])
 
 angular.module('teamboard').config ["$httpProvider", ($httpProvider) ->

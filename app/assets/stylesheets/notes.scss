@@ -1,5 +1,81 @@
-$color: rgba(52, 152, 219, 0.4);
-$colorDark: darken($color, 10%) transparent;
+$colorBlue: rgba(52, 152, 219, 0.4);
+$colorBlueDark: darken($colorBlue, 10%) transparent;
+
+$colorPurple: rgba(155, 89, 182, 0.4);
+$colorPurpleDark: darken($colorPurple, 10%) transparent;
+
+$colorGreen: rgba(46, 204, 113, 0.4);
+$colorGreenDark: darken($colorGreen, 10%) transparent;
+
+$colorRed: rgba(231, 76, 60, 0.4);
+$colorRedDark: darken($colorRed, 10%) transparent;
+
+$colorYellow: rgba(241, 196, 15, 0.4);
+$colorYellowDark: darken($colorYellow, 10%) transparent;
+
+/* Note Colors */
+.note-item.blue {
+  background: $colorBlue;
+}
+
+.note-item.purple {
+  background: $colorPurple;
+}
+
+.note-item.green {
+  background: $colorGreen;
+}
+
+.note-item.red {
+  background: $colorRed;
+}
+
+.note-item.yellow {
+  background: $colorYellow;
+}
+
+
+.blue.note-item:after {
+  border-color: $colorBlue;
+}
+
+.purple.note-item:after {
+  border-color: $colorPurple;
+}
+
+.green.note-item:after {
+  border-color: $colorGreen;
+}
+
+.red.note-item:after {
+  border-color: $colorRed;
+}
+
+.yellow.note-item:after {
+  border-color: $colorYellow;
+}
+
+
+.blue.note-item:before {
+  border-color: $colorBlueDark;
+}
+
+.purple.note-item:before {
+  border-color: $colorPurpleDark;
+}
+
+.green.note-item:before {
+  border-color: $colorGreenDark;
+}
+
+.red.note-item:before {
+  border-color: $colorRedDark;
+}
+
+.yellow.note-item:before {
+  border-color: $colorYellowDark;
+}
+/* End Note Colors */
 
 .items {
   margin-top: 20px;
@@ -34,10 +110,10 @@ $colorDark: darken($color, 10%) transparent;
   width: 90%;
   font-size: 20px;
   padding: 10px;
-  background: $color;
   position: relative;
   min-height: 1em;
   margin-bottom: 65px;
+  background: $colorBlue;
 }
 .note-item:after {
   content: "";
@@ -47,7 +123,7 @@ $colorDark: darken($color, 10%) transparent;
   right: 2em;
   border-width: 1em;
   border-style: solid;
-  border-color: $color;
+  border-color: $colorBlue;
 }
 .note-item:before {
   content: "";
@@ -56,7 +132,7 @@ $colorDark: darken($color, 10%) transparent;
   right: 0;
   border-width: 2em 2em 0 0;
   border-style: solid;
-  border-color: $colorDark;
+  border-color: $colorBlueDark;
 }
 
 
@@ -67,5 +143,13 @@ $colorDark: darken($color, 10%) transparent;
       min-height:100px;
       padding-bottom:0px;
     }
+  }
+}
+
+
+.context-men {
+  position: absolute;
+  li {
+    cursor: pointer;
   }
 }
