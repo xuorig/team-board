@@ -1,7 +1,7 @@
 angular
   .module('teamboard.controllers')
-  .controller("BoardController", [ '$scope','$location','$resource','$routeParams','Board','SweetAlert', '_',
-    ($scope, $location, $resource, $routeParams, Board, SweetAlert, _) ->
+  .controller("BoardController", [ '$scope','$timeout', '$location','$resource','$routeParams','Board','SweetAlert', '_',
+    ($scope, $timeout, $location, $resource, $routeParams, Board, SweetAlert, _) ->
 
       $scope.sortableOptions = {
         'ui-floating': true,
@@ -34,6 +34,15 @@ angular
             position: $scope.splitItems[0][0].position + 1,
             uiColumn: 1
           })
+        # Start edit of new note
+        $timeout( () ->
+          title = $("ul[ng-model]").first().children().first().find("h3")
+          title.click()
+          title.siblings().find("input").focus()
+          title.siblings().find("input").select()
+        )
+
+
         console.log($scope.splitItems)
 
       $scope.splitItems = []

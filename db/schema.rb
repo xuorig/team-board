@@ -33,6 +33,8 @@ ActiveRecord::Schema.define(version: 20150212182312) do
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
     t.string   "type"
+    t.integer  "note_item_id"
+    t.integer  "file_item_id"
     t.string   "note_content"
     t.integer  "board_id"
     t.integer  "ui_column"
@@ -47,6 +49,12 @@ ActiveRecord::Schema.define(version: 20150212182312) do
     t.datetime "updated_at",  null: false
     t.integer  "project_id"
     t.integer  "owner_id"
+  end
+
+  create_table "file_items", force: :cascade do |t|
+    t.string   "file_url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "manager_projects", force: :cascade do |t|
@@ -66,6 +74,12 @@ ActiveRecord::Schema.define(version: 20150212182312) do
   create_table "memberships", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "team_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "note_items", force: :cascade do |t|
+    t.string   "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
