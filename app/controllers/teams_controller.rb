@@ -21,17 +21,19 @@ class TeamsController < ApplicationController
     team.users << current_user
     team.managers << current_user
 
-    params[:team][:users].each do |email|
-      user = User.where(email: email)
-      if user.blank?
-        user = User.new
-        user.email = email
-        user.save!
-      else
-        user = user.first
-      end
-      if user != current_user
-        team.users << user
+    if params[:team][:users]
+      params[:team][:users].each do |email|
+        user = User.where(email: email)
+        if user.blank?
+          user = User.new
+          user.email = email
+          user.save!
+        else
+          user = user.first
+        end
+        if user != current_user
+          team.users << user
+        end
       end
     end
 

@@ -29,11 +29,19 @@
       <div class="col-md-12">
         <i class="glyphicon glyphicon-user"></i>
         <span class="title">Managers </span>
-        <p ng-repeat="manager in team.managers" class="user-list">{{manager.name}} <a href="#" ng-if="team.isOwner" class="remove-user hidden-link">Remove</a></p>
-        <div class="new-member-container">
-          <input type="text" name="newManager" class="form-control new-member" placeholder="sadelephant@zoo.com" ng-model="newManager">
-          <i ng-click="addUserToTeam()" class="add glyphicon glyphicon-plus-sign"></i>
-        </div>
+        <p ng-repeat="user in team.managers" class="user-list">
+          <span ng-if="user.active && currentUser.id !== user.id">{{user.name}}</span>
+          <span ng-if="currentUser.id == user.id"><strong>You</strong></span>
+          <span ng-if="!user.active">{{user.email}} (Invitation Sent)</span>
+          <a href="#" ng-if="team.isOwner && currentUser.id !== user.id" class="remove-user hidden-link"><i class="glyphicon glyphicon-trash"></i></a>
+        </p>
+        <form name="newManagerForm">
+          <div class="new-member-container form-group"  ng-class="{'has-error': newManagerForm.newManager.$error.email}">
+            <input type="email" name="newManager" class="form-control new-member" placeholder="sadelephant@zoo.com" ng-model="newManager">
+            <i ng-click="addManagerToTeam()" class="add glyphicon glyphicon-plus-sign"></i>
+            <span class="error" ng-show="newManagerForm.newManager.$error.email">Please enter a valid email!</span>
+          </div>
+        </form>
       </div>
     </div>
 
@@ -42,14 +50,18 @@
         <i class="glyphicon glyphicon-user"></i>
         <span class="title">All Users </span>
         <p ng-repeat="user in team.users" class="user-list">
-          <span ng-if="user.active">{{user.name}}</span>
+          <span ng-if="user.active && currentUser.id !== user.id">{{user.name}}</span>
+          <span ng-if="currentUser.id == user.id"><strong>You</strong></span>
           <span ng-if="!user.active">{{user.email}} (Invitation Sent)</span>
-          <a href="#" ng-if="team.isOwner" class="remove-user hidden-link">Remove</a>
+          <a href="#" ng-if="team.isOwner && currentUser.id !== user.id" class="remove-user hidden-link">Remove</a>
         </p>
-        <div class="new-member-container">
-          <input type="text" name="newUser" class="form-control new-member" placeholder="sadelephant@zoo.com" ng-model="newUser">
-          <i ng-click="addUserToTeam()" class="add glyphicon glyphicon-plus-sign"></i>
-        </div>
+        <form name="newUserForm">
+          <div class="new-member-container form-group" ng-class="{'has-error': newUserForm.newUser.$error.email}">
+            <input type="email" name="newUser" class="form-control new-member" placeholder="sadelephant@zoo.com" ng-model="newUser">
+            <i ng-click="addUserToTeam()" class="add glyphicon glyphicon-plus-sign"></i>
+            <span class="error" ng-show="newUserForm.newUser.$error.email">Please enter a valid email!</span>
+          </div>
+        </form>
       </div>
     </div>
 

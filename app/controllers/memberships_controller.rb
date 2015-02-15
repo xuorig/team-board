@@ -1,5 +1,14 @@
 class MembershipsController < ApplicationController
   before_filter :authenticate_user!
+  def index
+    @membership = Membership.where({team_id: params[:team_id], user_id: params[:user_id]})
+    if @membership
+      render json: @membership, status:200
+    end
+  end
+
+  def show
+  end
 
   # POST /teams
   def create
@@ -18,8 +27,7 @@ class MembershipsController < ApplicationController
   end
 
   def destroy
-    user = User.where(email: safe_params[:email])
-    @membership = Membership.where({team_id: params[:membership][:team_id], user_id: user.id}).first
+    @membership = Membership.find(params[:id])
     respond_to do |format|
       if @membership.destroy
         format.json { head :no_content, status: :ok }

@@ -1,18 +1,22 @@
 class UsersController < ApplicationController
-  # GET /users
+
+  # GET /users?email=
   def index
   	if params[:email]
   		@user = User.where(email: params[:email])
-  		if @user.blank?
+  		if @user.blank? or not @user.first.active
   		  render :nothing => true, :status => 404
   		else
-		  render :nothing => true, :status => 200
+		    render :nothing => true, :status => 200
+      end 
 		end
-	end
   end
 
   def show
-    user = User.find(params[:id])
-    render json: user, :status => 200
+    if params[:id] == 'me' && current_user
+      @user = current_user
+    end
+    raise ActiveRecord::RecordNotFound unless @user
+    render json: @user, :status => 200
   end
 end

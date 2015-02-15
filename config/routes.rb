@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     resources :boards, only: [:show, :edit, :update, :destroy]
     resources :users, defaults: { format: 'json' }
     resources :memberships, defaults: { format: 'json' }
+    resources :managerships, defaults: { format: 'json'}
   end
 
   #Catch all route for angularjs
