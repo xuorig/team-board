@@ -17,22 +17,12 @@ class ProjectsController < ApplicationController
   def create
     @project = Project.new(safe_params.slice(:name, :description))
     @project.owner = current_user
-    @project.users << current_user
-    @project.managers << current_user
 
-    params[:project][:users].each do |email|
-      user = User.where(email: email)
-      if user.blank?
-        user = User.new
-        user.email = email
-        user.save!
-      else
-        user = user.first
-      end
-      if user != current_user
-        @project.users << user
-      end
-    end
+    @team = Team.find(params[:project][:team_id])
+    @project.team = @team if @team else nil
+
+    sample_board = Board.new(:name => safe_params[:name])
+    @project.boards << sample_board
 
     @project.save!
     render json: @project, status: 201
@@ -50,6 +40,6 @@ class ProjectsController < ApplicationController
   end
 
   def safe_params
-    params.require(:project).permit(:name, :description, :users => [], :teams => [])
+    params.require(:project).permit(:name, :description, :team_id)
   end
 end

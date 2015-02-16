@@ -28,12 +28,18 @@ angular
           return
 
       $scope.onAddNote = () ->
+        firstItem = $scope.splitItems[0][0]
+        nextPos = 1
+        if firstItem
+          nextPos = firstItem.position + 1
+
         $scope.splitItems[0].unshift({
             title: "Untitled Note",
             noteContent: "No Content",
-            position: $scope.splitItems[0][0].position + 1,
+            position: nextPos,
             uiColumn: 1
           })
+        
         # Start edit of new note
         $timeout( () ->
           title = $("ul[ng-model]").first().children().first().find("h3")

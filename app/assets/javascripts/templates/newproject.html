@@ -1,0 +1,48 @@
+<div class="row new-team" ng-controller="NewProjectController">
+  <div class="col-md-12 col-sm-12">
+    <div class="section-header">
+      <h1>New Project</h1>
+      <h2>Create a project and assign members to start working!</h2>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <form name="newProjectForm" ng-submit="createProject()">
+          <!-- NAME -->
+          <div class="form-group">
+            <label>Project Name</label>
+            <input type="text" name="name" class="form-control" placeholder="Awesome Team" ng-model="formData.name" required>
+            <span class="help-block"></span>
+          </div>
+
+          <div class="form-group">
+            <label>Description</label>
+            <input type="text" name="description" class="form-control" placeholder="This is the best team ever." ng-model="formData.description">
+            <span class="help-block"></span>
+          </div>
+
+          <div ng-class="{'has-error': newTeamForm.member.$error.email}"class="form-group form-inline">
+            <label>Assign to a Team (Optional)</label>
+            <ul class="member-list">
+              <li ng-if="formData.team">
+                <div class="member-info">
+                  <i class="glyphicon glyphicon-globe"></i> {{ formData.team.name }}    
+                  <i ng-click="deassignTeam()" class="pull-right glyphicon glyphicon-remove remove-user"></i>
+                </div>
+              </Li>
+            </ul>
+            <div>
+            <select class="form-control" ng-model="assignedTeam" ng-options="team.name for team in teams"></select>
+            <button type="button" ng-disabled="formData.team" ng-click="assignToTeam()" class="btn tb-btn add-member-btn">Assign</button>
+            </div>
+          </div>
+
+
+          <button ng-disabled="newProjectForm.$invalid" type="submit" class="btn tb-btn create-team-btn">
+            Create Project!
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

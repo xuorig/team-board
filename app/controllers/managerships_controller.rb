@@ -1,5 +1,14 @@
 class ManagershipsController < ApplicationController
   before_filter :authenticate_user!
+  def index
+    @managership = Managership.where({team_id: params[:team_id], manager_id: params[:manager_id]})
+    if @managership
+      render json: @managership, status:200
+    end
+  end
+
+  def show
+  end
 
   # POST /teams
   def create
@@ -18,8 +27,7 @@ class ManagershipsController < ApplicationController
   end
 
   def destroy
-    user = User.where(email: safe_params[:email])
-    @managership = Managership.where({team_id: params[:managership][:team_id], manager_id: user.id}).first
+    @managership = Managership.find(params[:id])
     respond_to do |format|
       if @managership.destroy
         format.json { head :no_content, status: :ok }

@@ -67,5 +67,34 @@ angular
           console.log(error)
           return
 
+      $scope.onRemoveUser = (user_id) ->
+        Membership.query({
+          team_id: $routeParams.team_id,
+          user_id: user_id
+        }).then ((ms) ->
+          ms[0].delete().then ((result) ->
+            getTeam()
+          ), (error) ->
+            console.log(error)
+            return
+        ), (error) ->
+          console.log(error)
+          return
+
+
+      $scope.onRemoveManager = (user_id) ->
+        Managership.query({
+          team_id: $routeParams.team_id,
+          manager_id: user_id
+        }).then ((managerships) ->
+          managerships[0].delete().then ((result) ->
+            getTeam()
+          ), (error) ->
+            console.log(error)
+            return
+        ), (error) ->
+          console.log(error)
+          return
+
       init()
   ])

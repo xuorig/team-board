@@ -39,10 +39,6 @@
         <i class="glyphicon glyphicon-user"></i>
         <span class="title">Managers </span>
         <p ng-repeat="manager in project.managers" class="user-list">{{manager.name}} <a href="#" ng-if="project.isOwner" class="remove-user hidden-link">Remove</a></p>
-        <div class="new-member-container">
-          <input type="text" name="newManager" class="form-control new-member" placeholder="sadelephant@zoo.com" ng-model="newManager">
-          <i ng-click="addUserToProject()" class="add glyphicon glyphicon-plus-sign"></i>
-        </div>
       </div>
     </div>
 
@@ -55,10 +51,6 @@
           <span ng-if="!user.active">{{user.email}} (Invitation Sent)</span>
           <a href="#" ng-if="project.isOwner" class="remove-user hidden-link">Remove</a>
         </p>
-        <div class="new-member-container">
-          <input type="text" name="newUser" class="form-control new-member" placeholder="sadelephant@zoo.com" ng-model="newUser">
-          <i ng-click="addUserToProject()" class="add glyphicon glyphicon-plus-sign"></i>
-        </div>
       </div>
     </div>
 

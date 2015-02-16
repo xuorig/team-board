@@ -1,6 +1,6 @@
 <div class="row team-page">
   <div class="col-md-12 col-sm-12">
-    <div ng-model="team" class="section-header row">
+    <div ng-model="team" class="section-header">
       <h1>Teams</h1>
       <h2>{{team.name}}</h2>
     </div>
@@ -33,7 +33,7 @@
           <span ng-if="user.active && currentUser.id !== user.id">{{user.name}}</span>
           <span ng-if="currentUser.id == user.id"><strong>You</strong></span>
           <span ng-if="!user.active">{{user.email}} (Invitation Sent)</span>
-          <a href="#" ng-if="team.isOwner && currentUser.id !== user.id" class="remove-user hidden-link"><i class="glyphicon glyphicon-trash"></i></a>
+          <a href="" ng-click="onRemoveManager(user.id)" ng-if="team.isOwner && currentUser.id !== user.id" class="remove-user hidden-link"><i class="glyphicon glyphicon-trash"></i></a>
         </p>
         <form name="newManagerForm">
           <div class="new-member-container form-group"  ng-class="{'has-error': newManagerForm.newManager.$error.email}">
@@ -53,7 +53,7 @@
           <span ng-if="user.active && currentUser.id !== user.id">{{user.name}}</span>
           <span ng-if="currentUser.id == user.id"><strong>You</strong></span>
           <span ng-if="!user.active">{{user.email}} (Invitation Sent)</span>
-          <a href="#" ng-if="team.isOwner && currentUser.id !== user.id" class="remove-user hidden-link">Remove</a>
+          <a href="" ng-if="team.isOwner && currentUser.id !== user.id" ng-click="onRemoveUser(user.id)" class="remove-user hidden-link"><i class="glyphicon glyphicon-trash"></i></a>
         </p>
         <form name="newUserForm">
           <div class="new-member-container form-group" ng-class="{'has-error': newUserForm.newUser.$error.email}">
