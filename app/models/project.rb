@@ -9,4 +9,12 @@ class Project < ActiveRecord::Base
   has_many :managers, :through => :manager_projects, :source => :user
 
   has_many :boards
+
+  def combined_users
+    (self.users + self.managers) << self.owner
+  end
+
+  def users_managers_owner
+    User.where(id: combined_users(&:id))
+  end
 end

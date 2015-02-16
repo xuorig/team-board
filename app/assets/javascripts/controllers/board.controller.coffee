@@ -10,13 +10,14 @@ angular
       }
 
       splitItemsInColumns = (items, numberOfColumns) ->
+        splitItems = [[],[],[]] # 3 cols
         lists = _.groupBy(items, (element, index) ->
           return element.uiColumn
         )
         _.each lists, (list, key) ->
-          lists[key] = _.sortBy(list, (item) -> return item.position).reverse()
+          splitItems[key] = _.sortBy(list, (item) -> return item.position).reverse()
 
-        return _.toArray(lists)
+        return splitItems
 
       getBoard = () ->
         Board.get($routeParams.board_id).then ((results) ->
@@ -28,6 +29,7 @@ angular
           return
 
       $scope.onAddNote = () ->
+        console.log($scope.splitItems)
         firstItem = $scope.splitItems[0][0]
         nextPos = 1
         if firstItem

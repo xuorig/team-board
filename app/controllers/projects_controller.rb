@@ -3,13 +3,15 @@ class ProjectsController < ApplicationController
 
   # GET /projects
   def index
-    render json: current_user.projects, status: 200
+    render json: current_user.all_projects, status: 200
   end
 
   # GET /projects/:id
   def show
-    @project = current_user.projects.find(params[:id]).to_json(:current_user => current_user,
-                                                          :include => [:owner, :users, :managers, :boards])
+    @project = current_user.all_projects
+    puts @project
+    puts 'sup'
+    @project = @project.find(params[:id]).to_json(:include => [:owner, :users, :managers, :boards])
     render json: @project
   end
 
@@ -17,12 +19,15 @@ class ProjectsController < ApplicationController
   def create
     @project = Project.new(safe_params.slice(:name, :description))
     @project.owner = current_user
+    @project.users << current_user
+    @project.managers << current_user
 
     @team = Team.find(params[:project][:team_id])
     @project.team = @team if @team else nil
 
-    sample_board = Board.new(:name => safe_params[:name])
+    sample_board = Board.new(:name => safe_params[:name], :description => "This is an auto generated board for your project.")
     @project.boards << sample_board
+
 
     @project.save!
     render json: @project, status: 201
