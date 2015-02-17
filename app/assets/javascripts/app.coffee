@@ -16,9 +16,9 @@ angular.module('teamboard').config ["$httpProvider", ($httpProvider) ->
   $httpProvider.defaults.headers.common['X-CSRF-Token'] = $('meta[name=csrf-token]').attr('content')
 ]
 
-angular.module('teamboard').run( (editableOptions) ->
+angular.module('teamboard').run( ['editableOptions', (editableOptions) ->
   editableOptions.theme = 'bs3'
-)
+])
 
 angular.module('teamboard.services', ['rails']);
 
