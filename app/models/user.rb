@@ -38,6 +38,9 @@ class User < ActiveRecord::Base
       user.name     = auth.info.name
       user.email    = auth.info.email
       user.save!
+      return user
+    else
+      return existingRecord.first
     end
   end
 end
