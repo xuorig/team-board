@@ -5,7 +5,6 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
   helper_method :user_signed_in?
   helper_method :correct_user? 
-  helper_method :dev_authenticate!
 
   private
   def current_user
@@ -22,10 +21,6 @@ class ApplicationController < ActionController::Base
     unless current_user == @user
       redirect_to root_url, :alert => "Access denied."
     end
-  end
-
-  def dev_authenticate!
-    @current_user = User.first
   end
 
   def authenticate_user!
