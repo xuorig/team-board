@@ -15,11 +15,6 @@
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
-  require 'omniauth'
-  require 'omniauth-google-oauth2'
-  require 'active_support/all'
-  require 'rspec-rails'
-  require 'rails'
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
   # assertions if you prefer.
@@ -43,18 +38,19 @@ RSpec.configure do |config|
     mocks.verify_partial_doubles = true
   end
 
-  OmniAuth.config.test_mode = true
-  omniauth_hash = { 
-    'provider' => 'google_oauth2',
-    'uid' => '12345',
-    'name' => 'Doode',
-    'credentials' => {
-          'token' => "123456",
-          'expires_at'=> Time.now + 1.day
-        }
-  }
+  # MAKE THIS WORK!!! (AUTH gem with test)
+  # OmniAuth.config.test_mode = true
+  # omniauth_hash = { 
+  #   'provider' => 'google_oauth2',
+  #   'uid' => '12345',
+  #   'name' => 'Doode',
+  #   'credentials' => {
+  #         'token' => "123456",
+  #         'expires_at'=> Time.now + 1.day
+  #       }
+  # }
  
-  OmniAuth.config.add_mock(:google_oauth2, omniauth_hash)
+  # OmniAuth.config.add_mock(:google_oauth2, omniauth_hash)
 
 # The settings below are suggested to provide a good initial experience
 # with RSpec, but feel free to customize to your heart's content.

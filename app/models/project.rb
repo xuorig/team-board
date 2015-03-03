@@ -14,6 +14,10 @@ class Project < ActiveRecord::Base
     (self.users + self.managers) << self.owner
   end
 
+  def users_from_team
+    self.team.users
+  end
+
   def users_managers_owner
     User.where(id: combined_users(&:id))
   end
