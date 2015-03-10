@@ -50,7 +50,7 @@
     <div class="row">
     	<div class="col-md-4 items">
         <ul ui-sortable="sortableOptions" ng-model="splitItems[0]" class="item-column">
-          <li ng-repeat="item in splitItems[0]">
+          <li ng-controller="BoardItemController" ng-repeat="item in splitItems[0]">
             <div ng-class="item.color" class="note-item" context-menu class="panel panel-default position-fixed"
                   data-target="menu" ng-class="{ 'highlight': highlight, 'expanded' : expanded }">
               <h3 editable-text="item.title" class="note-title">{{ item.title }}</h3>
@@ -63,7 +63,7 @@
       <!-- Column 2 -->
       <div class="col-md-4 items">
         <ul ui-sortable="sortableOptions" ng-model="splitItems[1]" class="item-column">
-          <li ng-repeat="item in splitItems[1]">
+          <li ng-controller="BoardItemController" ng-repeat="item in splitItems[1]">
             <div ng-class="item.color" class="note-item">
               <h3 editable-text="item.title" class="note-title">{{ item.title }}</h3>
               <p editable-textarea="item.noteContent" class="note-content">{{ item.position }} {{ item.noteContent }}</p>
@@ -75,7 +75,7 @@
       <!-- Column 3 -->
       <div class="col-md-4 items">
         <ul ui-sortable="sortableOptions" ng-model="splitItems[2]" class="item-column">
-          <li ng-repeat="item in splitItems[2]">
+          <li ng-controller="BoardItemController" ng-repeat="item in splitItems[2]">
             <div ng-class="item.color" class="note-item">
               <h3 editable-text="item.title" class="note-title">{{ item.title }}</h3>
               <p editable-textarea="item.noteContent" class="note-content">{{ item.position }} {{ item.noteContent }}</p>

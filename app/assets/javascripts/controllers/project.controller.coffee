@@ -8,7 +8,7 @@ angular
           return
         ), (error) ->
           return
-      getProject()
+
       $scope.onDelete = () ->
         SweetAlert.swal {
           title: 'Watch out!'
@@ -39,4 +39,6 @@ angular
         # ), (error) ->
         #   console.log(error)
         #   return
+
+      getProject()
   ])

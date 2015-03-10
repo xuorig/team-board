@@ -1,13 +1,15 @@
 angular
   .module('teamboard.controllers')
-  .controller("BoardController", [ '$scope','$timeout', '$location','$resource','$routeParams','Board','SweetAlert', '_',
-    ($scope, $timeout, $location, $resource, $routeParams, Board, SweetAlert, _) ->
-
-      $scope.sortableOptions = {
-        'ui-floating': true,
-        connectWith: ".item-column",
-        cursor: "pointer"
-      }
+  .controller("BoardController", [ '$scope','$timeout', '$location','$resource','$routeParams','Board','BoardItem', 'SweetAlert', '_',
+    ($scope, $timeout, $location, $resource, $routeParams, Board, BoardItem, SweetAlert, _) ->
+      init = () ->
+        $scope.sortableOptions = {
+          'ui-floating': true,
+          connectWith: ".item-column",
+          cursor: "pointer"
+        }
+        $scope.splitItems = []
+        getBoard()
 
       splitItemsInColumns = (items, numberOfColumns) ->
         splitItems = [[],[],[]] # 3 cols
@@ -35,12 +37,17 @@ angular
         if firstItem
           nextPos = firstItem.position + 1
 
-        $scope.splitItems[0].unshift({
-            title: "Untitled Note",
-            noteContent: "No Content",
-            position: nextPos,
-            uiColumn: 1
-          })
+        newItem = {
+          title: "Untitled Note",
+          noteContent: "No Content",
+          position: nextPos,
+          uiColumn: 0,
+          boardId: $routeParams.board_id
+        }
+
+        new BoardItem(newItem).create()
+
+        $scope.splitItems[0].unshift(newItem)
         
         # Start edit of new note
         $timeout( () ->
@@ -50,9 +57,5 @@ angular
           title.siblings().find("input").select()
         )
 
-
-        console.log($scope.splitItems)
-
-      $scope.splitItems = []
-      getBoard()
+      init()
   ])

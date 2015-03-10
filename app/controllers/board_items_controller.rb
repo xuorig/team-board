@@ -1,11 +1,11 @@
-class BoardsController < ApplicationController
+class BoardItemsController < ApplicationController
   before_filter :authenticate_user!
-  before_filter :get_project
+  before_filter :get_board
 
   def get_board
     if params[:board_id]
       board = Board.find(params[:board_id])
-      if board.users.include?(current_user)
+      if board.project.users_managers_owner.include?(current_user)
         @board = board
       else
         @board = nil
@@ -21,31 +21,32 @@ class BoardsController < ApplicationController
   end
 
   def show
-    @item = BoardItem.find(params[:id])
-    # Check if user is allwowed to see board
-    if @board.users_managers_owner.include?(current_user)
-      @board = @board.to_json(:include => [:items])
-      render json: @board, :status => 200
+    @item = BoardItem.find(params[:id]).to_json()
+    render json: @item, :status => 200
+  end
 
+  def update
+    @item = BoardItem.find(params[:id])
+    @item.update!(safe_params)
   end
 
   def create
     @board.items << BoardItem.create!(safe_params)
-    render :nothing => true, :status => 202
+    render :nothing => true, :status => 201
   end
 
   def destroy
-    @board = @project.boards.find(params[:id])
+    @item = BoardItem.find(params[:id])
     respond_to do |format|
-      if @board.destroy
+      if @item.destroy
         format.json { head :no_content, status: :ok }
       else
-        format.json { render json: @team.errors, status: :unprocessable_entity }
+        format.json { render json: @item.errors, status: :unprocessable_entity }
       end
     end
   end
 
   def safe_params
-    params.require(:board_item).permit(:title, :note_content, :position, :color)
+    params.require(:board_item).permit(:title, :note_content, :position, :color, :ui_column)
   end
 end

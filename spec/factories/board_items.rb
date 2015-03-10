@@ -1,8 +1,8 @@
 FactoryGirl.define do
   factory :board_item do
     position 1
-color "MyString"
-title "MyString"
+    color "MyString"
+    title "MyString"
   end
 
 end

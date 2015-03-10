@@ -1,8 +1,7 @@
 FactoryGirl.define do
   factory :team do
-    name "MyString"
-description "MyString"
-string "MyString"
+    name "SomeTeam"
+    description "SomeTeamDescription"
   end
 
 end
