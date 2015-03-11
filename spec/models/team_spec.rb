@@ -8,4 +8,8 @@ RSpec.describe Team, :type => :model do
   it 'is invalid without a name' do
     expect(build(:team, name: nil)).to_not be_valid
   end
+
+  it 'is invalid without an owner' do
+  	expect(build(:team, owner: nil)).to_not be_valid
+  end
 end
