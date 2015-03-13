@@ -27,7 +27,25 @@ class BoardItemsController < ApplicationController
 
   def update
     @item = BoardItem.find(params[:id])
-    @item.update!(safe_params)
+    if safe_params[:ui_column] != @item.ui_column     
+      @item.remove_from_list
+      @item.save
+      @item.ui_column = safe_params[:ui_column]
+      @item.save
+    end
+    if safe_params[:position] != @item.position
+      @item.insert_at(safe_params[:position])
+      @item.save
+    end
+
+    respond_to do |format|
+      if @item.update!(safe_params.except([:ui_column, :position]))
+        format.json { render json: @item, status: :ok }
+      else
+        format.json { render json: @item.errors, status: :unprocessable_entity }
+      end
+    end
+
   end
 
   def create

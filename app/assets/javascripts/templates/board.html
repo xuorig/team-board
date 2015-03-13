@@ -49,12 +49,12 @@
     <!-- Column 1 -->
     <div class="row">
     	<div class="col-md-4 items">
-        <ul ui-sortable="sortableOptions" ng-model="splitItems[0]" class="item-column">
-          <li ng-controller="BoardItemController" ng-repeat="item in splitItems[0]">
+        <ul ui-sortable="sortableOptions" ng-model="firstCol" class="item-column">
+          <li ng-controller="BoardItemController" ng-repeat="item in firstCol">
             <div ng-class="item.color" class="note-item" context-menu class="panel panel-default position-fixed"
                   data-target="menu" ng-class="{ 'highlight': highlight, 'expanded' : expanded }">
-              <h3 editable-text="item.title" class="note-title">{{ item.title }}</h3>
-              <p editable-textarea="item.noteContent" class="note-content">{{ item.position }} {{ item.noteContent }}</p>
+              <h3 editable-text="item.title" class="note-title" onaftersave="updateItem()">{{ item.title }}</h3>
+              <p editable-textarea="item.noteContent" class="note-content" onaftersave="updateItem()">{{ item.noteContent }}</p>
             </div>
           </li>
         </ul>
@@ -62,11 +62,11 @@
 
       <!-- Column 2 -->
       <div class="col-md-4 items">
-        <ul ui-sortable="sortableOptions" ng-model="splitItems[1]" class="item-column">
-          <li ng-controller="BoardItemController" ng-repeat="item in splitItems[1]">
+        <ul ui-sortable="sortableOptions" ng-model="secondCol" class="item-column">
+          <li ng-controller="BoardItemController" ng-repeat="item in secondCol">
             <div ng-class="item.color" class="note-item">
-              <h3 editable-text="item.title" class="note-title">{{ item.title }}</h3>
-              <p editable-textarea="item.noteContent" class="note-content">{{ item.position }} {{ item.noteContent }}</p>
+              <h3 editable-text="item.title" class="note-title" onaftersave="updateItem(item.id, item.title, item.noteContent)">{{ item.title }}</h3>
+              <p editable-textarea="item.noteContent" class="note-content" onaftersave="updateItem(item.id, item.title, item.noteContent)">{{ item.noteContent }}</p>
             </div>
           </li>
         </ul>
@@ -74,11 +74,11 @@
 
       <!-- Column 3 -->
       <div class="col-md-4 items">
-        <ul ui-sortable="sortableOptions" ng-model="splitItems[2]" class="item-column">
-          <li ng-controller="BoardItemController" ng-repeat="item in splitItems[2]">
+        <ul ui-sortable="sortableOptions" ng-model="thirdCol" class="item-column">
+          <li ng-controller="BoardItemController" ng-repeat="item in thirdCol">
             <div ng-class="item.color" class="note-item">
-              <h3 editable-text="item.title" class="note-title">{{ item.title }}</h3>
-              <p editable-textarea="item.noteContent" class="note-content">{{ item.position }} {{ item.noteContent }}</p>
+              <h3 editable-text="item.title" class="note-title" onaftersave="updateItem(item.id, item.title, item.noteContent)">{{ item.title }}</h3>
+              <p editable-textarea="item.noteContent" class="note-content" onaftersave="updateItem(item.id, item.title, item.noteContent)">{{ item.noteContent }}</p>
             </div>
           </li>
         </ul>
