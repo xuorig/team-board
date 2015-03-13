@@ -28,7 +28,7 @@ gem 'angular-rails-templates'
 gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
-# gem 'unicorn'
+gem 'unicorn'
 gem 'font-awesome-sass'
 gem 'angularjs-rails-resource', '~> 1.1.1'
 gem 'acts_as_list'
@@ -37,9 +37,6 @@ gem 'acts_as_list'
 
 # Use Unicorn as the app server
 # gem 'unicorn'
-
-# IM: This is required for windows platform, see https://github.com/tzinfo/tzinfo-data/issues/4
-gem 'tzinfo-data'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
