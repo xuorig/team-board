@@ -50,24 +50,35 @@ RSpec.describe User, :type => :model do
   it 'has managed teams when is team owner' do
     team_owner = build(:team_owner)
     expect(team_owner.managed_teams).not_to be_empty
+    expect(team_owner.owned).not_to be_empty
+    expect(team_owner.managed_teams).to include(*team_owner.owned)
   end
 
   it 'has teams when is team manager' do
+    team_manager = build(:team_manager)
+    expect(team_manager.managed_teams).not_to be_empty
+    expect(team_manager.owned).to be_empty
+    expect(team_manager.teams).not_to be_empty
+    expect(team_manager.teams).to include(*team_manager.managed_teams)
   end
 
   it 'has teams when is team member' do
+    team_member = build(:team_member)
+    expect(team_member.managed_teams).to be_empty
+    expect(team_member.owned).to be_empty
+    expect(team_member.teams).not_to be_empty
   end
 
-  it 'has projects when is project manager' do
+  xit 'has projects when is project manager' do
   end
 
-  it 'has projects when is project member' do
+  xit 'has projects when is project member' do
   end
 
-  it 'has boards when is board owner' do
+  xit 'has boards when is board owner' do
   end
 
-  it 'has board items when is board item owner' do
+  xit 'has board items when is board item owner' do
   end
 
 end
