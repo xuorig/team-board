@@ -1,3 +1,33 @@
 <div class="row">
-  <h1>Dashboard</h1>
+  <div class="col-md-12 col-sm-12">
+    <div class="section-header">
+      <h1>Dashboard</h1>
+      <h2>Welcome, {{ currentUser.name }}</h2>
+    </div>
+
+    <div class="row section dashboard">
+      <div class="col-md-12">
+        <h2 class="dashboard-title">Recently Active Projects</h2>
+        <div class="row" ng-repeat="project in projects">
+          <a href="#/projects/{{project.id}}">
+          <div class="col-md-12">
+            <p class="name">{{project.name}} - {{project.description}}</p>
+          </div>
+          </a>
+        </div>
+      </div>
+
+      <div class="col-md-12">
+        <h2 class="dashboard-title">Most Recent Comments</h2>
+      </div>
+
+      <div class="col-md-12">
+        <h2 class="dashboard-title">Tasks Due Soon</h2>
+      </div>
+
+
+    </div>
+
+    </div>
+  </div>
 </div>
