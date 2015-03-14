@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  validates :email, presence: true
   # Teams
   has_many :memberships, :dependent => :destroy
   has_many :teams, :through => :memberships
