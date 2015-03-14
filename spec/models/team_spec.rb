@@ -21,12 +21,13 @@ RSpec.describe Team, :type => :model do
   it 'has managership' do
     new_team = build(:team)
     expect(new_team.managership).not_to be_empty
-    expect(new_team.managership).to be == new_team.owner.managership
+    expect(new_team.managers).to include(new_team.owner)
+    expect(new_team.owner.managed_teams).to include(new_team)
   end
 
   it 'has memberships' do
     new_team = build(:team)
     expect(new_team.memberships).not_to be_empty
-    expect(new_team.memberships).to be == new_team.owner.memberships
+    expect(new_team.owner.teams).to include(new_team)
   end
 end
