@@ -1,7 +1,6 @@
 FactoryGirl.define do
-  factory :managership do
-    manager_id 1
-team_id 1
+  factory :managerships, class: Managership do
+    team
+    user
   end
-
 end

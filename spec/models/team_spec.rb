@@ -17,4 +17,17 @@ RSpec.describe Team, :type => :model do
   	new_team = build(:team)
   	expect(new_team.projects).to be_empty
   end
+
+  it 'has managership' do
+    new_team = build(:team)
+    expect(new_team.managership).not_to be_empty
+    expect(new_team.managers).to include(new_team.owner)
+    expect(new_team.owner.managed_teams).to include(new_team)
+  end
+
+  it 'has memberships' do
+    new_team = build(:team)
+    expect(new_team.memberships).not_to be_empty
+    expect(new_team.owner.teams).to include(new_team)
+  end
 end
