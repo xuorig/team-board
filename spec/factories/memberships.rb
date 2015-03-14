@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :membership do
+  factory :memberships do
     user_id 1
     team_id 1
   end
