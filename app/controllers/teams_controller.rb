@@ -3,13 +3,13 @@ class TeamsController < ApplicationController
   # GET /teams
   # GET /teams.json
   def index
-    render json: current_user.teams, status: 200
+    render json: current_user.all_teams.to_json(:include => [:owner, :managers]), status: 200
   end
 
   # GET /teams/:id
   # GET /teams/:id.json
   def show
-    team = current_user.teams.find(params[:id]).to_json(:current_user => current_user,
+    team = current_user.all_teams.find(params[:id]).to_json(:current_user => current_user,
                                                           :include => [:owner, :users, :managers])
     render json: team
   end
@@ -18,19 +18,11 @@ class TeamsController < ApplicationController
   def create
   	team = Team.new(safe_params.slice(:name, :description))
     team.owner = current_user
-    team.users << current_user
-    team.managers << current_user
 
     if params[:team][:users]
       params[:team][:users].each do |email|
-        user = User.where(email: email)
-        if user.blank?
-          user = User.new
-          user.email = email
-          user.save!
-        else
-          user = user.first
-        end
+        existingUser = User.where(email: email)
+        user = existingUser.blank? ? User.create!(:email => email) : existingUser.first
         if user != current_user
           team.users << user
         end

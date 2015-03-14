@@ -26,14 +26,17 @@
             <ul class="member-list">
               <li ng-if="formData.team">
                 <div class="member-info">
-                  <i class="glyphicon glyphicon-globe"></i> {{ formData.team.name }}    
+                  <i class="glyphicon glyphicon-globe"></i>{{ formData.team.name }}    
                   <i ng-click="deassignTeam()" class="pull-right glyphicon glyphicon-remove remove-user"></i>
                 </div>
               </Li>
             </ul>
-            <div>
-            <select class="form-control" ng-model="assignedTeam" ng-options="team.name for team in teams"></select>
-            <button type="button" ng-disabled="formData.team" ng-click="assignToTeam()" class="btn tb-btn add-member-btn">Assign</button>
+            <div ng-if="teams.length > 0">
+              <select class="form-control" ng-model="assignedTeam" ng-options="team.name for team in teams"></select>
+              <button type="button" ng-disabled="formData.team" ng-click="assignToTeam()" class="btn tb-btn add-member-btn">Assign</button>
+            </div>
+            <div ng-if="teams.length == 0">
+              <p> You don't have the permissions to assign this project to a team </p>
             </div>
           </div>
 

@@ -24,10 +24,10 @@ class ProjectsController < ApplicationController
 
     @team = Team.find(params[:project][:team_id])
     @project.team = @team if @team else nil
+    @project.users += @team.users
 
     sample_board = Board.new(:name => safe_params[:name], :description => "This is an auto generated board for your project.")
     @project.boards << sample_board
-
 
     @project.save!
     render json: @project, status: 201

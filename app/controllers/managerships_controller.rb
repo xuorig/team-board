@@ -21,6 +21,12 @@ class ManagershipsController < ApplicationController
       user.email = safe_params[:email]
       user.save!
     end
+
+    # if a membership already exists for that user and team, remove it and replace it by a managership
+    existingMembersShip = Membership.where({team_id: safe_params[:team_id], user_id: user.id})
+    if !existingMembersShip.blank?
+      existingMembersShip.first.delete()
+    end
     @managership = Managership.new({:team_id => safe_params[:team_id], :manager_id => user.id})
     @managership.save!
     render json: @managership, status: 201

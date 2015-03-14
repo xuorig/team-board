@@ -1,4 +1,4 @@
-<div class="row team-page">
+<div class="row team-page" ngController="TeamController">
   <div class="col-md-12 col-sm-12">
     <div ng-model="team" class="section-header">
       <h1>Teams</h1>
@@ -20,7 +20,7 @@
     <div class="row section">
       <div class="col-md-12">
         <i class="glyphicon glyphicon-king"></i>
-        <span class="title">Owners </span>
+        <span class="title">Owner </span>
         <p class="user-list">{{team.owner.name}} <a ng-if="team.isOwner" class="transfer hidden-link" href="#">Transfer Ownership</a></p>
       </div>
     </div>
@@ -35,13 +35,15 @@
           <span ng-if="!user.active">{{user.email}} (Invitation Sent)</span>
           <a href="" ng-click="onRemoveManager(user.id)" ng-if="team.isOwner && currentUser.id !== user.id" class="remove-user hidden-link"><i class="glyphicon glyphicon-trash"></i></a>
         </p>
-        <form name="newManagerForm">
-          <div class="new-member-container form-group"  ng-class="{'has-error': newManagerForm.newManager.$error.email}">
-            <input type="email" name="newManager" class="form-control new-member" placeholder="sadelephant@zoo.com" ng-model="newManager">
-            <i ng-click="addManagerToTeam()" class="add glyphicon glyphicon-plus-sign"></i>
-            <span class="error" ng-show="newManagerForm.newManager.$error.email">Please enter a valid email!</span>
-          </div>
-        </form>
+        <div ng-if="team.isOwner">
+          <form name="addForms.newManagerForm">
+            <div class="new-member-container form-group"  ng-class="{'has-error': addForms.newManagerForm.newManager.$error.email}">
+              <input type="email" name="newManager" class="form-control new-member" placeholder="sadelephant@zoo.com" ng-model="addForms.newManager">
+              <i ng-click="addManagerToTeam()" class="add glyphicon glyphicon-plus-sign"></i>
+              <span class="error" ng-show="addForms.newManagerForm.newManager.$error.email">Please enter a valid email!</span>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
 
@@ -55,13 +57,15 @@
           <span ng-if="!user.active">{{user.email}} (Invitation Sent)</span>
           <a href="" ng-if="team.isOwner && currentUser.id !== user.id" ng-click="onRemoveUser(user.id)" class="remove-user hidden-link"><i class="glyphicon glyphicon-trash"></i></a>
         </p>
-        <form name="newUserForm">
-          <div class="new-member-container form-group" ng-class="{'has-error': newUserForm.newUser.$error.email}">
-            <input type="email" name="newUser" class="form-control new-member" placeholder="sadelephant@zoo.com" ng-model="newUser">
-            <i ng-click="addUserToTeam()" class="add glyphicon glyphicon-plus-sign"></i>
-            <span class="error" ng-show="newUserForm.newUser.$error.email">Please enter a valid email!</span>
-          </div>
-        </form>
+        <div ng-if="team.isOwner">
+          <form name="addForms.newUserForm">
+            <div class="new-member-container form-group" ng-class="{'has-error': addForms.newUserForm.newUser.$error.email}">
+              <input type="email" name="newUser" class="form-control new-member" placeholder="sadelephant@zoo.com" ng-model="addForms.newUser">
+              <i ng-click="addUserToTeam()" class="add glyphicon glyphicon-plus-sign"></i>
+              <span class="error" ng-show="addForms.newUserForm.newUser.$error.email">Please enter a valid email!</span>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
 

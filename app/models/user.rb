@@ -25,6 +25,14 @@ class User < ActiveRecord::Base
     Project.where(id: combined_projects(&:id))
   end
 
+  def combined_teams
+    self.teams + self.managed_teams + self.owned
+  end
+
+  def all_teams
+    Team.where(id: combined_teams(&:id))
+  end
+
   def self.from_omniauth(auth)
     existingRecord = where(email: auth.info.email)
     if existingRecord.blank? or existingRecord.first.provider == nil

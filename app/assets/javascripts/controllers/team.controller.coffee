@@ -4,6 +4,7 @@ angular
     ($scope, $location, $resource, $routeParams, CurrentUser, Membership, Managership, Team, SweetAlert)->
 
       init = () ->
+        $scope.addForms = {}
         getTeam()
         CurrentUser.getUser().then (data) ->
           $scope.currentUser = data
@@ -11,6 +12,7 @@ angular
       getTeam = () ->
         Team.get($routeParams.team_id).then ((results) ->
           $scope.team = results
+          console.log $scope.team.users
           return
         ), (error) ->
           return
@@ -35,12 +37,11 @@ angular
           return
 
       $scope.addUserToTeam = () ->
-        if $scope.newUserForm.newUser.$error.email
-          console.log 'sup'
+        if $scope.addForms.newUserForm.newUser.$error.email
           return
         new Membership({
           team_id: $routeParams.team_id,
-          email: $scope.newUser
+          email: $scope.addForms.newUser
         })
         .create()
         .then ((result) ->
@@ -52,12 +53,11 @@ angular
 
 
       $scope.addManagerToTeam = () ->
-        if $scope.newManagerForm.newManager.$error.email
-          console.log 'yo'
+        if $scope.addForms.newManagerForm.newManager.$error.email
           return
         new Managership({
           team_id: $routeParams.team_id,
-          email: $scope.newManager
+          email: $scope.addForms.newManager
         })
         .create()
         .then ((result) ->

@@ -9,13 +9,20 @@ angular
           cursor: "pointer",
           stop: (e, ui) ->
             destinationListIndex = $scope.splitItems.indexOf(ui.item.sortable.droptargetModel)
-            destinationPosition = $scope.splitItems[destinationListIndex].indexOf(ui.item.sortable.model)
-            $scope.updateItemPosition(ui.item.sortable.model, destinationListIndex, destinationPosition)
+            destinationIndex = $scope.splitItems[destinationListIndex].indexOf(ui.item.sortable.model)
+            numOfitems = $scope.splitItems[destinationListIndex].length
+            newPosition = numOfitems - destinationIndex
+            console.log numOfitems
+            console.log newPosition
+            console.log destinationIndex
+            $scope.updateItemPosition(ui.item.sortable.model, destinationListIndex, newPosition)
         }
+
         $scope.splitItems = []
         $scope.firstCol = []
         $scope.secondCol = []
         $scope.thirdCol = []
+
         getBoard()
 
       splitItemsInColumns = (items, numberOfColumns) ->
@@ -35,14 +42,13 @@ angular
           $scope.firstCol = $scope.splitItems[0]
           $scope.secondCol = $scope.splitItems[1]
           $scope.thirdCol = $scope.splitItems[2]
-          console.log($scope.splitItems)
           return
         ), (error) ->
           return
 
       $scope.updateItemPosition = (item, column, pos) ->
         BoardItem.get(item.id).then (boardItem) ->
-          boardItem.position = pos + 1
+          boardItem.position = pos
           boardItem.uiColumn = column
           boardItem.update()
           return
@@ -63,9 +69,8 @@ angular
         }
 
         new BoardItemNested(newItem).create()
-
         $scope.splitItems[0].unshift(newItem)
-        
+
         # Start edit of new note
         $timeout( () ->
           title = $("ul[ng-model]").first().children().first().find("h3")
