@@ -4,7 +4,7 @@ RSpec.describe User, :type => :model do
 
   it 'has a valid factory' do
     expect(build(:user)).to be_valid
-  end 
+  end
 
   it 'must have an email' do
     expect(build(:user, email: nil)).not_to be_valid
@@ -53,27 +53,21 @@ RSpec.describe User, :type => :model do
   end
 
   it 'has teams when is team manager' do
-    pending "add some examples"
   end
 
   it 'has teams when is team member' do
-    pending "add some examples"
   end
 
   it 'has projects when is project manager' do
-    pending "add some examples"
   end
 
   it 'has projects when is project member' do
-    pending "add some examples"
   end
 
   it 'has boards when is board owner' do
-    pending "add some examples"
   end
 
   it 'has board items when is board item owner' do
-    pending "add some examples"
   end
 
 end
