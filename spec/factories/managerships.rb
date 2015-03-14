@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :managership do
+  factory :managerships, class: Managership do
     team
     user
   end
