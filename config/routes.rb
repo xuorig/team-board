@@ -14,7 +14,12 @@ Rails.application.routes.draw do
       resources :board_items, only: [:index, :new, :create], defaults: { format: 'json' }
     end
 
-    resources :board_items, only: [:show, :edit, :update, :destroy]
+    resources :board_items, only: [:show, :edit, :update, :destroy] do
+      resources :comments, only: [:index, :new, :create], defaults: { format: 'json' }
+    end
+
+    resource :comments, only: [:show, :edit, :update, :destroy]
+
     resources :users, defaults: { format: 'json' }
     resources :memberships, defaults: { format: 'json' }
     resources :managerships, defaults: { format: 'json'}

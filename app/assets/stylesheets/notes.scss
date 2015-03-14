@@ -105,6 +105,26 @@ $colorYellowDark: darken($colorYellow, 10%) transparent;
     text-decoration: none !important;
     border: none !important;
   }
+  .note-details {
+    a {
+      color: #4D4D4D;
+      font-size: 12px;
+      margin-right: 5px;
+    }
+  }
+  .note-comments {
+    max-height: 500px;
+    transition: .8s;
+    overflow: hidden;
+    .comment {
+      font-size: 14px;
+      padding-top: 5px;
+      padding-bottom: 5px;
+    }
+  }
+  .note-comments.hidden {
+    max-height: 0;
+  }
   cursor:pointer;
   margin: auto;
   width: 90%;
