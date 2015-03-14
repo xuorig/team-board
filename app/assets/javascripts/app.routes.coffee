@@ -3,7 +3,16 @@ angular.module('teamboard').config([ '$routeProvider', '$locationProvider',
     $routeProvider
       .when('/', {
         templateUrl: "index.html",
-        controller: 'HomeController'
+        controller: 'DashboardController'
+      })
+      # USER
+      .when('/profile', {
+        templateUrl: "userprofile.html",
+        controller: "ProfileController" 
+      })
+      .when('/settings', {
+        templateUrl: "settings.html",
+        controller: "SettingsController" 
       })
       # BOARDS
       .when('/boards', {

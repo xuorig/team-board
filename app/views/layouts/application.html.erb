@@ -19,19 +19,19 @@
   <div class="main-logo"></div>
   <ul class="sidebar" ng-controller="MenuController">
     <li id="user-menu" class="sidebar-item first-element">
-      <a id="toggle-user-menu" href="#">
+      <a id="toggle-user-menu">
         <i class="glyphicon glyphicon-user"></i>
         <%= current_user.name %>
       </a>
       <ul class="sidebar-submenu">
         <li class="sidebar-submenu-item">
-          <a href="#">
+          <a href="#/profile">
             <i class="glyphicon glyphicon-user"></i>
             Profile
           </a>
         </li>
         <li class="sidebar-submenu-item">
-          <a href="#">
+          <a href="#/settings">
             <i class="glyphicon glyphicon-cog"></i>
             Settings
           </a>
@@ -43,14 +43,14 @@
         </li>
       </ul>
     </li>
+    <li ng-class="{current: isCurrentPath('/')}" class="sidebar-item">  
+      <a href="#/"><i class="glyphicon glyphicon-stats"></i> Dashboard</a>
+    </li>
     <li ng-class="{current: isCurrentPath('/projects')}" class="sidebar-item">  
       <a href="#/projects"><i class="glyphicon glyphicon-th-list"></i> Projects</a>
     </li>
     <li ng-class="{current: isCurrentPath('/teams')}" class="sidebar-item">
       <a href="#/teams"><i class="glyphicon glyphicon-globe"></i> My Teams</a>
-    </li>
-    <li ng-class="{current: isCurrentPath('/boards')}" class="sidebar-item">
-      <a href="#/boards"><i class="glyphicon glyphicon-th"></i> Boards</a>
     </li>
     <li ng-class="{current: isCurrentPath('/calendar')}" class="sidebar-item">
       <a href="#/calendar"><i class="glyphicon glyphicon-calendar"></i> Calendar</a>
