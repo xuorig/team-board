@@ -12,7 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require jquery-ui/jquery-ui
+//= require jquery-ui/ui/jquery-ui
 //= require angular/angular
 //= require angular-route/angular-route
 //= require angular-resource/angular-resource
@@ -26,4 +26,7 @@
 //= require angular-ui-sortable/sortable
 //= require angular-xeditable/dist/js/xeditable.js
 //= require ng-context-menu/dist/ng-context-menu
+//= require fullcalendar/fullcalendar
+//= require fullcalendar/gcal
+//= require angular-ui-calendar/src/calendar
 //= require_tree .

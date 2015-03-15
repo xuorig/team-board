@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150314185936) do
+ActiveRecord::Schema.define(version: 20150315193650) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,10 +33,13 @@ ActiveRecord::Schema.define(version: 20150314185936) do
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
     t.string   "type"
+    t.integer  "note_item_id"
+    t.integer  "file_item_id"
     t.string   "note_content"
     t.integer  "board_id"
     t.integer  "ui_column"
     t.string   "note_title"
+    t.datetime "due_date"
   end
 
   create_table "boards", force: :cascade do |t|
@@ -57,6 +60,12 @@ ActiveRecord::Schema.define(version: 20150314185936) do
     t.integer  "board_item_id"
   end
 
+  create_table "file_items", force: :cascade do |t|
+    t.string   "file_url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "manager_projects", force: :cascade do |t|
     t.integer  "manager_id"
     t.integer  "project_id"
@@ -74,6 +83,12 @@ ActiveRecord::Schema.define(version: 20150314185936) do
   create_table "memberships", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "team_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "note_items", force: :cascade do |t|
+    t.string   "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

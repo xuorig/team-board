@@ -52,6 +52,38 @@ angular
         getComments()
         $scope.newComment = null
 
+      $scope.calendar = {}
+
       $scope.changeNoteColor = (color) ->
         $scope.item.color = color
+
+      $scope.calendar.today = ->
+        $scope.item.dueDate = new Date
+        return
+
+      $scope.calendar.clear = ->
+        $scope.item.dueDate = null
+        return
+
+      $scope.calendar.toggleMin = ->
+        $scope.calendar.minDate = if $scope.calendar.minDate then null else new Date
+        return
+      $scope.calendar.toggleMin()
+
+      $scope.calendar.open = ($event) ->
+        $event.preventDefault()
+        $event.stopPropagation()
+        $scope.calendar.opened = true
+        return
+
+      $scope.calendar.dateOptions =
+        formatYear: 'yy'
+        startingDay: 1
+      $scope.calendar.formats = [
+        'dd-MMMM-yyyy'
+        'yyyy/MM/dd'
+        'dd.MM.yyyy'
+        'shortDate'
+      ]
+      $scope.calendar.format = $scope.calendar.formats[0]
   ])

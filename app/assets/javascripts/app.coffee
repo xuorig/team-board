@@ -8,6 +8,7 @@ angular.module('teamboard',[
   'oitozero.ngSweetAlert',
   'ui.bootstrap',
   'ui.sortable',
+  'ui.calendar',
   'xeditable',
 ])
 
