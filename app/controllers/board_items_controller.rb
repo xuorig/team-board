@@ -1,50 +1,70 @@
 class BoardItemsController < ApplicationController
   before_filter :authenticate_user!
-  before_filter :get_board_item
+  before_filter :get_board
 
-  def get_board_item
-    if params[:board_item_id]
-      boardItem = BoardItem.find(params[:board_item_id])
-      if boardItem.board.project.users_managers_owner.include?(current_user)
-        @boardItem = boardItem
+  def get_board
+    if params[:board_id]
+      board = Board.find(params[:board_id])
+      if board.project.users_managers_owner.include?(current_user)
+        @board = board
       else
-        @boardItem = nil
+        @board = nil
       end
     end
   end
 
   def index
-    @comments = @boardItem.comments
+    @boardItems = @board.items
     respond_to do |format|
-      format.json {render json: @comments}
+      format.json {render json: @boardItems}
     end
   end
 
   def show
-    @comment = Comment.find(params[:id]).to_json(:include => [:user])
-    render json: @comment, :status => 200
+    @item = BoardItem.find(params[:id]).to_json()
+    render json: @item, :status => 200
   end
 
   def update
+    @item = BoardItem.find(params[:id])
+    if safe_params[:ui_column] != @item.ui_column     
+      @item.remove_from_list
+      @item.save
+      @item.ui_column = safe_params[:ui_column]
+      @item.save
+    end
+    if safe_params[:position] != @item.position
+      @item.insert_at(safe_params[:position])
+      @item.save
+    end
+
+    respond_to do |format|
+      if @item.update!(safe_params.except([:ui_column, :position]))
+        format.json { render json: @item, status: :ok }
+      else
+        format.json { render json: @item.errors, status: :unprocessable_entity }
+      end
+    end
+
   end
 
   def create
-    @boardItem.comments << Comment.create!(safe_params)
+    @board.items << BoardItem.create!(safe_params)
     render :nothing => true, :status => 201
   end
 
   def destroy
-    @comment = Comment.find(params[:id])
+    @item = BoardItem.find(params[:id])
     respond_to do |format|
-      if @comment.destroy
+      if @item.destroy
         format.json { head :no_content, status: :ok }
       else
-        format.json { render json: @comment.errors, status: :unprocessable_entity }
+        format.json { render json: @item.errors, status: :unprocessable_entity }
       end
     end
   end
 
   def safe_params
-    params.require(:comment).permit(:content)
+    params.require(:board_item).permit(:title, :note_content, :position, :color, :ui_column)
   end
 end

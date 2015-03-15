@@ -13,6 +13,56 @@ $colorRedDark: darken($colorRed, 10%) transparent;
 $colorYellow: rgba(241, 196, 15, 0.4);
 $colorYellowDark: darken($colorYellow, 10%) transparent;
 
+$colorLightBlue: lighten($colorBlue, 10%);
+$colorLightPurple: lighten($colorPurple, 10%);
+$colorLightGreen: lighten($colorGreen, 10%);
+$colorLightRed: lighten($colorRed, 10%);
+$colorLightYellow: lighten($colorYellow, 10%);
+
+.color-dropdown {
+  min-width: 125px !important;
+  padding-bottom: 0px !important; 
+}
+
+.color-square {
+  display: inline-block;
+  margin-right: -6px;
+  margin-left: 6px;
+  width: 19px;
+  height: 19px;
+  cursor: pointer;
+}
+.color-square.blue-square {
+  background: $colorLightBlue;
+}
+.color-square.blue-square:hover {
+  background: $colorBlue;
+}
+.color-square.purple-square {
+  background: $colorLightPurple;
+}
+.color-square.purple-square:hover {
+  background: $colorPurple;
+}
+.color-square.green-square {
+  background: $colorLightGreen;
+}
+.color-square.green-square:hover {
+  background: $colorGreen;
+}
+.color-square.red-square {
+  background: $colorLightRed;
+}
+.color-square.red-square:hover {
+  background: $colorRed;
+}
+.color-square.yellow-square {
+  background: $colorLightYellow;
+}
+.color-square.yellow-square:hover {
+  background: $colorYellow;
+}
+
 /* Note Colors */
 .note-item.blue {
   background: $colorBlue;
@@ -94,6 +144,7 @@ $colorYellowDark: darken($colorYellow, 10%) transparent;
   h3 {
     margin-top: 0px;
     font-weight: bold;
+    font-size: 18px;
   }
   .editable-click {
     color: #333 !important;
@@ -111,6 +162,7 @@ $colorYellowDark: darken($colorYellow, 10%) transparent;
       font-size: 12px;
       margin-right: 5px;
     }
+    margin-bottom: 10px;
   }
   .note-comments {
     max-height: 500px;
@@ -128,7 +180,7 @@ $colorYellowDark: darken($colorYellow, 10%) transparent;
   cursor:pointer;
   margin: auto;
   width: 90%;
-  font-size: 20px;
+  font-size: 14px;
   padding: 10px;
   position: relative;
   min-height: 1em;

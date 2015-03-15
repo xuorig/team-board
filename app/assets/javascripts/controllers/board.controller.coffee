@@ -12,17 +12,10 @@ angular
             destinationIndex = $scope.splitItems[destinationListIndex].indexOf(ui.item.sortable.model)
             numOfitems = $scope.splitItems[destinationListIndex].length
             newPosition = numOfitems - destinationIndex
-            console.log numOfitems
-            console.log newPosition
-            console.log destinationIndex
             $scope.updateItemPosition(ui.item.sortable.model, destinationListIndex, newPosition)
         }
 
         $scope.splitItems = []
-        $scope.firstCol = []
-        $scope.secondCol = []
-        $scope.thirdCol = []
-
         getBoard()
 
       splitItemsInColumns = (items, numberOfColumns) ->
@@ -39,9 +32,6 @@ angular
         Board.get($routeParams.board_id).then ((results) ->
           $scope.board = results
           $scope.splitItems = splitItemsInColumns($scope.board.items, 3)
-          $scope.firstCol = $scope.splitItems[0]
-          $scope.secondCol = $scope.splitItems[1]
-          $scope.thirdCol = $scope.splitItems[2]
           return
         ), (error) ->
           return
