@@ -5,6 +5,7 @@ angular
       init = () ->
         $scope.formData = {}
         $scope.formData.team = null
+        $scope.selectInput = {}
         getTeams()
 
       getTeams = () ->
@@ -32,17 +33,15 @@ angular
         })
         .create()
         .then ((result) ->
-          console.log(result)
           $location.path('/projects')
           return
         ), (error) ->
-          console.log(error)
           return
 
       $scope.assignToTeam = () ->
         $scope.formData.team = {
-          id: $scope.assignedTeam.id,
-          name: $scope.assignedTeam.name
+          id: $scope.selectInput.assignedTeam.id,
+          name: $scope.selectInput.assignedTeam.name
         }
 
       $scope.deassignTeam = () ->

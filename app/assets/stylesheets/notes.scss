@@ -146,6 +146,17 @@ $colorLightYellow: lighten($colorYellow, 10%);
     font-weight: bold;
     font-size: 18px;
   }
+  .delete-note {
+    cursor: pointer;
+    position: absolute;
+    top: 3px;
+    right: 11px;
+    font-size: 20px;
+    color: rgba(0, 0, 0, 0.4);
+  }
+  .delete-note:hover {
+    color: #4D4D4D;
+  }
   .editable-click {
     color: #333 !important;
     text-decoration: none !important;
@@ -164,6 +175,10 @@ $colorLightYellow: lighten($colorYellow, 10%);
     }
     margin-bottom: 10px;
   }
+  .user-icon {
+    font-size: 20px;
+    padding-top: 6px;
+  }
   .note-comments {
     max-height: 500px;
     transition: .8s;
@@ -172,12 +187,17 @@ $colorLightYellow: lighten($colorYellow, 10%);
       font-size: 14px;
       padding-top: 5px;
       padding-bottom: 5px;
+      .comment-date {
+        font-size: 10px;
+      }
+      .comment-content {
+        margin: 0px;
+      }
     }
   }
   .note-comments.hidden {
     max-height: 0;
   }
-  cursor:pointer;
   margin: auto;
   width: 90%;
   font-size: 14px;

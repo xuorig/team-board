@@ -10,12 +10,16 @@ angular
             updateItem(newVal)
         ), true
 
-        $scope.comments = []
+        $scope.olderComments = []
+        $scope.toShowComments = []
+        $scope.commentOptions = {}
         getComments()
 
       getComments = () ->
         CommentNested.query({}, {boardItemId: $scope.itemId}).then ((results) ->
-          $scope.comments = results
+          $scope.toShowComments = results
+          $scope.olderComments = $scope.toShowComments.splice(0, Math.max(results.length - 2, 0))
+          console.log results
           return
         ), (error) ->
           # do something about the error
@@ -29,6 +33,15 @@ angular
           boardItem.color = newVal.color
           boardItem.update()
           return
+
+      $scope.deleteNote = () ->
+        BoardItem.get($scope.itemId).then (boardItem) ->
+          boardItem.delete().then (res) ->
+            #remove item from $scope
+            _.each($scope.splitItems, (column, index) ->
+              $scope.splitItems[index] = _.without(column, $scope.item)
+            ) 
+            return
 
       $scope.postComment = () ->
         new CommentNested({

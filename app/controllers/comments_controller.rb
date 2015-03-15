@@ -14,7 +14,7 @@ class CommentsController < ApplicationController
   end
 
   def index
-    @comments = @boardItem.comments
+    @comments = @boardItem.comments.to_json(:include => [:user])
     respond_to do |format|
       format.json {render json: @comments}
     end
@@ -29,7 +29,7 @@ class CommentsController < ApplicationController
   end
 
   def create
-    @boardItem.comments << Comment.create!(safe_params)
+    @boardItem.comments << Comment.create!(:user => current_user, :content => safe_params[:content])
     render :nothing => true, :status => 201
   end
 

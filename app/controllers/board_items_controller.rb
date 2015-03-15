@@ -49,8 +49,9 @@ class BoardItemsController < ApplicationController
   end
 
   def create
-    @board.items << BoardItem.create!(safe_params)
-    render :nothing => true, :status => 201
+    @item = BoardItem.new(safe_params)
+    @board.items << @item
+    render json: @item, :status => 201
   end
 
   def destroy

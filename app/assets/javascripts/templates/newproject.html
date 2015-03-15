@@ -32,7 +32,7 @@
               </Li>
             </ul>
             <div ng-if="teams.length > 0">
-              <select class="form-control" ng-model="assignedTeam" ng-options="team.name for team in teams"></select>
+              <select name="assignedTeam" class="form-control" ng-model="selectInput.assignedTeam" ng-options="team.name for team in teams"></select>
               <button type="button" ng-disabled="formData.team" ng-click="assignToTeam()" class="btn tb-btn add-member-btn">Assign</button>
             </div>
             <div ng-if="teams.length == 0">

@@ -14,7 +14,6 @@ angular
             newPosition = numOfitems - destinationIndex
             $scope.updateItemPosition(ui.item.sortable.model, destinationListIndex, newPosition)
         }
-
         $scope.splitItems = []
         getBoard()
 
@@ -44,7 +43,6 @@ angular
           return
 
       $scope.onAddNote = () ->
-        console.log($scope.splitItems)
         firstItem = $scope.splitItems[0][0]
         nextPos = 1
         if firstItem
@@ -58,8 +56,10 @@ angular
           boardId: $routeParams.board_id
         }
 
-        new BoardItemNested(newItem).create()
-        $scope.splitItems[0].unshift(newItem)
+        new BoardItemNested(newItem).create().then ((createdItem) ->
+          $scope.splitItems[0].unshift(createdItem)
+          ), (error) ->
+            return
 
         # Start edit of new note
         $timeout( () ->

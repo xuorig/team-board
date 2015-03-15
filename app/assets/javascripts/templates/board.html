@@ -12,10 +12,10 @@
     <ul ui-sortable="sortableOptions" ng-model="col" class="item-column">
       <li ng-controller="BoardItemController" ng-init="init(item.id)" ng-repeat="item in col">
         <div ng-class="item.color" class="note-item">
+          <div class="delete-note" ng-click="deleteNote()">x</div>
           <h3 editable-text="item.title" class="note-title">{{ item.title }}</h3>
           <p editable-textarea="item.noteContent" class="note-content">{{ item.noteContent }}</p>
           <div class="note-details">
-            <a href="" ng-click="showComments = ! showComments"><i class="glyphicon glyphicon-comment"></i> Comments</a> 
             <a href=""><i class="glyphicon glyphicon-calendar"></i> Due Date</a>
             <span class="dropdown" dropdown>
               <a href class="dropdown-toggle" dropdown-toggle>
@@ -30,19 +30,32 @@
               </div>
             </span>
           </div>
-          <div ng-class="{ 'hidden': ! showComments }" class="note-comments">
-            <div class="row" ng-repeat="comment in comments">
-              <div class="col-md-1">
-                <i class="glyphicon glyphicon-user"></i>
-              </div>
-              <div class="col-md-10 comment">
-                <p><strong>{{ comment.user.name }}</strong> {{ comment.content }}</p>
-                <p>{{ comment.createdAt }}</p>
-              </div>
+          <div class="note-details" ng-if="olderComments.length > 0 && !commentOptions.showComments">
+            <a href="" ng-click="commentOptions.showComments = ! commentOptions.showComments"><i class="glyphicon glyphicon-comment"></i> Show {{ olderComments.length }} more comments</a> 
+          </div>
+          <div class="note-details" ng-if="commentOptions.showComments">
+            <a href="" ng-click="commentOptions.showComments = ! commentOptions.showComments"><i class="glyphicon glyphicon-comment"></i> Hide extra comments</a> 
+          </div>
+
+          <div ng-class="{ 'hidden': ! commentOptions.showComments }" class="note-comments">
+            <div class="row" ng-repeat="comment in olderComments">
+                <div class="col-md-12 comment">
+                  <p class="comment-content"><strong>{{ comment.user.name }}</strong> {{ comment.content }}</p>
+                  <p class="comment-date">{{ comment.createdAt | date:"EEEE, MMM dd 'at' H:mm" }}</p>
+                </div>
             </div>
-            <div class="row">
+          </div>
+          <div class="note-comments">
+            <div class="row" ng-repeat="comment in toShowComments">
+                <div class="col-md-12 comment">
+                  <p class="comment-content"><strong>{{ comment.user.name }}</strong> {{ comment.content }}</p>
+                  <p class="comment-date">{{ comment.createdAt | date:"EEEE, MMM dd 'at' H:mm" }}</p>
+                </div>
+            </div>
+          </div>
+          <div class="row">
               <div class="col-md-1">
-                <i class="glyphicon glyphicon-user"></i>
+                <i class="user-icon glyphicon glyphicon-user"></i>
               </div>
               <div class="col-md-10">
                 <form ng-submit="postComment()">
@@ -51,7 +64,6 @@
                 </form>
               </div>
             </div>
-          </div>
         </div>
       </li>
     </ul>
