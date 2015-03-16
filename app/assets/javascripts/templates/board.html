@@ -16,7 +16,11 @@
           <h3 editable-text="item.title" class="note-title">{{ item.title }}</h3>
           <p editable-textarea="item.noteContent" class="note-content">{{ item.noteContent }}</p>
           <div class="note-details">
-            <a href="" datepicker-popup="dd-MMMM-yyyy" ng-model="item.dueDate" is-open="calendar.opened" min-date="calendar.minDate" max-date="'2015-06-22'" datepicker-options="calendar.dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" ng-click="calendar.open($event)"><i class="glyphicon glyphicon-calendar"></i> {{item.dueDate}}</a>
+            <a href="" datepicker-popup="dd-MMMM-yyyy" ng-model="item.dueDate" is-open="calendar.opened" min-date="calendar.minDate" max-date="'2015-06-22'" datepicker-options="calendar.dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" ng-click="calendar.open($event)">
+              <i class="glyphicon glyphicon-calendar"></i>
+              <span ng-if="item.dueDate"><strong>Due for:</strong>{{item.dueDate | date:"EEEE, MMM dd"}}</span>
+              <span ng-if="!item.dueDate"><strong>Add Due Date</strong></span>
+            </a>
             <span class="dropdown" dropdown>
               <a href class="dropdown-toggle" dropdown-toggle>
                 <i class="glyphicon glyphicon-pencil"></i> Color

@@ -18,6 +18,10 @@ class User < ActiveRecord::Base
   has_many :owned_boards, :class_name => "Board"
   has_many :board_items
 
+  # Item Assignments
+  has_many :assignments, :foreign_key => :assignee_id, :dependent => :destroy
+  has_many :assigned_items, :through => :assignments, :source => :board_item
+
   def combined_projects
     self.projects + self.managed_projects + self.owned_projects
   end
