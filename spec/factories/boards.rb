@@ -1,8 +1,10 @@
 FactoryGirl.define do
   factory :board do
-    name "MyString"
-    description "MyText"
-    color "MyString"
+    name "MyBoard"
+    description "BoardDescription"
+    color ""
+    association :owner, factory: :user
+    project
   end
 
 end

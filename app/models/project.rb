@@ -1,4 +1,6 @@
 class Project < ActiveRecord::Base
+  validates :owner, presence: true
+  
   belongs_to :team
   belongs_to :owner, :class_name => "User"
   

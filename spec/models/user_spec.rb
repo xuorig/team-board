@@ -43,19 +43,19 @@ RSpec.describe User, :type => :model do
   # Tests with team owner
 
   it 'has teams when is team owner' do
-    team_owner = build(:team_owner)
+    team_owner = create(:team_owner)
     expect(team_owner.all_teams()).not_to be_empty
   end
 
   it 'has managed teams when is team owner' do
-    team_owner = build(:team_owner)
+    team_owner = create(:team_owner)
     expect(team_owner.managed_teams).not_to be_empty
     expect(team_owner.owned).not_to be_empty
     expect(team_owner.managed_teams).to include(*team_owner.owned)
   end
 
   it 'has teams when is team manager' do
-    team_manager = build(:team_manager)
+    team_manager = create(:team_manager)
     expect(team_manager.managed_teams).not_to be_empty
     expect(team_manager.owned).to be_empty
     expect(team_manager.teams).not_to be_empty
@@ -63,19 +63,36 @@ RSpec.describe User, :type => :model do
   end
 
   it 'has teams when is team member' do
-    team_member = build(:team_member)
+    team_member = create(:team_member)
     expect(team_member.managed_teams).to be_empty
     expect(team_member.owned).to be_empty
     expect(team_member.teams).not_to be_empty
   end
 
-  xit 'has projects when is project manager' do
+  it 'has projects when is project owner' do
+    project_owner = build(:project_owner)
+    expect(project_owner.managed_projects).not_to be_empty
+    expect(project_owner.projects).not_to be_empty
+    expect(project_owner.owned_projects).not_to be_empty
   end
 
-  xit 'has projects when is project member' do
+  it 'has projects when is project manager' do
+    project_manager = build(:project_manager)
+    expect(project_manager.managed_projects).not_to be_empty
+    expect(project_manager.projects).not_to be_empty
+    expect(project_manager.owned_projects).to be_empty
   end
 
-  xit 'has boards when is board owner' do
+  it 'has projects when is project member' do
+    project_member = build(:project_member)
+    expect(project_member.managed_projects).to be_empty
+    expect(project_member.projects).not_to be_empty
+    expect(project_member.owned_projects).to be_empty
+  end
+
+  it 'has boards when is board owner' do
+    board_owner = build(:board_owner)
+    expect(board_owner.owned_boards).not_to be_empty
   end
 
   xit 'has board items when is board item owner' do
