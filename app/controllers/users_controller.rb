@@ -2,14 +2,14 @@ class UsersController < ApplicationController
 
   # GET /users?email=
   def index
-  	if params[:email]
-  		@user = User.where(email: params[:email])
-  		if @user.blank? or not @user.first.active
-  		  render :nothing => true, :status => 404
-  		else
-		    render :nothing => true, :status => 200
+    if params[:email]
+      @user = User.where(email: params[:email])
+      if @user.blank? or not @user.first.active
+        render :nothing => true, :status => 404
+      else
+        render :nothing => true, :status => 200
       end 
-		end
+    end
   end
 
   def show

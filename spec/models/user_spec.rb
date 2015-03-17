@@ -71,21 +71,21 @@ RSpec.describe User, :type => :model do
   end
 
   it 'has projects when is project owner' do
-    project_owner = build(:project_owner)
+    project_owner = create(:project_owner)
     expect(project_owner.managed_projects).not_to be_empty
     expect(project_owner.projects).not_to be_empty
     expect(project_owner.owned_projects).not_to be_empty
   end
 
   it 'has projects when is project manager' do
-    project_manager = build(:project_manager)
+    project_manager = create(:project_manager)
     expect(project_manager.managed_projects).not_to be_empty
     expect(project_manager.projects).not_to be_empty
     expect(project_manager.owned_projects).to be_empty
   end
 
   it 'has projects when is project member' do
-    project_member = build(:project_member)
+    project_member = create(:project_member)
     expect(project_member.managed_projects).to be_empty
     expect(project_member.projects).not_to be_empty
     expect(project_member.owned_projects).to be_empty

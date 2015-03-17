@@ -3,6 +3,7 @@ FactoryGirl.define do
     position 1
     color "MyString"
     title "MyString"
+    board
   end
 
 end
