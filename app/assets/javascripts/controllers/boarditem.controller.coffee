@@ -31,6 +31,7 @@ angular
           boardItem.title = newVal.title
           boardItem.noteContent = newVal.noteContent
           boardItem.color = newVal.color
+          boardItem.dueDate = newVal.dueDate
           boardItem.update()
           return
 

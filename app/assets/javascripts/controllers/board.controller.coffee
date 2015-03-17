@@ -1,10 +1,11 @@
-angular
+  angular
   .module('teamboard.controllers')
   .controller("BoardController", [ '$scope','$timeout', '$location','$resource','$routeParams','Board','BoardItemNested', 'BoardItem', 'SweetAlert', '_',
     ($scope, $timeout, $location, $resource, $routeParams, Board, BoardItemNested, BoardItem, SweetAlert, _) ->
       init = () ->
         $scope.sortableOptions = {
           'ui-floating': true,
+          placeholder: 'note-placeholder',
           connectWith: ".item-column",
           cursor: "pointer",
           stop: (e, ui) ->
@@ -58,16 +59,17 @@ angular
 
         new BoardItemNested(newItem).create().then ((createdItem) ->
           $scope.splitItems[0].unshift(createdItem)
-          ), (error) ->
-            return
+          # Start edit of new note
+          $timeout( () ->
+            title = $("ul[ng-model]").first().children().first().find("h3")
+            title.click()
+            title.siblings().find("input").focus()
+            title.siblings().find("input").select()
+          )
 
-        # Start edit of new note
-        $timeout( () ->
-          title = $("ul[ng-model]").first().children().first().find("h3")
-          title.click()
-          title.siblings().find("input").focus()
-          title.siblings().find("input").select()
-        )
+        ), (error) ->
+          return
+
 
       init()
   ])

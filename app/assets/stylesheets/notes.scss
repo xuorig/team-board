@@ -19,10 +19,40 @@ $colorLightGreen: lighten($colorGreen, 10%);
 $colorLightRed: lighten($colorRed, 10%);
 $colorLightYellow: lighten($colorYellow, 10%);
 
+/* CALENDAR EVENT COLORS */
+
+.fc-event.green {
+    background-color: $colorGreen;
+    border-color: $colorGreen;
+    color: black;
+}
+.fc-event.blue {
+    background-color: $colorBlue;
+    border-color: $colorBlue;
+    color: black;
+}
+.fc-event.purple {
+    background-color: $colorPurple;
+    border-color: $colorPurple;
+    color: black;
+}
+.fc-event.red {
+    background-color: $colorRed;
+    border-color: $colorRed;
+    color: black;
+}
+.fc-event.yellow {
+    background-color: $colorYellow;
+    border-color: $colorYellow;
+    color: black;
+}
+
 .color-dropdown {
   min-width: 125px !important;
-  padding-bottom: 0px !important; 
+  padding-bottom: 0px !important;
 }
+
+/* COLOR PICKER COLORS */
 
 .color-square {
   display: inline-block;
@@ -138,6 +168,16 @@ $colorLightYellow: lighten($colorYellow, 10%);
     min-height:100px;
     padding-bottom:100px;
   }
+}
+
+.note-placeholder {
+  margin: auto;
+  width: 90%;
+  padding: 10px;
+  position: relative;
+  min-height: 10em;
+  margin-bottom: 65px;
+  border: dashed 1px rgba(0, 0, 0, 0.4);
 }
 
 .note-item {

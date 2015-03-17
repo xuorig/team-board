@@ -14,7 +14,25 @@ class BoardItemsController < ApplicationController
   end
 
   def index
-    @boardItems = @board.items
+    if @board
+      @boardItems = @board.items
+    else
+        @boardItems = []
+        user_projects = UserProject.where(:user_id => current_user.id).map(&:project) +
+                        ManagerProject.where(:manager_id => current_user.id).map(&:project) +
+                        Project.where(:owner_id => current_user.id)
+
+        user_projects.each do |project|
+          project.boards.each do |board|
+            if params[:has_due_date]
+              @boardItems += board.items.where("board_items.due_date IS NOT NULL")
+            else
+              @boardItems += board.items
+            end
+          end
+        end
+    end
+
     respond_to do |format|
       format.json {render json: @boardItems}
     end
@@ -66,6 +84,6 @@ class BoardItemsController < ApplicationController
   end
 
   def safe_params
-    params.require(:board_item).permit(:title, :note_content, :position, :color, :ui_column)
+    params.require(:board_item).permit(:title, :note_content, :due_date, :position, :color, :ui_column)
   end
 end
