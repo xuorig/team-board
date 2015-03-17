@@ -32,30 +32,30 @@ FactoryGirl.define do
 
     #Projects
     factory :project_member do
-      after(:build) do |user|
-        project = build(:project)
+      after(:create) do |user|
+        project = create(:project)
         create_list(:user_projects, 1, project: project, user: user)
       end
     end
 
     factory :project_manager do
-      after(:build) do |user|
-        project = build(:project)
+      after(:create) do |user|
+        project = create(:project)
         create_list(:user_projects, 1, project: project, user: user)
         create_list(:manager_projects, 1, project: project, user: user)
       end
     end
 
     factory :project_owner do
-      after(:build) do |user|
-        build(:project, owner: user)
+      after(:create) do |user|
+        create(:project, owner: user)
       end
     end
 
     #Boards
     factory :board_owner do
-      after(:build) do |user|
-        build(:board, owner: user)
+      after(:create) do |user|
+        create(:board, owner: user)
       end
     end
 

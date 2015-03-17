@@ -16,7 +16,7 @@ class TeamsController < ApplicationController
 
   # POST /teams
   def create
-  	team = Team.new(safe_params.slice(:name, :description))
+    team = Team.new(safe_params.slice(:name, :description))
     team.owner = current_user
 
     if params[:team][:users]
@@ -30,7 +30,7 @@ class TeamsController < ApplicationController
     end
 
     team.save!
-  	render json: team, status: 201
+    render json: team, status: 201
   end
 
   def destroy
@@ -45,6 +45,6 @@ class TeamsController < ApplicationController
   end
 
   def safe_params
-	  params.require(:team).permit(:name, :description, :users => [])
+    params.require(:team).permit(:name, :description, :users => [])
   end
 end
