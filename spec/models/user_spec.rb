@@ -91,4 +91,14 @@ RSpec.describe User, :type => :model do
     expect(project_member.owned_projects).to be_empty
   end
 
+  it 'can be found from omniauth' do
+    auth = OmniAuth::AuthHash.new
+    auth.info = OmniAuth::AuthHash::InfoHash.new
+    auth.info["email"] = "email@test.com"
+    user = create(:user)
+    user_from_auth = User.from_omniauth(auth)
+
+    expect(user).to eq(user_from_auth)
+  end
+
 end

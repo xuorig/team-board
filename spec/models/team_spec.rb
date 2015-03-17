@@ -10,12 +10,12 @@ RSpec.describe Team, :type => :model do
   end
 
   it 'is invalid without an owner' do
-  	expect(build(:team, owner: nil)).not_to be_valid
+    expect(build(:team, owner: nil)).not_to be_valid
   end
 
   it 'has no projects when created' do
-  	new_team = build(:team)
-  	expect(new_team.projects).to be_empty
+    new_team = build(:team)
+    expect(new_team.projects).to be_empty
   end
 
   it 'has managership' do
