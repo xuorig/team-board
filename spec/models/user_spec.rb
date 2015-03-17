@@ -41,6 +41,7 @@ RSpec.describe User, :type => :model do
   end
 
   # Tests with team owner
+  # These are more about controller tests...........
 
   it 'has teams when is team owner' do
     team_owner = create(:team_owner)
@@ -88,14 +89,6 @@ RSpec.describe User, :type => :model do
     expect(project_member.managed_projects).to be_empty
     expect(project_member.projects).not_to be_empty
     expect(project_member.owned_projects).to be_empty
-  end
-
-  it 'has boards when is board owner' do
-    board_owner = build(:board_owner)
-    expect(board_owner.owned_boards).not_to be_empty
-  end
-
-  xit 'has board items when is board item owner' do
   end
 
 end
