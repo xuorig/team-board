@@ -1,3 +1,5 @@
+@import "variables";
+
 html, body
 {
     height: 100%;
@@ -9,15 +11,9 @@ body {
   overflow-y: auto;
 }
 
-.error {
-  color: red;
-  display: block;
-}
-
-/* main content */
-
+/* MAIN WRAP */
 #wrap {
-  height: 100%;
+  min-height: 100%;
   position: relative;
   width: auto;
   margin-right: 0;
@@ -33,29 +29,23 @@ body {
     margin-top: 40px;
     padding-bottom: 26px;
     border-bottom: 1px solid #e0e0e0;
-    padding-right: 40px;
+    padding-right: 20px;
     h1 {
       margin-top: 0px;
-      color: #2980b9;
+      color: $teamboardBlue;
       font-size: 48px;
     }
     h2 {
       line-height: 32px;
-      color: #4d4d4d;
+      color: $teamboardBlack;
       font-weight: bold;
       font-size: 18px;
       margin-top: 21px;
       margin-left: 5px;
     }   
   }
-
-  .event-calendar {
-    width: 80%;
-    margin: 20px auto;
-  }
-
-  .dashboard-title {
-    color: #2980b9;
+  .section-header.no-sub-title {
+    padding-bottom: 78px;
   }
 
   .tb-list-item {
@@ -63,21 +53,26 @@ body {
     border-bottom: 1px solid #e0e0e0;
     .icon-col {
       text-align: center;
+      margin-top: 15px;
       .team-icon {
         font-size: 58px;
-        color:#9b9b9b;
+        color:$lightGrey;
       }
     }
     .name {
       font-size: 18px;
-      font-weight: bold;
-      color: #4d4d4d;
+      font-weight: normal;
+      color: $teamboardBlue;
     }
     .description {
-      font-size: 12px;
+      font-size: 16px;
       font-weight: normal;
-      color:#9b9b9b;
+      color:$teamboardBlack;
     } 
+  }
+
+  .tb-list-item.first {
+    border-top: 1px solid #e0e0e0;
   }
   
   .tb-list-item:hover {
@@ -88,10 +83,9 @@ body {
   .item-page {
     .title {
       font-weight: bold;
-      color: #4d4d4d;
+      color: $teamboardBlack;
       font-size: 18px;
     }
-
     .section {
         padding: 20px;
         border-bottom: 1px solid #e0e0e0;
@@ -111,39 +105,38 @@ body {
       }
     }
 
-
     .transfer {
-      color: #9b9b9b;
+      color: $lightGrey;
       text-decoration: none;
       font-size: 16px;
     }
     .transfer:hover {
-      color: #2980b9;
+      color: $teamboardBlue;
       text-decoration: none;
     }
 
     .remove-user {
       margin-left: 5px;
-      color: #9b9b9b;
+      color: $lightGrey;
       font-size: 16px;
     }
     .remove-user:hover {
-      color: #F27474;
+      color: $teamboardRed;
       text-decoration: none;
     }
 
     .add-user {
       font-size: 20px;
-      color: #A5DC86;
+      color: $teamboardGreen;
     }
 
     .add {
-      color: #9b9b9b;
+      color: $lightGrey;
       font-size: 23px;
       cursor: pointer;
     }
     .add:hover {
-      color: #A5DC86;
+      color: $teamboardGreen;
     }
 
 
@@ -156,7 +149,7 @@ body {
         opacity: 0;
       }
       font-size: 18px;
-      color: #4d4d4d;
+      color: $teamboardBlack;
     }
 
     .user-list:hover {

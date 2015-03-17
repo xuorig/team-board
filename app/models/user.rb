@@ -38,6 +38,11 @@ class User < ActiveRecord::Base
     Team.where(id: combined_teams(&:id))
   end
 
+  def board_items
+    userBoards = Board.where(:project_id => all_projects.map(&:id))
+    BoardItem.where(:board_id => userBoards.map(&:id))
+  end
+
   def self.from_omniauth(auth)
     existingRecord = where(email: auth.info.email)
     if existingRecord.blank? or existingRecord.first.provider == nil

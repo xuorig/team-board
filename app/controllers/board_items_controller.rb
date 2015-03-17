@@ -17,25 +17,13 @@ class BoardItemsController < ApplicationController
     if @board
       @boardItems = @board.items
     else
-        @boardItems = []
-        user_projects = UserProject.where(:user_id => current_user.id).map(&:project) +
-                        ManagerProject.where(:manager_id => current_user.id).map(&:project) +
-                        Project.where(:owner_id => current_user.id)
-
-        user_projects.each do |project|
-          project.boards.each do |board|
-            if params[:has_due_date]
-              @boardItems += board.items.where("board_items.due_date IS NOT NULL")
-            else
-              @boardItems += board.items
-            end
-          end
-        end
+      if params[:has_due_date]
+        @boardItems = current_user.board_items.where("board_items.due_date IS NOT NULL")
+      else
+        boardItems = current_user.board_items
+      end
     end
-
-    respond_to do |format|
-      format.json {render json: @boardItems}
-    end
+    render json: @boardItems, :status => 200
   end
 
   def show
@@ -63,7 +51,6 @@ class BoardItemsController < ApplicationController
         format.json { render json: @item.errors, status: :unprocessable_entity }
       end
     end
-
   end
 
   def create

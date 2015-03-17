@@ -3,7 +3,7 @@ class ProjectsController < ApplicationController
 
   # GET /projects
   def index
-    render json: current_user.all_projects, status: 200
+    render json: current_user.all_projects.to_json(:include => [:owner]), :status => 200
   end
 
   # GET /projects/:id
@@ -23,10 +23,11 @@ class ProjectsController < ApplicationController
     @project.managers << current_user
 
     @team = Team.find(params[:project][:team_id])
-    @project.team = @team if @team else nil
+    @project.team = @team if @team
     @project.users += @team.users
 
-    sample_board = Board.new(:name => safe_params[:name], :description => "This is an auto generated board for your project.")
+    sample_board = Board.new(:name => safe_params[:name], :description => "This is an auto generated board for your project.", 
+                              :owner => current_user)
     @project.boards << sample_board
 
     @project.save!

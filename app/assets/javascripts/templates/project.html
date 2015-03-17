@@ -1,30 +1,55 @@
- <div class="row item-page" ng-controller="ProjectController">
+ <div class="row details-page" ng-controller="ProjectController">
   <div class="col-md-12 col-sm-12">
-    <div ng-model="project" class="section-header">
+    <div ng-model="project" class="section-header no-sub-title">
       <h1>{{project.name}}</h1>
-      <h2>Edit Project</h2>
     </div>
 
-    <div class="row section">
-      <div class="col-md-4">
-        <span class="title">Description</span> <p class="team-desc">{{project.description}}</p>
+    <div class="row">
+      <div class="col-md-12">
+        <h3>Project's Description</h3>
+        <p class="description-text">{{project.description}}</p>
       </div>
     </div>
 
-    <div class="row section">
+    <div class="row">
       <div class="col-md-12">
-        <span class="title">Boards</span>
-        <div class="row">
-          <div class="col-md-4" ng-repeat="board in project.boards">
-            <div class="board">
-              <div class="board-name">
-                <i class="glyphicon glyphicon-th"></i><a href="#/boards/{{board.id}}">{{board.name}}</a>
-              </div>
-            </div>
+        <h3>Project Owner</h3>
+        <p class="description-text">{{project.owner}}</p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <h3>Project Managers</h3>
+        <p class="description-text">{{project.managers}}</p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <h3>All Users</h3>
+        <p class="description-text">{{project.users}}</p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <h3>Boards</h3>
+        <div class="row tb-list-item first" ng-repeat="board in project.boards">
+          <a href="#/boards/{{board.id}}">
+          <div class="col-md-2 col-xs-4 icon-col">
+            <i class="team-icon glyphicon glyphicon-pushpin"></i>
           </div>
+          <div class="col-md-10 col-xs-8">
+            <p class="name">{{board.name}}</p>
+            <p class="description">{{board.description}}</p>
+            <p class="description"><strong>Board Owner: </strong>{{board.owner.name}}</p>
+          </div>
+          </a>
         </div>
       </div>
     </div>
+
 
     <div ng-if="project.isOwner" class="row section">
       <div class="col-md-4 user-list">

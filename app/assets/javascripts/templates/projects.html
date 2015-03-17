@@ -14,11 +14,12 @@
     <div class="row tb-list-item" ng-repeat="project in projects">
       <a href="#/projects/{{project.id}}">
       <div class="col-md-2 col-xs-4 icon-col">
-        <i class="team-icon glyphicon glyphicon-globe"></i>
+        <i class="team-icon glyphicon glyphicon-folder-open"></i>
       </div>
       <div class="col-md-10 col-xs-8">
         <p class="name">{{project.name}}</p>
         <p class="description">{{project.description}}</p>
+        <p class="description"><strong>Project Owner: </strong>{{project.owner.name}}</p>
       </div>
       </a>
     </div>

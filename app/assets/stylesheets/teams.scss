@@ -1,3 +1,6 @@
+@import "variables";
+
+
 .new-team {
   .add-member-btn {
     display: inline
@@ -45,6 +48,18 @@
   .create-team-btn {
     margin-top: 10px;
   }
+}
+
+
+.details-page {
+  h3 {
+    color: $teamboardBlack;
+    font-size: 22px;
+  }
+  .description-text {
+    font-size: 16px;
+  }
+
 }
 
 .team-page {

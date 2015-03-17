@@ -17,8 +17,9 @@
         <i class="team-icon glyphicon glyphicon-globe"></i>
       </div>
       <div class="col-md-10 col-xs-8">
-        <p class="name">{{team.name}}</p>
+        <p class="name">{{team.name}}  <a href="#/teams/{{team.id}}" class="pull-right btn tb-btn">Edit</a></p>
         <p class="description">{{team.description}}</p>
+        <p class="description"><strong>Owned by </strong>{{team.owner.name}}</p>
       </div>
       </a>
     </div>

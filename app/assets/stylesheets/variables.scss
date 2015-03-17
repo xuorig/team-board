@@ -1,0 +1,25 @@
+/* BRAND COLORS */
+$teamboardBlue: #2980b9;
+$teamboardBlack: #4d4d4d;
+$teamboardRed: #F27474;
+$teamboardGreen:  #A5DC86;
+$lightGrey: #9b9b9b;
+
+/* NOTE COLORS */
+$colorBlue: rgba(52, 152, 219, 0.4);
+$colorBlueDark: darken($colorBlue, 10%) transparent;
+$colorPurple: rgba(155, 89, 182, 0.4);
+$colorPurpleDark: darken($colorPurple, 10%) transparent;
+$colorGreen: rgba(46, 204, 113, 0.4);
+$colorGreenDark: darken($colorGreen, 10%) transparent;
+$colorRed: rgba(231, 76, 60, 0.4);
+$colorRedDark: darken($colorRed, 10%) transparent;
+$colorYellow: rgba(241, 196, 15, 0.4);
+$colorYellowDark: darken($colorYellow, 10%) transparent;
+$colorLightBlue: lighten($colorBlue, 10%);
+$colorLightPurple: lighten($colorPurple, 10%);
+$colorLightGreen: lighten($colorGreen, 10%);
+$colorLightRed: lighten($colorRed, 10%);
+$colorLightYellow: lighten($colorYellow, 10%);
+
+

@@ -1,161 +1,52 @@
-$colorBlue: rgba(52, 152, 219, 0.4);
-$colorBlueDark: darken($colorBlue, 10%) transparent;
+@import "variables";
 
-$colorPurple: rgba(155, 89, 182, 0.4);
-$colorPurpleDark: darken($colorPurple, 10%) transparent;
 
-$colorGreen: rgba(46, 204, 113, 0.4);
-$colorGreenDark: darken($colorGreen, 10%) transparent;
-
-$colorRed: rgba(231, 76, 60, 0.4);
-$colorRedDark: darken($colorRed, 10%) transparent;
-
-$colorYellow: rgba(241, 196, 15, 0.4);
-$colorYellowDark: darken($colorYellow, 10%) transparent;
-
-$colorLightBlue: lighten($colorBlue, 10%);
-$colorLightPurple: lighten($colorPurple, 10%);
-$colorLightGreen: lighten($colorGreen, 10%);
-$colorLightRed: lighten($colorRed, 10%);
-$colorLightYellow: lighten($colorYellow, 10%);
-
-/* CALENDAR EVENT COLORS */
-
-.fc-event.green {
-    background-color: $colorGreen;
-    border-color: $colorGreen;
-    color: black;
-}
-.fc-event.blue {
-    background-color: $colorBlue;
-    border-color: $colorBlue;
-    color: black;
-}
-.fc-event.purple {
-    background-color: $colorPurple;
-    border-color: $colorPurple;
-    color: black;
-}
-.fc-event.red {
-    background-color: $colorRed;
-    border-color: $colorRed;
-    color: black;
-}
-.fc-event.yellow {
-    background-color: $colorYellow;
-    border-color: $colorYellow;
-    color: black;
-}
-
+/* COLOR PICKER */
 .color-dropdown {
   min-width: 125px !important;
   padding-bottom: 0px !important;
+  /* COLOR PICKER COLORS */
+  .color-square {
+    display: inline-block;
+    margin-right: -6px;
+    margin-left: 6px;
+    width: 19px;
+    height: 19px;
+    cursor: pointer;
+  }
+  .color-square.blue-square {
+    background: $colorLightBlue;
+  }
+  .color-square.blue-square:hover {
+    background: $colorBlue;
+  }
+  .color-square.purple-square {
+    background: $colorLightPurple;
+  }
+  .color-square.purple-square:hover {
+    background: $colorPurple;
+  }
+  .color-square.green-square {
+    background: $colorLightGreen;
+  }
+  .color-square.green-square:hover {
+    background: $colorGreen;
+  }
+  .color-square.red-square {
+    background: $colorLightRed;
+  }
+  .color-square.red-square:hover {
+    background: $colorRed;
+  }
+  .color-square.yellow-square {
+    background: $colorLightYellow;
+  }
+  .color-square.yellow-square:hover {
+    background: $colorYellow;
+  }
 }
 
-/* COLOR PICKER COLORS */
-
-.color-square {
-  display: inline-block;
-  margin-right: -6px;
-  margin-left: 6px;
-  width: 19px;
-  height: 19px;
-  cursor: pointer;
-}
-.color-square.blue-square {
-  background: $colorLightBlue;
-}
-.color-square.blue-square:hover {
-  background: $colorBlue;
-}
-.color-square.purple-square {
-  background: $colorLightPurple;
-}
-.color-square.purple-square:hover {
-  background: $colorPurple;
-}
-.color-square.green-square {
-  background: $colorLightGreen;
-}
-.color-square.green-square:hover {
-  background: $colorGreen;
-}
-.color-square.red-square {
-  background: $colorLightRed;
-}
-.color-square.red-square:hover {
-  background: $colorRed;
-}
-.color-square.yellow-square {
-  background: $colorLightYellow;
-}
-.color-square.yellow-square:hover {
-  background: $colorYellow;
-}
-
-/* Note Colors */
-.note-item.blue {
-  background: $colorBlue;
-}
-
-.note-item.purple {
-  background: $colorPurple;
-}
-
-.note-item.green {
-  background: $colorGreen;
-}
-
-.note-item.red {
-  background: $colorRed;
-}
-
-.note-item.yellow {
-  background: $colorYellow;
-}
-
-
-.blue.note-item:after {
-  border-color: $colorBlue;
-}
-
-.purple.note-item:after {
-  border-color: $colorPurple;
-}
-
-.green.note-item:after {
-  border-color: $colorGreen;
-}
-
-.red.note-item:after {
-  border-color: $colorRed;
-}
-
-.yellow.note-item:after {
-  border-color: $colorYellow;
-}
-
-
-.blue.note-item:before {
-  border-color: $colorBlueDark;
-}
-
-.purple.note-item:before {
-  border-color: $colorPurpleDark;
-}
-
-.green.note-item:before {
-  border-color: $colorGreenDark;
-}
-
-.red.note-item:before {
-  border-color: $colorRedDark;
-}
-
-.yellow.note-item:before {
-  border-color: $colorYellowDark;
-}
-/* End Note Colors */
+/* NOTES */
 
 .items {
   margin-top: 20px;
@@ -168,105 +59,168 @@ $colorLightYellow: lighten($colorYellow, 10%);
     min-height:100px;
     padding-bottom:100px;
   }
-}
 
-.note-placeholder {
-  margin: auto;
-  width: 90%;
-  padding: 10px;
-  position: relative;
-  min-height: 10em;
-  margin-bottom: 65px;
-  border: dashed 1px rgba(0, 0, 0, 0.4);
-}
+  .note-placeholder {
+    margin: auto;
+    width: 90%;
+    padding: 10px;
+    position: relative;
+    min-height: 10em;
+    margin-bottom: 65px;
+    border: dashed 1px rgba(0, 0, 0, 0.4);
+  }
 
-.note-item {
-  h3 {
-    margin-top: 0px;
-    font-weight: bold;
-    font-size: 18px;
-  }
-  .delete-note {
-    cursor: pointer;
-    position: absolute;
-    top: 3px;
-    right: 11px;
-    font-size: 20px;
-    color: rgba(0, 0, 0, 0.4);
-  }
-  .delete-note:hover {
-    color: #4D4D4D;
-  }
-  .editable-click {
-    color: #333 !important;
-    text-decoration: none !important;
-    border: none !important;
-  }
-  .editable-click:hover {
-    color: #333 !important;
-    text-decoration: none !important;
-    border: none !important;
-  }
-  .note-details {
-    a {
+  .note-item {
+    h3 {
+      margin-top: 0px;
+      font-weight: bold;
+      font-size: 18px;
+    }
+    .delete-note {
+      cursor: pointer;
+      position: absolute;
+      top: 3px;
+      right: 11px;
+      font-size: 20px;
+      color: rgba(0, 0, 0, 0.4);
+    }
+    .delete-note:hover {
       color: #4D4D4D;
-      font-size: 12px;
-      margin-right: 5px;
     }
-    margin-bottom: 10px;
-  }
-  .user-icon {
-    font-size: 20px;
-    padding-top: 6px;
-  }
-  .note-comments {
-    max-height: 500px;
-    transition: .8s;
-    overflow: hidden;
-    .comment {
-      font-size: 14px;
-      padding-top: 5px;
-      padding-bottom: 5px;
-      .comment-date {
-        font-size: 10px;
+    .editable-click {
+      color: #333 !important;
+      text-decoration: none !important;
+      border: none !important;
+    }
+    .editable-click:hover {
+      color: #333 !important;
+      text-decoration: none !important;
+      border: none !important;
+    }
+    .note-details {
+      a {
+        color: #4D4D4D;
+        font-size: 12px;
+        margin-right: 5px;
       }
-      .comment-content {
-        margin: 0px;
+      margin-bottom: 10px;
+    }
+    .user-icon {
+      font-size: 20px;
+      padding-top: 6px;
+    }
+    .note-comments {
+      max-height: 500px;
+      transition: .8s;
+      overflow: hidden;
+      .comment {
+        font-size: 14px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        .comment-date {
+          font-size: 10px;
+        }
+        .comment-content {
+          margin: 0px;
+        }
       }
     }
+    .note-comments.hidden {
+      max-height: 0;
+    }
+    margin: auto;
+    width: 90%;
+    font-size: 14px;
+    padding: 10px;
+    position: relative;
+    min-height: 1em;
+    margin-bottom: 65px;
+    background: $colorBlue;
   }
-  .note-comments.hidden {
-    max-height: 0;
+  .note-item:after {
+    content: "";
+    position: absolute;
+    bottom: -2em;
+    left: 0;
+    right: 2em;
+    border-width: 1em;
+    border-style: solid;
+    border-color: $colorBlue;
   }
-  margin: auto;
-  width: 90%;
-  font-size: 14px;
-  padding: 10px;
-  position: relative;
-  min-height: 1em;
-  margin-bottom: 65px;
-  background: $colorBlue;
-}
-.note-item:after {
-  content: "";
-  position: absolute;
-  bottom: -2em;
-  left: 0;
-  right: 2em;
-  border-width: 1em;
-  border-style: solid;
-  border-color: $colorBlue;
-}
-.note-item:before {
-  content: "";
-  position: absolute;
-  bottom: -2em;
-  right: 0;
-  border-width: 2em 2em 0 0;
-  border-style: solid;
-  border-color: $colorBlueDark;
-}
+  .note-item:before {
+    content: "";
+    position: absolute;
+    bottom: -2em;
+    right: 0;
+    border-width: 2em 2em 0 0;
+    border-style: solid;
+    border-color: $colorBlueDark;
+  }
 
+  /* Note Colors */
+  .note-item.blue {
+    background: $colorBlue;
+  }
+
+  .note-item.purple {
+    background: $colorPurple;
+  }
+
+  .note-item.green {
+    background: $colorGreen;
+  }
+
+  .note-item.red {
+    background: $colorRed;
+  }
+
+  .note-item.yellow {
+    background: $colorYellow;
+  }
+
+
+  .blue.note-item:after {
+    border-color: $colorBlue;
+  }
+
+  .purple.note-item:after {
+    border-color: $colorPurple;
+  }
+
+  .green.note-item:after {
+    border-color: $colorGreen;
+  }
+
+  .red.note-item:after {
+    border-color: $colorRed;
+  }
+
+  .yellow.note-item:after {
+    border-color: $colorYellow;
+  }
+
+
+  .blue.note-item:before {
+    border-color: $colorBlueDark;
+  }
+
+  .purple.note-item:before {
+    border-color: $colorPurpleDark;
+  }
+
+  .green.note-item:before {
+    border-color: $colorGreenDark;
+  }
+
+  .red.note-item:before {
+    border-color: $colorRedDark;
+  }
+
+  .yellow.note-item:before {
+    border-color: $colorYellowDark;
+  }
+  /* End Note Colors */
+}
 
 @media(max-width:767px) {
   .items {
@@ -275,13 +229,5 @@ $colorLightYellow: lighten($colorYellow, 10%);
       min-height:100px;
       padding-bottom:0px;
     }
-  }
-}
-
-
-.context-men {
-  position: absolute;
-  li {
-    cursor: pointer;
   }
 }
