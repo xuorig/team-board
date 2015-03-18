@@ -2,8 +2,16 @@ require 'rails_helper'
 
 RSpec.describe User, :type => :model do
 
+  let(:user) { build(:user) }
+  let(:team_owner) { create(:team_owner) }
+  let(:team_manager) { create(:team_manager) }
+  let(:team_member) { create(:team_member) }
+  let(:project_owner) { create(:project_owner) }
+  let(:project_manager) { create(:project_manager) }
+  let(:project_member) { create(:project_member) }
+
   it 'has a valid factory' do
-    expect(build(:user)).to be_valid
+    expect(user).to be_valid
   end
 
   it 'must have an email' do
@@ -11,32 +19,26 @@ RSpec.describe User, :type => :model do
   end
 
   it 'has no teams when created' do
-    user = build(:user)
     expect(user.teams).to be_empty
   end
 
   it 'has no projects when created' do
-    user = build(:user)
     expect(user.projects).to be_empty
   end
 
   it 'has all teams also is empty' do
-    user = build(:user)
     expect(user.all_teams()).to be_empty
   end
 
   it 'has all projects also is empty' do
-    user = build(:user)
     expect(user.all_projects()).to be_empty
   end
 
   it 'has no owned boards' do
-    user = build(:user)
     expect(user.owned_boards).to be_empty
   end
 
   it 'has no board items' do
-    user = build(:user)
     expect(user.board_items).to be_empty
   end
 
@@ -99,6 +101,11 @@ RSpec.describe User, :type => :model do
     user_from_auth = User.from_omniauth(auth)
 
     expect(user).to eq(user_from_auth)
+  end
+
+  it 'can not have duplicate email TEST' do
+    user1 = create(:user, email:"myemail")
+    user2 = create(:user, email: "notmyemail")
   end
 
 end
