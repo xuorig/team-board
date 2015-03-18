@@ -9,6 +9,10 @@ class Team < ActiveRecord::Base
   belongs_to :owner, :class_name => "User", :foreign_key => "owner_id"
   has_many :projects, :dependent => :destroy
 
+  def all_users
+    (self.users + self.managers) << self.owner
+  end
+
   def as_json(options = { })
       h = super(options)
       h[:isOwner] = options[:current_user] == self.owner

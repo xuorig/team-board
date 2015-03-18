@@ -4,6 +4,7 @@ angular
     ($scope, $location, $resource, $routeParams, Project, SweetAlert)->
       getProject = () ->
         Project.get($routeParams.project_id).then ((results) ->
+          console.log results
           $scope.project = results
           return
         ), (error) ->

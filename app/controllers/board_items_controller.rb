@@ -5,7 +5,7 @@ class BoardItemsController < ApplicationController
   def get_board
     if params[:board_id]
       board = Board.find(params[:board_id])
-      if board.project.users_managers_owner.include?(current_user)
+      if board.project.all_users.include?(current_user)
         @board = board
       else
         @board = nil

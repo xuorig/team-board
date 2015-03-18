@@ -9,9 +9,7 @@ class ProjectsController < ApplicationController
   # GET /projects/:id
   def show
     @project = current_user.all_projects
-    puts @project
-    puts 'sup'
-    @project = @project.find(params[:id]).to_json(:include => [:owner, :users, :managers, :boards])
+    @project = @project.find(params[:id]).to_json(:include => [:owner, :all_users, :boards])
     render json: @project
   end
 
@@ -19,12 +17,11 @@ class ProjectsController < ApplicationController
   def create
     @project = Project.new(safe_params.slice(:name, :description))
     @project.owner = current_user
-    @project.users << current_user
-    @project.managers << current_user
 
     @team = Team.find(params[:project][:team_id])
-    @project.team = @team if @team
-    @project.users += @team.users
+    @project.team = @team
+
+    # TODO Add extra project members
 
     sample_board = Board.new(:name => safe_params[:name], :description => "This is an auto generated board for your project.", 
                               :owner => current_user)

@@ -7,20 +7,10 @@ class Project < ActiveRecord::Base
   has_many :user_projects, :dependent => :destroy
   has_many :users, :through => :user_projects
 
-  has_many :manager_projects, :dependent => :destroy
-  has_many :managers, :through => :manager_projects, :source => :user
-
   has_many :boards
 
-  def combined_users
-    (self.users + self.managers) << self.owner
+  def all_users
+    (self.team.all_users + self.users << self.owner).uniq
   end
 
-  def users_from_team
-    self.team.users
-  end
-
-  def users_managers_owner
-    User.where(id: combined_users(&:id))
-  end
 end

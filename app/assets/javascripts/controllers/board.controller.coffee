@@ -1,4 +1,4 @@
-  angular
+angular
   .module('teamboard.controllers')
   .controller("BoardController", [ '$scope','$timeout', '$location','$resource','$routeParams','Board','BoardItemNested', 'BoardItem', 'SweetAlert', '_',
     ($scope, $timeout, $location, $resource, $routeParams, Board, BoardItemNested, BoardItem, SweetAlert, _) ->

@@ -5,6 +5,7 @@ angular
       init = () ->
         $scope.currentUser = null
         $scope.projects = []
+        $scope.comments = []
 
         CurrentUser.getUser().then (data) ->
           $scope.currentUser = data
@@ -15,6 +16,10 @@ angular
         ), (error) ->
           # do something about the error
           return
+
+        # Comment.query({num: 10}).then ((data) ->
+        #   $scope.comments = data
+        # )
 
       init()
   ])

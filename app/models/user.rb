@@ -10,20 +10,18 @@ class User < ActiveRecord::Base
   # Projects
   has_many :user_projects, :dependent => :destroy
   has_many :projects, :through => :user_projects
-  has_many :manager_projects, :foreign_key => :manager_id, :dependent => :destroy
-  has_many :managed_projects, :through => :manager_projects, :source => :project
   has_many :owned_projects, :class_name => "Project", :foreign_key => "owner_id"
 
   # Boards
   has_many :owned_boards, :class_name => "Board"
-  has_many :board_items
 
   # Item Assignments
   has_many :assignments, :foreign_key => :assignee_id, :dependent => :destroy
   has_many :assigned_items, :through => :assignments, :source => :board_item
 
+  # Combine self projects + team projects
   def combined_projects
-    self.projects + self.managed_projects + self.owned_projects
+    self.projects + self.teams.map(&:projects).flatten(1) + self.owned_projects
   end
 
   def all_projects

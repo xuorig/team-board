@@ -49,6 +49,11 @@ angular.module('teamboard').config([ '$routeProvider', '$locationProvider',
         templateUrl: "team.html",
         controller: "TeamController"
       })
+      # TASKS
+      .when('/tasks', {
+        templateUrl: "tasks.html",
+        controller: "TasksController"
+      })
       # CALENDAR
       .when('/calendar', {
         templateUrl: "calendar.html",

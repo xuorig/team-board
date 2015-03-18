@@ -5,7 +5,7 @@ class CommentsController < ApplicationController
   def get_board_item
     if params[:board_item_id]
       boardItem = BoardItem.find(params[:board_item_id])
-      if boardItem.board.project.users_managers_owner.include?(current_user)
+      if boardItem.board.project.all_users.include?(current_user)
         @boardItem = boardItem
       else
         @boardItem = nil
@@ -14,10 +14,13 @@ class CommentsController < ApplicationController
   end
 
   def index
-    @comments = @boardItem.comments.to_json(:include => [:user])
-    respond_to do |format|
-      format.json {render json: @comments}
+    if @boardItem
+      @comments = @boardItem.comments.to_json(:include => [:user])
+    else
+      @comments = @boardItem.where(:user)
     end
+    render json: @comments
+
   end
 
   def show
@@ -29,7 +32,7 @@ class CommentsController < ApplicationController
   end
 
   def create
-    @boardItem.comments << Comment.create!(:user => current_user, :content => safe_params[:content])
+    @boardItem.comments << Comment.new(:user => current_user, :content => safe_params[:content])
     render :nothing => true, :status => 201
   end
 
