@@ -11,33 +11,27 @@ RSpec.describe User, :type => :model do
   end
 
   it 'has no teams when created' do
-    user = build(:user)
-    expect(user.teams).to be_empty
+    expect(build(:user).teams).to be_empty
   end
 
   it 'has no projects when created' do
-    user = build(:user)
-    expect(user.projects).to be_empty
+    expect(build(:user).projects).to be_empty
   end
 
   it 'has all teams also is empty' do
-    user = build(:user)
-    expect(user.all_teams()).to be_empty
+    expect(build(:user).all_teams()).to be_empty
   end
 
   it 'has all projects also is empty' do
-    user = build(:user)
-    expect(user.all_projects()).to be_empty
+    expect(build(:user).all_projects()).to be_empty
   end
 
   it 'has no owned boards' do
-    user = build(:user)
-    expect(user.owned_boards).to be_empty
+    expect(build(:user).owned_boards).to be_empty
   end
 
   it 'has no board items' do
-    user = build(:user)
-    expect(user.board_items).to be_empty
+    expect(build(:user).board_items).to be_empty
   end
 
   # Tests with team owner
@@ -99,6 +93,11 @@ RSpec.describe User, :type => :model do
     user_from_auth = User.from_omniauth(auth)
 
     expect(user).to eq(user_from_auth)
+  end
+
+  it 'can not have duplicate email TEST' do
+    user1 = create(:user, email:"myemail")
+    user2 = create(:user, email: "notmyemail")
   end
 
 end
