@@ -28,7 +28,8 @@ gem 'angular-rails-templates'
 gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
-gem 'unicorn'
+# gem 'unicorn' # uncomment for Windows
+gem 'tzinfo-data' # install for Windows
 gem 'font-awesome-sass'
 gem 'angularjs-rails-resource', '~> 1.1.1'
 gem 'acts_as_list'
@@ -53,7 +54,8 @@ group :development, :test do
   gem "rspec-rails"
   gem "factory_girl_rails"
   gem "capybara"
-  gem "database_cleaner"
+  # database_cleaner 1.4.0 breaks migrations: https://github.com/DatabaseCleaner/database_cleaner/issues/317
+  gem "database_cleaner", '1.3.0'
   gem "selenium-webdriver"
 end
 
