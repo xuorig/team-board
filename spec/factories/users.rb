@@ -42,15 +42,6 @@ FactoryGirl.define do
       end
     end
 
-    factory :project_manager do
-      email "project_manager@test.com"
-      after(:create) do |user|
-        project = create(:project)
-        create_list(:user_projects, 1, project: project, user: user)
-        create_list(:manager_projects, 1, project: project, user: user)
-      end
-    end
-
     factory :project_owner do
       email "project_owner@test.com"
       after(:create) do |user|
