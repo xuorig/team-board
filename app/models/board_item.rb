@@ -9,4 +9,6 @@ class BoardItem < ActiveRecord::Base
   has_many :assignments, :dependent => :destroy
   has_many :assignees, :source => :user, :through => :assignments
 
+  scope :due_soon, -> { where(:due_date => DateTime.now..1.week.from_now) }
+
 end

@@ -6,26 +6,49 @@
     </div>
 
     <div class="row section dashboard">
-      <div class="col-md-6">
-        <h2 class="dashboard-title">Recently Active Projects</h2>
-        <div class="row" ng-repeat="project in projects">
+      <div class="col-md-4">
+        <h2 class="dashboard-title"><i class="glyphicon glyphicon-folder-open"></i> Recently Active Projects</h2>
+        <div class="row dashboard-item" ng-repeat="project in projects">
           <a href="#/projects/{{project.id}}">
           <div class="col-md-1 col-xs-4 icon-col">
             <i class="project-icon glyphicon glyphicon-folder-open"></i>
           </div>
           <div class="col-md-11 col-xs-8">
-            <p class="name">{{project.name}}</p>
+            <p class="name"><strong>{{project.name}}</strong></p>
+            <p class="name">{{project.description}}</p>
           </div>
           </a>
         </div>
       </div>
 
-      <div class="col-md-6">
-        <h2 class="dashboard-title">Most Recent Comments</h2>
+      <div class="col-md-4">
+        <h2 class="dashboard-title"><i class="glyphicon glyphicon-comment"></i> Most Recent Comments</h2>
+         <div class="row dashboard-item" ng-repeat="comment in comments">
+          <a href="#/boards/{{comment.boardItem.boardId}}">
+          <div class="col-md-1 col-xs-4 icon-col">
+            <i class="project-icon glyphicon glyphicon-user"></i>
+          </div>
+          <div class="col-md-11 col-xs-8">
+            <p class="name">By <strong>{{comment.user.name}}</strong> on Board Item <strong>{{comment.boardItem.title}}</strong></p>
+            <p class="name">{{comment.content}}</p>
+          </div>
+          </a>
+        </div>
       </div>
 
-      <div class="col-md-6">
-        <h2 class="dashboard-title">Tasks Due Soon</h2>
+      <div class="col-md-4">
+        <h2 class="dashboard-title"><i class="glyphicon glyphicon-hourglass"></i> Tasks Due Soon</h2>
+        <div class="row dashboard-item" ng-repeat="item in itemsDueSoon">
+          <a href="#/boards/{{item.boardId}}">
+          <div class="col-md-1 col-xs-4 icon-col">
+            <i class="project-icon glyphicon glyphicon-pushpin"></i>
+          </div>
+          <div class="col-md-11 col-xs-8">
+            <p class="name"><strong>{{ item.title }}</strong></p>
+            <p class="name"><strong> Due on </strong> {{ item.dueDate | date:"EEEE, MMM dd" }}</p>
+          </div>
+          </a>
+        </div>
       </div>
 
 

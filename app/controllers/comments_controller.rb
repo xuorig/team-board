@@ -17,10 +17,10 @@ class CommentsController < ApplicationController
     if @boardItem
       @comments = @boardItem.comments.to_json(:include => [:user])
     else
-      @comments = @boardItem.where(:user)
+      limit = params[:limit] or nil
+      @comments = Comment.where(:board_item_id => current_user.board_items.map(&:id)).limit(limit).to_json(:include => [:user, :board_item])
     end
-    render json: @comments
-
+    render json: @comments, :status => 200
   end
 
   def show

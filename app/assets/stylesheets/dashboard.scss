@@ -3,14 +3,27 @@
 .dashboard {
   .dashboard-title {
   	font-size: 24px;
-  	font-weight: 400;
+  	font-weight: 500;
   	color: $teamboardBlack;
+    padding-bottom: 15px;
+    i {
+      padding-right: 7px;
+    }
+  }
+  .dashboard-item:hover {
+    background-color: #F7F7F7;
+    .project-icon {
+      color: $teamboardBlue;
+    }
   }
   .project-icon {
   	color: $lightGrey;
   }
   a {
   	color: $teamboardBlack;
+  }
+  a:hover {
+    color: $teamboardBlack;
   }
 
 

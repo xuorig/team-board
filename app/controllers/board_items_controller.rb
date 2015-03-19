@@ -1,6 +1,11 @@
 class BoardItemsController < ApplicationController
   before_filter :authenticate_user!
   before_filter :get_board
+  before_filter :get_limit
+
+  def get_limit
+    @limit = params[:limit] or nil
+  end
 
   def get_board
     if params[:board_id]
@@ -18,9 +23,11 @@ class BoardItemsController < ApplicationController
       @boardItems = @board.items
     else
       if params[:has_due_date]
-        @boardItems = current_user.board_items.where("board_items.due_date IS NOT NULL")
+        @boardItems = current_user.board_items.where("board_items.due_date IS NOT NULL").limit(@limit)
+      elsif params[:due_soon]
+        @boardItems = current_user.board_items.due_soon.limit(@limit)
       else
-        boardItems = current_user.board_items
+        @boardItems = current_user.board_items
       end
     end
     render json: @boardItems, :status => 200

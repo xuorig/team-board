@@ -18,7 +18,7 @@ Rails.application.routes.draw do
       resources :comments, only: [:index, :new, :create], defaults: { format: 'json' }
     end
 
-    resource :comments, only: [:show, :edit, :update, :destroy]
+    resources :comments, only: [:index, :show, :edit, :update, :destroy], defaults: { format: 'json' }
 
     resources :users, defaults: { format: 'json' }
     resources :memberships, defaults: { format: 'json' }
