@@ -71,6 +71,22 @@ body {
     } 
   }
 
+  .tb-list-item.small {
+    p {
+      margin: 0px;
+    }
+    padding: 5px;
+    .name {
+      font-size: 16px;
+    }
+    .icon-col {
+      margin-top: 10px;
+      .team-icon {
+        font-size: 25px;
+      }
+    }
+  }
+
   .tb-list-item.first {
     border-top: 1px solid #e0e0e0;
   }
@@ -80,7 +96,7 @@ body {
     cursor: pointer;
   }
 
-  .item-page {
+  .details-page {
     .title {
       font-weight: bold;
       color: $teamboardBlack;

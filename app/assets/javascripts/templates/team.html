@@ -1,19 +1,98 @@
-<div class="row team-page" ngController="TeamController">
+<div class="row details-page" ngController="TeamController">
   <div class="col-md-12 col-sm-12">
     <div ng-model="team" class="section-header">
-      <h1>Teams</h1>
-      <h2>{{team.name}}</h2>
+      <h1>{{team.name}}</h1>
+      <h2>Manage and Edit Team</h2>
     </div>
 
-    <div class="row section">
-      <div class="col-md-4">
-        <span class="title">Description</span> <p class="team-desc">{{team.description}}</p>
+    <div class="row">
+      <div class="col-md-12">
+        <h3>Team Description</h3>
+        <p class="description-text">{{team.description}}</p>
       </div>
     </div>
 
-    <div class="row section">
-      <div class="col-md-4 user-list">
-        <span class="title">Team's Projects</span> <p class="team-project"></p>
+
+    <div class="row">
+      <div class="col-md-12">
+        <h3>Projects</h3>
+        <div class="row tb-list-item first" ng-repeat="project in team.projects">
+          <a href="#/projects/{{project.id}}">
+          <div class="col-md-2 col-xs-4 icon-col">
+            <i class="team-icon glyphicon glyphicon-folder-open"></i>
+          </div>
+          <div class="col-md-10 col-xs-8">
+            <p class="name">{{project.name}}</p>
+            <p class="description">{{project.description}}</p>
+          </div>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <h3>Members
+          <div class="pull-right btn-group">
+            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+              Action <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+              <li><a href="#">Action</a></li>
+              <li><a href="#">Another action</a></li>
+              <li><a href="#">Something else here</a></li>
+              <li class="divider"></li>
+              <li><a href="#">Separated link</a></li>
+            </ul>
+          </div>
+        </h3>
+
+        <div class="row tb-list-item small first">
+          <a href="">
+          <div class="col-md-2 col-xs-4 icon-col">
+            <i class="team-icon glyphicon glyphicon-king"></i>
+          </div>
+          <div class="col-md-10 col-xs-8">
+            <p class="name">{{team.owner.name}} <!-- a ng-if="team.isOwner" class="transfer hidden-link" href="#">Transfer Ownership</a--></p>
+            <p class="description">{{team.owner.email}}</p>
+          </div>
+          </a>
+        </div>
+        <div class="row tb-list-item small first" ng-repeat="manager in team.managers">
+          <a href="">
+          <div class="col-md-2 col-xs-4 icon-col">
+            <i class="team-icon glyphicon glyphicon-knight"></i>
+          </div>
+          <div class="col-md-10 col-xs-8">
+            <p class="name">{{manager.name}}</p>
+            <p class="description">{{manager.email}}</p>
+          </div>
+          </a>
+        </div>
+        <div class="row tb-list-item small first" ng-repeat="user in team.users">
+          <a href="">
+          <div class="col-md-2 col-xs-4 icon-col">
+            <i class="team-icon glyphicon glyphicon-pawn"></i>
+          </div>
+          <div class="col-md-10 col-xs-8">
+            <p class="name">{{user.name}}</p>
+            <p class="description">{{user.email}}</p>
+          </div>
+          </a>
+        </div>
+
+        <div class="row">
+        <div class="col-md-4">
+          <form name="addForms.newUserForm">
+            <div class="new-member-container form-group" ng-class="{'has-error': addForms.newUserForm.newUser.$error.email}">
+                <input type="email" name="newUser" class="form-control new-member" placeholder="sadelephant@zoo.com" ng-model="addForms.newUser">
+              <i ng-click="addUserToTeam()" class="add glyphicon glyphicon-plus-sign"></i>
+              <span class="error" ng-show="addForms.newUserForm.newUser.$error.email">Please enter a valid email!</span>
+            </div>
+          </form>
+        </div>
+        </div>
+
       </div>
     </div>
 
@@ -21,7 +100,7 @@
       <div class="col-md-12">
         <i class="glyphicon glyphicon-king"></i>
         <span class="title">Owner </span>
-        <p class="user-list">{{team.owner.name}} <a ng-if="team.isOwner" class="transfer hidden-link" href="#">Transfer Ownership</a></p>
+        <p class="user-list">{{team.owner.name}} <
       </div>
     </div>
 

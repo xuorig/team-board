@@ -6,23 +6,24 @@
 
     <div class="row">
       <div class="col-md-12">
-        <h3>Project's Description</h3>
+        <h3>Project Description</h3>
         <p class="description-text">{{project.description}}</p>
       </div>
     </div>
 
     <div class="row">
       <div class="col-md-12">
-        <h3>Project Owner</h3>
-        <p class="description-text">{{project.owner.name}}</p>
+        <h3>Assigned Team</h3>
+        <p class="description-text"><a href="#/teams/{{project.team.id}}">{{project.team.name}}</a></p>
       </div>
     </div>
 
 
     <div class="row">
       <div class="col-md-12">
-        <h3>All Users</h3>
-        <p class="description-text" ng-repeat="user in project.allUsers">{{user.name}}</p>
+        <h3>Additional Users</h3>
+        <p class="description-text" ng-repeat="user in project.users">{{user.name}}</p>
+        <p ng-if="project.users.length == 0"><a href="">Add Additional Users</a></p>
       </div>
     </div>
 

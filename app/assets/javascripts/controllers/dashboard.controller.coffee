@@ -22,7 +22,7 @@ angular
           $scope.comments = data
         )
 
-        BoardItem.query({limit: 10}).then ((data) ->
+        BoardItem.query({due_soon: true, limit: 10}).then ((data) ->
           $scope.itemsDueSoon = data
         )
 
