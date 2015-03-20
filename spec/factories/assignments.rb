@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :assignment do
     board_item
-    user
+    association :user,  :factory => :user, :email => 'assignementuser@email.com'
   end
 end
