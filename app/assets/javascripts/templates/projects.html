@@ -5,12 +5,15 @@
       <h2>Create and Edit Existing Projects<a href="#/projects/new" class="pull-right btn tb-btn">Add Project</a></h2>
     </div>
 
-    <div class="row" ng-if="projects.length == 0">
+
+    <div class="row empty-state" ng-if="projects.length == 0">
       <div class="col-md-12">
-        <h1>You have no projects as of now.</h1>
-        <a href="#/projects/new" class="create-project">Create one now</a>
+        <i class="glyphicon glyphicon-folder-open"></i>
+        <h1>Uh oh! You have no projects to work on</h1>
+        <h2>Start working by <a href="#/projects/new">creating one now</a></h2>
       </div>
     </div>
+
     <div class="row tb-list-item" ng-repeat="project in projects">
       <a href="#/projects/{{project.id}}">
       <div class="col-md-2 col-xs-4 icon-col">

@@ -5,6 +5,14 @@
       <h2>Items assigned to me</h2>
     </div>
 
+    <div class="row empty-state" ng-if="tasks.length == 0">
+      <div class="col-md-12">
+        <i class="glyphicon glyphicon-pushpin"></i>
+        <h1>Hmm... Looks like nothing is assigned to you right now</h1>
+        <h2>Take a look at your <a href="#/projects">existing projects</a></h2>
+      </div>
+    </div>
+
     <div class="row tb-list-item" ng-repeat="task in tasks">
       <a href="">
       <div class="col-md-2 col-xs-4 icon-col">

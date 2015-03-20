@@ -48,6 +48,24 @@ body {
     padding-bottom: 78px;
   }
 
+  .empty-state {
+    margin-top: 50px;
+    text-align: center;
+    a {
+      color: $teamboardBlue;
+    }
+    i {
+      font-size: 84px;
+      color: $lightGrey;
+    }
+    h1 {
+      color: $teamboardBlack;
+    }
+    h2 {
+      color: $lightGrey;
+    }
+  }
+
   .tb-list-item {
     padding: 20px;
     border-bottom: 1px solid #e0e0e0;

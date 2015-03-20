@@ -5,12 +5,14 @@
       <h2>Create a team or invite your peers to join an existing team. <a href="#/teams/new" class="pull-right btn tb-btn">Add Team</a></h2>
     </div>
 
-    <div class="row" ng-if="teams.length == 0">
-      <div class="col-md-12 empty-state">
-        <h1>You haven't created any teams yet!</h1>
-        <a href="#/teams/new" class="create-team">Create one now!</a>
+    <div class="row empty-state" ng-if="teams.length == 0">
+      <div class="col-md-12">
+        <i class="glyphicon glyphicon-globe"></i>
+        <h1>Looks like you don't have any teams yet!</h1>
+        <h2>Get started by <a href="#/teams/new">creating one now</a></h2>
       </div>
     </div>
+
     <div class="row tb-list-item" ng-repeat="team in teams">
       <a href="#/teams/{{team.id}}">
       <div class="col-md-2 col-xs-4 icon-col">
