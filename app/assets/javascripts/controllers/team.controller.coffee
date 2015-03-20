@@ -36,12 +36,17 @@ angular
             return
           return
 
-      $scope.addUserToTeam = () ->
-        if $scope.addForms.newUserForm.newUser.$error.email
+      $scope.onAddUser = () ->
+        if $scope.addForms.newUserForm.newUser.$error.email || !$scope.addForms.newUser
           return
+        email = $scope.addForms.newUser
+        if $scope.addForms.addAsManager then addManagerToTeam(email) else addUserToTeam(email)
+        $scope.addForms.newUser = null
+
+      addUserToTeam = (email) ->
         new Membership({
           team_id: $routeParams.team_id,
-          email: $scope.addForms.newUser
+          email: email
         })
         .create()
         .then ((result) ->
@@ -52,12 +57,10 @@ angular
           return
 
 
-      $scope.addManagerToTeam = () ->
-        if $scope.addForms.newManagerForm.newManager.$error.email
-          return
+      addManagerToTeam = (email) ->
         new Managership({
           team_id: $routeParams.team_id,
-          email: $scope.addForms.newManager
+          email: email
         })
         .create()
         .then ((result) ->
