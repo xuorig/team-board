@@ -18,7 +18,7 @@ class ProjectsController < ApplicationController
     @project = Project.new(safe_params.slice(:name, :description))
     @project.owner = current_user
 
-    @team = Team.find(params[:project][:team_id])
+    @team = params[:project][:team_id] != nil ? Team.find(params[:project][:team_id]) : nil
     @project.team = @team
 
     # TODO Add extra project members

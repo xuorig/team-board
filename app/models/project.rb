@@ -10,7 +10,8 @@ class Project < ActiveRecord::Base
   has_many :boards
 
   def all_users
-    (self.team.all_users + self.users << self.owner).uniq
+    all_users = self.team != nil ? self.team.all_users : []
+    (all_users + self.users << self.owner).uniq
   end
 
 end
