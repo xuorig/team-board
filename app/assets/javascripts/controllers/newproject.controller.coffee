@@ -29,7 +29,7 @@ angular
         new Project({
             name: $scope.formData.name,
             description: $scope.formData.description
-            team_id: $scope.formData.team.id 
+            team_id: if $scope.formData.team? then $scope.formData.team.id else null
         })
         .create()
         .then ((result) ->

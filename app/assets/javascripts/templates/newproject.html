@@ -32,8 +32,7 @@
               </Li>
             </ul>
             <div ng-if="teams.length > 0">
-              <select name="assignedTeam" class="form-control" ng-model="selectInput.assignedTeam" ng-options="team.name for team in teams"></select>
-              <button type="button" ng-disabled="formData.team" ng-click="assignToTeam()" class="btn tb-btn add-member-btn">Assign</button>
+              <select name="assignedTeam" class="form-control" ng-model="selectInput.assignedTeam" ng-options="team.name for team in teams" ng-change="assignToTeam()"></select>
             </div>
             <div ng-if="teams.length == 0">
               <p> You don't have the permissions to assign this project to a team </p>
