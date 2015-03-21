@@ -1,18 +1,18 @@
 angular
   .module('teamboard.controllers')
-  .controller("DashboardController", [ '$scope', 'CurrentUser', 'Project', 'Comment', 'BoardItem'
-    ($scope, CurrentUser, Project, Comment, BoardItem)->
+  .controller("DashboardController", [ '$scope', 'CurrentUser', 'Board', 'Comment', 'BoardItem'
+    ($scope, CurrentUser, Board, Comment, BoardItem)->
       init = () ->
         $scope.currentUser = null
-        $scope.projects = []
+        $scope.boards = []
         $scope.comments = []
         $scope.itemsDueSoon = []
 
         CurrentUser.getUser().then (data) ->
           $scope.currentUser = data
 
-        Project.query().then ((results) ->
-          $scope.projects = results
+        Board.query({recently_updated: true, limit: 5}).then ((results) ->
+          $scope.boards = results
           return
         ), (error) ->
           # do something about the error

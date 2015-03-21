@@ -23,7 +23,7 @@ class ProjectsController < ApplicationController
 
     # TODO Add extra project members
 
-    sample_board = Board.new(:name => safe_params[:name], :description => "This is an auto generated board for your project.", 
+    sample_board = Board.new(:name => safe_params[:name] + " Board", :description => "This is an auto generated board for your project.", 
                               :owner => current_user)
     @project.boards << sample_board
 

@@ -66,6 +66,21 @@ body {
     }
   }
 
+  .empty-state.small {
+    margin-top: 5px;
+    i {
+      font-size: 30px;
+    }
+    h1 {
+      font-size: 18px;
+      margin-top: 8px;
+    }
+    h2 {
+      font-size: 16px;
+      margin-top: 8px;
+    }
+  }
+
   .tb-list-item {
     padding: 20px;
     border-bottom: 1px solid #e0e0e0;

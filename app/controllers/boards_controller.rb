@@ -1,6 +1,11 @@
 class BoardsController < ApplicationController
   before_filter :authenticate_user!
   before_filter :get_project
+  before_filter :set_num
+
+  def set_num
+    @limit = params[:limit]
+  end
 
   def get_project
     if params[:project_id]
@@ -14,10 +19,16 @@ class BoardsController < ApplicationController
   end
 
   def index
-    @boards = @project.boards
-    respond_to do |format|
-      format.json {render json: @boards}
+    if @project
+      @boards = @project.boards
+    else
+      @boards = current_user.boards
+      if params[:recently_updated]
+        @boards = current_user.boards.order("updated_at DESC")
+      end
     end
+    @boards = @boards.limit(@limit)
+    render json: @boards, :status => 200
   end
 
   def show

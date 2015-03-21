@@ -5,7 +5,7 @@
       <h2>Welcome, {{ currentUser.name }}. Here are the most recent news about your projects.</h2>
     </div>
 
-    <div class="row empty-state" ng-if="projects.length == 0">
+    <div class="row empty-state" ng-if="projects.length == 0 || boads.length == 0">
       <div class="col-md-12">
         <i class="glyphicon glyphicon-thumbs-up"></i>
         <h1>Looks like you're new here</h1>
@@ -13,30 +13,37 @@
       </div>
     </div>
 
-    <div class="row section dashboard" ng-if="projects.length > 0">
-      <div class="col-md-4">
-        <h2 class="dashboard-title"><i class="glyphicon glyphicon-folder-open"></i> Recently Active Projects</h2>
-        <div class="row dashboard-item" ng-repeat="project in projects">
-          <a href="#/projects/{{project.id}}">
+    <div class="row section dashboard" ng-if="boards.length > 0">
+      <div class="col-md-4 text-center">
+        <h2 class="dashboard-title"><i class="glyphicon glyphicon-pushpin"></i> Recently Active Boards</h2>
+        <div class="row dashboard-item" ng-repeat="board in boards">
+          <a href="#/boards/{{board.id}}">
           <div class="col-md-1 col-xs-4 icon-col">
-            <i class="project-icon glyphicon glyphicon-folder-open"></i>
+            <i class="project-icon glyphicon glyphicon-pushpin"></i>
           </div>
-          <div class="col-md-10 col-xs-8">
-            <p class="name"><strong>{{project.name}}</strong></p>
-            <p class="name">{{project.description}}</p>
+          <div class="col-md-10 col-xs-8 text-left">
+            <p class="name"><strong>{{board.name}}</strong></p>
+            <p class="name">{{board.description}}</p>
           </div>
           </a>
         </div>
       </div>
 
-      <div class="col-md-4">
+      <div class="col-md-4 text-center">
         <h2 class="dashboard-title"><i class="glyphicon glyphicon-comment"></i> Most Recent Comments</h2>
+        <div class="row empty-state small" ng-if="comments.length == 0">
+          <div class="col-md-12">
+            <i class="glyphicon glyphicon-comment"></i>
+            <h1>No recent comments to show</h1>
+            <h2>Add one yourself to a <a href="#/projects">Board</a></h2>
+          </div>
+        </div>
          <div class="row dashboard-item" ng-repeat="comment in comments">
           <a href="#/boards/{{comment.boardItem.boardId}}">
           <div class="col-md-1 col-xs-4 icon-col">
             <i class="project-icon glyphicon glyphicon-user"></i>
           </div>
-          <div class="col-md-10 col-xs-8">
+          <div class="col-md-10 col-xs-8 text-left">
             <p class="name">By <strong>{{comment.user.name}}</strong> on Board Item <strong>{{comment.boardItem.title}}</strong></p>
             <p class="name">{{comment.content}}</p>
           </div>
@@ -44,14 +51,21 @@
         </div>
       </div>
 
-      <div class="col-md-4">
+      <div class="col-md-4 text-center">
         <h2 class="dashboard-title"><i class="glyphicon glyphicon-hourglass"></i> Tasks Due Soon</h2>
+        <div class="row empty-state small" ng-if="comments.length == 0">
+          <div class="col-md-12">
+            <i class="glyphicon glyphicon-hourglass"></i>
+            <h1>Hmm... looks like you're free</h1>
+            <h2>There are no <a href="#/projects">Tasks</a> assigned to you</h2>
+          </div>
+        </div>
         <div class="row dashboard-item" ng-repeat="item in itemsDueSoon">
           <a href="#/boards/{{item.boardId}}">
           <div class="col-md-1 col-xs-4 icon-col">
             <i class="project-icon glyphicon glyphicon-pushpin"></i>
           </div>
-          <div class="col-md-10 col-xs-8">
+          <div class="col-md-10 col-xs-8 text-left">
             <p class="name"><strong>{{ item.title }}</strong></p>
             <p class="name"><strong> Due on </strong> {{ item.dueDate | date:"EEEE, MMM dd" }}</p>
           </div>

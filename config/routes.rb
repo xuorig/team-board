@@ -10,7 +10,7 @@ Rails.application.routes.draw do
       resources :boards, only: [:index, :new, :create], defaults: { format: 'json' }
     end
 
-    resources :boards, only: [:show, :edit, :update, :destroy] do
+    resources :boards, only: [:index, :show, :edit, :update, :destroy] do
       resources :board_items, only: [:index, :new, :create], defaults: { format: 'json' }
     end
 

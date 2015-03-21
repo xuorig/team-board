@@ -52,6 +52,7 @@
 
 
 .details-page {
+
   h3 {
     color: $teamboardBlack;
     font-size: 22px;
@@ -60,10 +61,7 @@
     font-size: 16px;
   }
 
-}
-
-.team-page {
-  .title {
+  .title{
     font-weight: bold;
     color: #4d4d4d;
     font-size: 18px;
@@ -75,6 +73,9 @@
   }
 
   .new-member-container {
+    margin-top: 5px;
+    padding-bottom: 0px;
+    margin-bottom: -10px;
     position: relative;
     .new-member {
       width: 200px;
@@ -87,7 +88,6 @@
       display: inline-block;
     }
   }
-
 
   .transfer {
     color: #9b9b9b;
