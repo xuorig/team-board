@@ -11,7 +11,6 @@ angular.module('teamboard',[
   'ui.sortable',
   'ui.calendar',
   'xeditable',
-  'ng-context-menu',
 ])
 
 angular.module('teamboard').config ["$httpProvider", ($httpProvider) ->

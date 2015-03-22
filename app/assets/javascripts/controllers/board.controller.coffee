@@ -43,6 +43,9 @@ angular
           boardItem.update()
           return
 
+      $scope.onRightClick = () ->
+        console.log("rightclick!")
+
       $scope.onAddNote = () ->
         firstItem = $scope.splitItems[0][0]
         nextPos = 1

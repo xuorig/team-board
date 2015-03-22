@@ -25,7 +25,6 @@
 //= require angular-bootstrap/ui-bootstrap-tpls
 //= require angular-ui-sortable/sortable
 //= require angular-xeditable/dist/js/xeditable.js
-//= require ng-context-menu/dist/ng-context-menu
 //= require fullcalendar/fullcalendar
 //= require fullcalendar/gcal
 //= require angular-ui-calendar/src/calendar

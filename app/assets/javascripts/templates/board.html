@@ -1,5 +1,3 @@
-
-
 <div class="row" ng-controller="BoardController">
   <div class="col-md-12">
     <div class="section-header">
@@ -9,20 +7,8 @@
     </div>
   </div>
 
-  <!-- DROPDOWN MENU RIGHT CLICK -->
-<div class="dropdown position-fixed" id="right-click-menu">
-  <ul class="dropdown-menu" role="menu">
-    <li>
-      <a class="pointer" role="menuitem" tabindex="1"
-         ng-click="onAddNote()">
-         Add Note
-      </a>
-    </li>
-  </ul>
-</div>
-
   <!-- Column 1 -->
-  <div context-menu data-target="right-click-menu" class="row">
+  <div class="row" ng-right-click="onRightClick()">
     <div class="col-md-4 items" ng-repeat="col in splitItems">
       <ul ui-sortable="sortableOptions" ng-model="col" class="item-column">
         <li ng-controller="BoardItemController" ng-init="init(item.id)" ng-repeat="item in col">
