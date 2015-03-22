@@ -12,7 +12,6 @@ angular
       getTeam = () ->
         Team.get($routeParams.team_id).then ((results) ->
           $scope.team = results
-          console.log $scope.team.users
           return
         ), (error) ->
           return
@@ -27,9 +26,9 @@ angular
           confirmButtonText: 'Yes, delete it!'
         }, ->
           Team.get($routeParams.team_id).then ((team) ->
-            console.log(team)
             team.delete()
             $location.path('/teams');
+            window.humane.log("Deleted Team " + $scope.team.name)
             return
           ), (error) ->
             console.log(error)

@@ -16,6 +16,7 @@
     <div class="row">
       <div class="col-md-12">
         <h3>Projects</h3>
+        <p class="no-items" ng-if="team.projects.length == 0">Your team has no projects. <a href="#/projects/new">Add a Project.</a></p>
         <div class="row tb-list-item small first" ng-repeat="project in team.projects">
           <a href="#/projects/{{project.id}}">
           <div class="col-md-2 col-xs-4 icon-col">

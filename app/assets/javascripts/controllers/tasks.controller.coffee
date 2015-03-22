@@ -7,8 +7,8 @@ angular
         getTasks()
       getTasks = () ->
         # TO DO: ONLY TASKS WHERE USER IS ASSIGNED
-        BoardItem.query({has_due_date: true}).then ((items) ->
-          $scope.tasks = items
+        BoardItem.query({due_soon: true}).then ((data) ->
+          $scope.tasks = data
         )
       init()
 

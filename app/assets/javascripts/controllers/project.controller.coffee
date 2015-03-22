@@ -4,7 +4,6 @@ angular
     ($scope, $location, $resource, $routeParams, Project, SweetAlert)->
       getProject = () ->
         Project.get($routeParams.project_id).then ((results) ->
-          console.log results
           $scope.project = results
           return
         ), (error) ->
@@ -14,7 +13,7 @@ angular
         SweetAlert.swal {
           title: 'Watch out!'
           text: 'Deleting this project will also delete all boards attached to it. Are you sure ?'
-          type: 'warning'
+          type: 'warning' 
           showCancelButton: true
           confirmButtonColor: '#DD6B55'
           confirmButtonText: 'Yes, delete it!'
@@ -27,19 +26,6 @@ angular
             console.log(error)
             return
           return
-
-      $scope.addUserToProject = () ->
-        # new Membership({
-        #   team_id: $routeParams.team_id,
-        #   email: $scope.newUser
-        # })
-        # .create()
-        # .then ((result) ->
-        #   getTeam()
-        #   return
-        # ), (error) ->
-        #   console.log(error)
-        #   return
 
       getProject()
   ])

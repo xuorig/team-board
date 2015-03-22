@@ -17,6 +17,7 @@ angular
         .then ((result) ->
           console.log(result)
           $location.path('/teams')
+          window.humane.log("Created Team " + $scope.formData.name)
           return
         ), (error) ->
           console.log(error)

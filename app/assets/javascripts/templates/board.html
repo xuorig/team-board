@@ -1,81 +1,90 @@
+
 <div class="row" ng-controller="BoardController">
+        <div class="context-menu">
+        <a href="" ng-click="onAddNote()">Add Note</a>
+      </div>
   <div class="col-md-12">
     <div class="section-header">
       <h1>{{board.name}}</h1>
       <h2>{{board.description}} <a href="" ng-click="onAddNote()" class="pull-right btn tb-btn">Pin a note</a></h2>
     </div>
-  </div>
 
-  <div class="context-menu">
-    <a href="" ng-click="onAddNote()">Add Note</a>
-  </div>
+    <div ng-right-click="onRightClick($event)" class="row empty-state" 
+            ng-if="splitItems[0].length == 0 && splitItems[1].length == 0 && splitItems[2].length == 0">
+      <div class="col-md-12">
+        <i class="glyphicon glyphicon-pushpin"></i>
+        <h1>Lame, your board is empty.</h1>
+        <h2>Improve it by <a href="" ng-click="onAddNote()">adding a note</a></h2>
+      </div>
+    </div>
 
-  <!-- Column 1 -->
-  <div class="row" ng-right-click="onRightClick($event)">
-    <div class="col-md-4 items" ng-repeat="col in splitItems">
-      <ul ui-sortable="sortableOptions" ng-model="col" class="item-column">
-        <li ng-controller="BoardItemController" ng-init="init(item.id)" ng-repeat="item in col">
-          <div ng-class="item.color" class="note-item">
-            <div class="delete-note" ng-click="deleteNote()">x</div>
-            <h3 editable-text="item.title" class="note-title">{{ item.title }}</h3>
-            <p editable-textarea="item.noteContent" class="note-content">{{ item.noteContent }}</p>
-            <div class="note-details">
-              <a href="" datepicker-popup="dd-MMMM-yyyy" ng-model="item.dueDate" is-open="calendar.opened" min-date="calendar.minDate" max-date="'2015-06-22'" datepicker-options="calendar.dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" ng-click="calendar.open($event)">
-                <i class="glyphicon glyphicon-calendar"></i>
-                <span ng-if="item.dueDate"><strong> Due for: </strong>{{item.dueDate | date:"EEEE, MMM dd"}}</span>
-                <span ng-if="!item.dueDate"><strong> Add Due Date</strong></span>
-              </a>
-              <span class="dropdown" dropdown>
-                <a href class="dropdown-toggle" dropdown-toggle>
-                  <i class="glyphicon glyphicon-pencil"></i> Color
+    <!-- Column 1 -->
+    <div class="row" ng-right-click="onRightClick($event)">
+
+      <div class="col-md-4 items" ng-repeat="col in splitItems">
+        <ul ui-sortable="sortableOptions" ng-model="col" class="item-column">
+          <li ng-controller="BoardItemController" ng-init="init(item.id)" ng-repeat="item in col">
+            <div ng-class="item.color" class="note-item">
+              <div class="delete-note" ng-click="deleteNote()">x</div>
+              <h3 editable-text="item.title" class="note-title">{{ item.title }}</h3>
+              <p editable-textarea="item.noteContent" class="note-content">{{ item.noteContent }}</p>
+              <div class="note-details">
+                <a href="" datepicker-popup="dd-MMMM-yyyy" ng-model="item.dueDate" is-open="calendar.opened" min-date="calendar.minDate" max-date="'2015-06-22'" datepicker-options="calendar.dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" ng-click="calendar.open($event)">
+                  <i class="glyphicon glyphicon-calendar"></i>
+                  <span ng-if="item.dueDate"><strong> Due for: </strong>{{item.dueDate | date:"EEEE, MMM dd"}}</span>
+                  <span ng-if="!item.dueDate"><strong> Add Due Date</strong></span>
                 </a>
-                <div class="dropdown-menu color-dropdown">
-                  <div ng-click="changeNoteColor('blue')" class="color-square blue-square"></div>
-                  <div ng-click="changeNoteColor('green')" class="color-square green-square"></div>
-                  <div ng-click="changeNoteColor('red')" class="color-square red-square"></div>
-                  <div ng-click="changeNoteColor('purple')" class="color-square purple-square"></div>
-                  <div ng-click="changeNoteColor('yellow')" class="color-square yellow-square"></div>
-                </div>
-              </span>
-            </div>
-            <div class="note-details" ng-if="olderComments.length > 0 && !commentOptions.showComments">
-              <a href="" ng-click="commentOptions.showComments = ! commentOptions.showComments"><i class="glyphicon glyphicon-comment"></i> Show {{ olderComments.length }} more comments</a> 
-            </div>
-            <div class="note-details" ng-if="commentOptions.showComments">
-              <a href="" ng-click="commentOptions.showComments = ! commentOptions.showComments"><i class="glyphicon glyphicon-comment"></i> Hide extra comments</a> 
-            </div>
+                <span class="dropdown" dropdown>
+                  <a href class="dropdown-toggle" dropdown-toggle>
+                    <i class="glyphicon glyphicon-pencil"></i> Color
+                  </a>
+                  <div class="dropdown-menu color-dropdown">
+                    <div ng-click="changeNoteColor('blue')" class="color-square blue-square"></div>
+                    <div ng-click="changeNoteColor('green')" class="color-square green-square"></div>
+                    <div ng-click="changeNoteColor('red')" class="color-square red-square"></div>
+                    <div ng-click="changeNoteColor('purple')" class="color-square purple-square"></div>
+                    <div ng-click="changeNoteColor('yellow')" class="color-square yellow-square"></div>
+                  </div>
+                </span>
+              </div>
+              <div class="note-details" ng-if="olderComments.length > 0 && !commentOptions.showComments">
+                <a href="" ng-click="commentOptions.showComments = ! commentOptions.showComments"><i class="glyphicon glyphicon-comment"></i> Show {{ olderComments.length }} more comments</a> 
+              </div>
+              <div class="note-details" ng-if="commentOptions.showComments">
+                <a href="" ng-click="commentOptions.showComments = ! commentOptions.showComments"><i class="glyphicon glyphicon-comment"></i> Hide extra comments</a> 
+              </div>
 
-            <div ng-class="{ 'hidden': ! commentOptions.showComments }" class="note-comments">
-              <div class="row" ng-repeat="comment in olderComments">
-                <div class="col-md-12 comment">
-                  <p class="comment-content"><strong>{{ comment.user.name }}</strong> {{ comment.content }}</p>
-                  <p class="comment-date">{{ comment.createdAt | date:"EEEE, MMM dd 'at' H:mm" }}</p>
+              <div ng-class="{ 'hidden': ! commentOptions.showComments }" class="note-comments">
+                <div class="row" ng-repeat="comment in olderComments">
+                  <div class="col-md-12 comment">
+                    <p class="comment-content"><strong>{{ comment.user.name }}</strong> {{ comment.content }}</p>
+                    <p class="comment-date">{{ comment.createdAt | date:"EEEE, MMM dd 'at' H:mm" }}</p>
+                  </div>
+                </div>
+              </div>
+              <div class="note-comments">
+                <div class="row" ng-repeat="comment in toShowComments">
+                  <div class="col-md-12 comment">
+                    <p class="comment-content"><strong>{{ comment.user.name }}</strong> {{ comment.content }}</p>
+                    <p class="comment-date">{{ comment.createdAt | date:"EEEE, MMM dd 'at' H:mm" }}</p>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-1">
+                  <i class="user-icon glyphicon glyphicon-user"></i>
+                </div>
+                <div class="col-md-10">
+                  <form ng-submit="postComment()">
+                    <input type="text" name="newComment" class="form-control new-member" 
+                    placeholder="Type your comment here..." ng-model="newComment">
+                  </form>
                 </div>
               </div>
             </div>
-            <div class="note-comments">
-              <div class="row" ng-repeat="comment in toShowComments">
-                <div class="col-md-12 comment">
-                  <p class="comment-content"><strong>{{ comment.user.name }}</strong> {{ comment.content }}</p>
-                  <p class="comment-date">{{ comment.createdAt | date:"EEEE, MMM dd 'at' H:mm" }}</p>
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-1">
-                <i class="user-icon glyphicon glyphicon-user"></i>
-              </div>
-              <div class="col-md-10">
-                <form ng-submit="postComment()">
-                  <input type="text" name="newComment" class="form-control new-member" 
-                  placeholder="Type your comment here..." ng-model="newComment">
-                </form>
-              </div>
-            </div>
-          </div>
-        </li>
-      </ul>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
-
 </div>

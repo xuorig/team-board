@@ -34,12 +34,16 @@ angular
           return
 
       $scope.deleteNote = () ->
-        BoardItem.get($scope.itemId).then (boardItem) ->
+        BoardItem.get($scope.itemId).then ((boardItem) ->
           boardItem.delete().then (res) ->
+            window.humane.log("Deleted Note")
             #remove item from $scope
             _.each($scope.splitItems, (column, index) ->
               $scope.splitItems[index] = _.without(column, $scope.item)
-            ) 
+            )
+          ), (error) ->
+              window.humane.log "Error Deleting Note"
+              return
             return
 
       $scope.postComment = () ->

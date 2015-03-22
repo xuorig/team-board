@@ -34,7 +34,7 @@ class TeamsController < ApplicationController
   end
 
   def destroy
-    @team = current_user.teams.find(params[:id])
+    @team = current_user.all_teams.find(params[:id])
     respond_to do |format|
       if @team.destroy
         format.json { head :no_content, status: :ok }
