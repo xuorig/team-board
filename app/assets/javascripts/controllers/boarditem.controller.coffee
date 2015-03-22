@@ -19,14 +19,12 @@ angular
         CommentNested.query({}, {boardItemId: $scope.itemId}).then ((results) ->
           $scope.toShowComments = results
           $scope.olderComments = $scope.toShowComments.splice(0, Math.max(results.length - 2, 0))
-          console.log results
           return
         ), (error) ->
           # do something about the error
           return
 
       updateItem = (newVal) ->
-        console.log newVal
         BoardItem.get(newVal.id).then (boardItem) ->
           boardItem.title = newVal.title
           boardItem.noteContent = newVal.noteContent

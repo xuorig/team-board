@@ -3,6 +3,7 @@ angular.module('teamboard',[
   'ngRoute',
   'teamboard.services'
   'teamboard.controllers',
+  'teamboard.directives',
   'ngResource',
   'ngAnimate',
   'oitozero.ngSweetAlert',
@@ -21,6 +22,7 @@ angular.module('teamboard').run( ['editableOptions', (editableOptions) ->
 ])
 
 angular.module('teamboard.services', ['rails']);
+angular.module('teamboard.directives', [])
 
 controllers = angular.module('teamboard.controllers',[])
 
