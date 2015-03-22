@@ -13,6 +13,7 @@
     "jquery.ui": "latest",
     "angular-ui-sortable": "latest",
     "angular-xeditable": "latest",
-    "angular-ui-calendar": "latest"
+    "angular-ui-calendar": "latest",
+    "ng-context-menu": "latest"
   }
 }
