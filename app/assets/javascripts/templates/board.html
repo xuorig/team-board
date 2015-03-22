@@ -3,12 +3,15 @@
     <div class="section-header">
       <h1>{{board.name}}</h1>
       <h2>{{board.description}} <a href="" ng-click="onAddNote()" class="pull-right btn tb-btn">Pin a note</a></h2>
-      <h3>Right click to pin a note</h3>
     </div>
   </div>
 
+  <div class="context-menu">
+    <a href="" ng-click="onAddNote()">Add Note</a>
+  </div>
+
   <!-- Column 1 -->
-  <div class="row" ng-right-click="onRightClick()">
+  <div class="row" ng-right-click="onRightClick($event)">
     <div class="col-md-4 items" ng-repeat="col in splitItems">
       <ul ui-sortable="sortableOptions" ng-model="col" class="item-column">
         <li ng-controller="BoardItemController" ng-init="init(item.id)" ng-repeat="item in col">

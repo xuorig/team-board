@@ -43,8 +43,26 @@ angular
           boardItem.update()
           return
 
-      $scope.onRightClick = () ->
-        console.log("rightclick!")
+      getPosition = (element) ->
+        xPosition = 0
+        yPosition = 0
+        while element
+          xPosition += element.offsetLeft - element.scrollLeft + element.clientLeft
+          yPosition += element.offsetTop - element.scrollTop + element.clientTop
+          element = element.offsetParent
+        {
+          x: xPosition
+          y: yPosition
+        }
+
+      $scope.onRightClick = (e) ->
+        parentPosition = getPosition(e.currentTarget)
+        xPosition = e.clientX - parentPosition.x
+        yPosition = e.clientY - parentPosition.y
+        $(".context-menu").addClass("open")
+        $(".context-menu").css("top", yPosition)
+        $(".context-menu").css("left", xPosition)
+        return
 
       $scope.onAddNote = () ->
         firstItem = $scope.splitItems[0][0]
