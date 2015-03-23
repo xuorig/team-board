@@ -21,6 +21,7 @@ angular
           Project.get($routeParams.project_id).then ((project) ->
             project.delete()
             $location.path('/projects');
+            window.humane.log("Deleted Project")
             return
           ), (error) ->
             console.log(error)

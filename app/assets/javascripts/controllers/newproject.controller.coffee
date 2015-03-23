@@ -34,6 +34,7 @@ angular
         .create()
         .then ((result) ->
           $location.path('/projects')
+          window.humane.log("Created Project " + $scope.formData.name)
           return
         ), (error) ->
           return

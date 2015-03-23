@@ -1,7 +1,7 @@
 angular
   .module('teamboard.controllers')
-  .controller("BoardItemController", [ '$scope', '$routeParams', '_', 'BoardItem', 'CommentNested', 'Comment'
-    ($scope, $routeParams, _, BoardItem, CommentNested, Comment)->
+  .controller("BoardItemController", [ '$scope', '$routeParams', '_', 'BoardItem', 'CommentNested', 'Comment', 'SweetAlert'
+    ($scope, $routeParams, _, BoardItem, CommentNested, Comment, SweetAlert)->
       $scope.itemId = null
       $scope.init = (itemId) ->
         $scope.itemId = itemId
@@ -34,6 +34,19 @@ angular
           return
 
       $scope.deleteNote = () ->
+        SweetAlert.swal {
+          title: 'Careful!'
+          text: 'Are you sure you want to delete this note?'
+          type: 'warning'
+          showCancelButton: true
+          confirmButtonColor: '#DD6B55'
+          confirmButtonText: 'Yes, delete it!'
+        }, ->
+          _deleteNote()
+          return
+
+
+      _deleteNote = () ->
         BoardItem.get($scope.itemId).then ((boardItem) ->
           boardItem.delete().then (res) ->
             window.humane.log("Deleted Note")

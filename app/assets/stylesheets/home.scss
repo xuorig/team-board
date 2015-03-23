@@ -81,6 +81,25 @@ body {
     }
   }
 
+  .about-page {
+    margin-top: 50px;
+    text-align: center;
+    a {
+      color: $teamboardBlue;
+    }
+    i {
+      color: $teamboardBlue;
+    }
+    h1 {
+      color: $teamboardBlack;
+      font-size: 24px;
+    }
+    h2 {
+      color: $lightGrey;
+      font-size: 20px;
+    }  
+  }
+
   .tb-list-item {
     padding: 20px;
     border-bottom: 1px solid #e0e0e0;
