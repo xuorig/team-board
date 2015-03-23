@@ -28,6 +28,7 @@ gem 'angular-rails-templates'
 gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
+gem 'google-api-client', :require => 'google/api_client'
 # gem 'unicorn' # uncomment for Windows
 gem 'tzinfo-data' # install for Windows
 gem 'font-awesome-sass'

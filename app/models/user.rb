@@ -61,7 +61,12 @@ class User < ActiveRecord::Base
       user.save!
       return user
     else
-      return existingRecord.first
+      # refresh access token after user relogin.
+      # TODO refresh tokens and Tokens model that refreshes itself
+      user = existingRecord.first
+      user.oauth_token = auth.credentials.token
+      user.save
+      return user
     end
   end
 end
