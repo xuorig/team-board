@@ -1,4 +1,4 @@
-# TeamBoard
+# TeamBoard ![Build Status](https://travis-ci.org/xuorig/team-board.svg?branch=master)
 ## Mini Project Management Tool And Shareable Web Whiteboard
 
 ### Built With
