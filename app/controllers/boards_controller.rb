@@ -1,4 +1,8 @@
+require 'teamboard/sse'
+
 class BoardsController < ApplicationController
+  include ActionController::Live
+
   before_filter :authenticate_user!
   before_filter :get_project
   before_filter :set_num
@@ -15,6 +19,24 @@ class BoardsController < ApplicationController
       else
         @project = nil
       end
+    end
+  end
+
+  def events
+    # SSE expects the `text/event-stream` content type
+    response.headers['Content-Type'] = 'text/event-stream'
+
+    sse = TeamBoard::SSE.new(response.stream)
+
+    begin
+      loop do
+        sse.write({ :data => "test" })
+        sleep 1
+      end
+    rescue IOError
+      # When the client disconnects, we'll get an IOError on write
+    ensure
+      sse.close
     end
   end
 

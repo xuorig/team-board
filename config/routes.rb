@@ -14,6 +14,8 @@ Rails.application.routes.draw do
       resources :board_items, only: [:index, :new, :create], defaults: { format: 'json' }
     end
 
+    get 'boards/:id/events' => 'boards#events'
+
     resources :board_items, only: [:index, :show, :edit, :update, :destroy], defaults: { format: 'json' } do
       resources :comments, only: [:index, :new, :create], defaults: { format: 'json' }
     end

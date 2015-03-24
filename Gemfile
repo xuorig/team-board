@@ -33,6 +33,9 @@ gem 'tzinfo-data' # install for Windows
 gem 'font-awesome-sass'
 gem 'angularjs-rails-resource', '~> 1.1.1'
 gem 'acts_as_list'
+
+gem 'puma'
+gem 'rb-fsevent'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
