@@ -23,21 +23,17 @@ class BoardsController < ApplicationController
   end
 
   def events
-    # SSE expects the `text/event-stream` content type
+    @board = current_user.boards.find(params[:id])
     response.headers['Content-Type'] = 'text/event-stream'
-
     sse = TeamBoard::SSE.new(response.stream)
 
-    begin
-      loop do
-        sse.write({ :data => "test" })
-        sleep 1
-      end
+    @board.on_board_change do |slide|
+      sse.write({board: @board}, {event: 'changed'})
+    end
     rescue IOError
-      # When the client disconnects, we'll get an IOError on write
+      # Client Disconnected
     ensure
       sse.close
-    end
   end
 
   def index

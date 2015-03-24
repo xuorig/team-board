@@ -15,6 +15,14 @@ angular
             newPosition = numOfitems - destinationIndex
             $scope.updateItemPosition(ui.item.sortable.model, destinationListIndex, newPosition)
         }
+
+        $timeout( () ->
+          source = new EventSource('/api/boards/' + $routeParams.board_id + '/events')
+          source.addEventListener('changed', (e) -> 
+            getBoard()
+          )
+        )
+
         $scope.splitItems = []
         getBoard()
 
