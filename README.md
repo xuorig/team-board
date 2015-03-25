@@ -9,4 +9,14 @@
 
 [PostgreSQL](http://www.postgresql.org/) — Our main database is in Postgres.
 
+[Puma](https://github.com/puma/puma) - We use puma to handle concurrency
+
 And a lot of Ruby Gems at [/master/Gemfile](https://github.com/xuorig/team-board/blob/master/Gemfile).
+
+### How to Run
+
+1. Clone Repo
+2. Configure google dev console + sendgrid env variables
+2. bundle install
+3. bundle exec rake bower:install
+4. bundle exec puma -C config/puma.rb
