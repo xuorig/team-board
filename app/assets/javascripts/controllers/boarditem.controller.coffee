@@ -2,13 +2,15 @@ angular
   .module('teamboard.controllers')
   .controller("BoardItemController", [ '$scope', '$routeParams', '_', 'BoardItem', 'CommentNested', 'Comment', 'SweetAlert'
     ($scope, $routeParams, _, BoardItem, CommentNested, Comment, SweetAlert)->
-      $scope.itemId = null
-      $scope.init = (itemId) ->
-        $scope.itemId = itemId
+      init = () ->
         $scope.$watch 'item', ((newVal, oldVal) ->
           if !_.isEqual(oldVal, newVal)
             updateItem(newVal)
         ), true
+
+        $scope.$on('update-'+$scope.item.id, (event, args) ->
+          fetchChanges($scope.item.id)
+        )
 
         $scope.olderComments = []
         $scope.toShowComments = []
@@ -16,12 +18,20 @@ angular
         getComments()
 
       getComments = () ->
-        CommentNested.query({}, {boardItemId: $scope.itemId}).then ((results) ->
+        CommentNested.query({}, {boardItemId: $scope.item.id}).then ((results) ->
           $scope.toShowComments = results
           $scope.olderComments = $scope.toShowComments.splice(0, Math.max(results.length - 2, 0))
           return
         ), (error) ->
           # do something about the error
+          return
+
+      fetchChanges = (id) ->
+        BoardItem.get(id).then (bi) ->
+          $scope.item.title = bi.title
+          $scope.item.noteContent = bi.noteContent
+          $scope.item.color = bi.color
+          $scope.item.dueDate = bi.dueDate
           return
 
       updateItem = (newVal) ->
@@ -47,7 +57,7 @@ angular
 
 
       _deleteNote = () ->
-        BoardItem.get($scope.itemId).then ((boardItem) ->
+        BoardItem.get($scope.item.id).then ((boardItem) ->
           boardItem.delete().then (res) ->
             window.humane.log("Deleted Note")
             #remove item from $scope
@@ -61,7 +71,7 @@ angular
 
       $scope.postComment = () ->
         new CommentNested({
-          boardItemId: $scope.itemId,
+          boardItemId: $scope.item.id,
           content: $scope.newComment
         }).create()
 
@@ -102,4 +112,6 @@ angular
         'shortDate'
       ]
       $scope.calendar.format = $scope.calendar.formats[0]
+
+      init()
   ])

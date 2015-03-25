@@ -1,8 +1,8 @@
 source 'https://rubygems.org'
 
-
+ruby "2.2.1"
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.0'
+gem 'rails'
 # Use postgresql as the database for Active Record
 gem 'pg'
 # Use SCSS for stylesheets
@@ -33,6 +33,9 @@ gem 'tzinfo-data' # install for Windows
 gem 'font-awesome-sass'
 gem 'angularjs-rails-resource', '~> 1.1.1'
 gem 'acts_as_list'
+
+gem 'puma'
+gem 'rb-fsevent'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

@@ -4,5 +4,33 @@ class Board < ActiveRecord::Base
 
   belongs_to :project
   belongs_to :owner, :class_name => "User"
-  has_many :items, :class_name => "BoardItem" 
+  has_many :items, :class_name => "BoardItem"
+
+  after_save :notify_board_change
+  after_create :notify_board_change
+  def notify_board_change(change = {:board => true})
+    Board.connection.execute "NOTIFY #{channel}, #{Board.connection.quote change.to_s}"
+  end
+
+  def on_board_change
+    ActiveRecord::Base.connection_pool.with_connection do |connection|
+      conn = connection.instance_variable_get(:@connection)
+      begin
+        conn.async_exec "LISTEN #{channel}"
+        loop do
+          conn.wait_for_notify do |event, pid, board_item_id|
+            yield board_item_id
+          end
+        end
+      ensure
+        conn.async_exec "UNLISTEN #{channel}"
+      end
+    end
+  end
+
+  private
+  def channel
+    "boards_#{id}"
+  end
+
 end

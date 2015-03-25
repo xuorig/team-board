@@ -1,4 +1,8 @@
+require 'teamboard/sse'
+
 class BoardsController < ApplicationController
+  include ActionController::Live
+
   before_filter :authenticate_user!
   before_filter :get_project
   before_filter :set_num
@@ -16,6 +20,21 @@ class BoardsController < ApplicationController
         @project = nil
       end
     end
+  end
+
+  def events
+    @board = current_user.boards.find(params[:id])
+    response.headers['Content-Type'] = 'text/event-stream'
+    sse = TeamBoard::SSE.new(response.stream)
+
+    @board.on_board_change do |change|
+      sse.write({:change => change}, {:event => 'changed'})
+    end
+
+    rescue ClientDisconnected
+      byebug
+    ensure
+      sse.close
   end
 
   def index

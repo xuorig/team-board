@@ -1,5 +1,5 @@
 
-<div class="row" ng-controller="BoardController">
+<div class="row">
         <div class="context-menu">
         <a href="" ng-click="onAddNote()">Add Note</a>
       </div>
@@ -23,7 +23,7 @@
 
       <div class="col-md-4 items" ng-repeat="col in splitItems">
         <ul ui-sortable="sortableOptions" ng-model="col" class="item-column">
-          <li ng-controller="BoardItemController" ng-init="init(item.id)" ng-repeat="item in col">
+          <li ng-controller="BoardItemController" ng-model="item" ng-repeat="item in col">
             <div ng-class="item.color" class="note-item">
               <div class="delete-note" ng-click="deleteNote()">x</div>
               <h3 editable-text="item.title" class="note-title">{{ item.title }}</h3>
