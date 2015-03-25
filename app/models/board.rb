@@ -8,19 +8,19 @@ class Board < ActiveRecord::Base
 
   after_save :notify_board_change
   after_create :notify_board_change
-  def notify_board_change
-    self.class.connection.execute "NOTIFY #{channel}, #{self.class.connection.quote self.to_s}"
+  def notify_board_change board_item_id
+    Board.connection.execute "NOTIFY #{channel}, #{Board.connection.quote board_item_id.to_s}"
   end
 
   def on_board_change
-    self.class.connection.execute "LISTEN #{channel}"
+    Board.connection.execute "LISTEN #{channel}"
     loop do
-      self.class.connection.raw_connection.wait_for_notify do |event, pid, board|
-        yield board
+      Board.connection.raw_connection.wait_for_notify do |event, pid, board_item_id|
+        yield board_item_id
       end
     end
   ensure
-    self.class.connection.execute "UNLISTEN #{channel}"
+    Board.connection.execute "UNLISTEN #{channel}"
   end
 
   private

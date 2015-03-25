@@ -18,8 +18,10 @@ angular
 
         $timeout( () ->
           source = new EventSource('/api/boards/' + $routeParams.board_id + '/events')
-          source.addEventListener('changed', (e) -> 
-            getBoard()
+          source.addEventListener('changed', (e) ->
+            data = JSON.parse(e.data)
+            $scope.$broadcast('update-'+data.board_item_id)
+            console.log 'changed!'
           )
         )
 

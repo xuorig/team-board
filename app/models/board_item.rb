@@ -13,9 +13,10 @@ class BoardItem < ActiveRecord::Base
 
   after_create :notify_board_change
   after_destroy :notify_board_change
+  after_save :notify_board_change
 
   def notify_board_change
-    self.board.notify_board_change
+    self.board.notify_board_change self.id
   end
 
 end
