@@ -4,7 +4,6 @@ angular
     ($scope, $routeParams, _, BoardItem, CommentNested, Comment, SweetAlert)->
       init = () ->
         $scope.$watch 'item', ((newVal, oldVal) ->
-          console.log 'changed'
           if !_.isEqual(oldVal, newVal)
             updateItem(newVal)
         ), true
@@ -28,7 +27,6 @@ angular
           return
 
       fetchChanges = (id) ->
-        console.log 'update item'
         BoardItem.get(id).then (bi) ->
           $scope.item.title = bi.title
           $scope.item.noteContent = bi.noteContent
@@ -72,7 +70,6 @@ angular
             return
 
       $scope.postComment = () ->
-        console.log $scope.item
         new CommentNested({
           boardItemId: $scope.item.id,
           content: $scope.newComment

@@ -16,7 +16,7 @@ class BoardItem < ActiveRecord::Base
   after_save :notify_board_change
 
   def notify_board_change
-    self.board.notify_board_change self.id
+    self.board.notify_board_change({:board_item => self.id})
   end
 
 end

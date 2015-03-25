@@ -27,8 +27,8 @@ class BoardsController < ApplicationController
     response.headers['Content-Type'] = 'text/event-stream'
     sse = TeamBoard::SSE.new(response.stream)
 
-    @board.on_board_change do |board_item_id|
-      sse.write({board_item_id: board_item_id}, {event: 'changed'})
+    @board.on_board_change do |change|
+      sse.write({:change => change}, {:event => 'changed'})
     end
 
     rescue ClientDisconnected

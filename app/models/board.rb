@@ -8,8 +8,8 @@ class Board < ActiveRecord::Base
 
   after_save :notify_board_change
   after_create :notify_board_change
-  def notify_board_change board_item_id
-    Board.connection.execute "NOTIFY #{channel}, #{Board.connection.quote board_item_id.to_s}"
+  def notify_board_change(change = {:board => true})
+    Board.connection.execute "NOTIFY #{channel}, #{Board.connection.quote change.to_s}"
   end
 
   def on_board_change
