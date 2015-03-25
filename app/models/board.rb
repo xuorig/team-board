@@ -13,14 +13,19 @@ class Board < ActiveRecord::Base
   end
 
   def on_board_change
-    Board.connection.execute "LISTEN #{channel}"
-    loop do
-      Board.connection.raw_connection.wait_for_notify do |event, pid, board_item_id|
-        yield board_item_id
+    ActiveRecord::Base.connection_pool.with_connection do |connection|
+      conn = connection.instance_variable_get(:@connection)
+      begin
+        conn.async_exec "LISTEN #{channel}"
+        loop do
+          conn.wait_for_notify do |event, pid, board_item_id|
+            yield board_item_id
+          end
+        end
+      ensure
+        conn.async_exec "UNLISTEN #{channel}"
       end
     end
-  ensure
-    Board.connection.execute "UNLISTEN #{channel}"
   end
 
   private
