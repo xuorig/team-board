@@ -35,7 +35,8 @@ gem 'angularjs-rails-resource', '~> 1.1.1'
 gem 'acts_as_list'
 
 gem 'puma'
-gem 'rb-fsevent'
+gem 'redis'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

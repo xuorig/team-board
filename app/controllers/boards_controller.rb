@@ -25,16 +25,16 @@ class BoardsController < ApplicationController
   def events
     @board = current_user.boards.find(params[:id])
     response.headers['Content-Type'] = 'text/event-stream'
-    sse = TeamBoard::SSE.new(response.stream)
+    sse = SSE.new(response.stream, event: "changed")
 
     @board.on_board_change do |change|
-      sse.write({:change => change}, {:event => 'changed'})
+      change = JSON.parse change
+      sse.write({change: change})
     end
 
-    rescue ClientDisconnected
-      byebug
+    rescue IOError, ClientDisconnected
     ensure
-      sse.close
+      response.stream.close
   end
 
   def index
@@ -78,5 +78,10 @@ class BoardsController < ApplicationController
 
   def safe_params
     params.require(:board).permit(:name, :description)
+  end
+
+  private
+  def sse(object, options = {})
+    (options.map{|k,v| "#{k}: #{v}" } << "data: #{JSON.dump object}").join("\n") + "\n\n"
   end
 end

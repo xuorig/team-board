@@ -2,7 +2,9 @@ angular
   .module('teamboard.controllers')
   .controller("BoardController", [ '$scope','$timeout', '$location','$resource','$routeParams','Board','BoardItemNested', 'BoardItem', 'SweetAlert', '_',
     ($scope, $timeout, $location, $resource, $routeParams, Board, BoardItemNested, BoardItem, SweetAlert, _) ->
+      
       init = () ->
+        # UI SORTABLE OPTIONS
         $scope.sortableOptions = {
           'ui-floating': true,
           placeholder: 'note-placeholder',
@@ -16,16 +18,23 @@ angular
             $scope.updateItemPosition(ui.item.sortable.model, destinationListIndex, newPosition)
         }
 
+        # SERVER SENT EVENTS
         $timeout( () ->
           source = new EventSource('/api/boards/' + $routeParams.board_id + '/events')
-          source.addEventListener('changed', (e) ->
-            changeType = JSON.parse(e.data).change
-            if changeType.board_item_id
-              $scope.$broadcast('update-'+data.board_item_id)
-            else
+
+          $scope.$on '$destroy', () ->
+            source.close()
+
+          source.addEventListener 'changed', (e) ->
+            data = JSON.parse(e.data).change
+            if data.board_item
+              $scope.$broadcast('update-'+data.board_item)
+            else if data.hb
+              # DO NOTHING
+            else if data.board
               getBoard()
-          )
         )
+        # TO DO: POLLING FOR BROWSERS THAT DONT SUPPORT EVENTSOURCE
 
         $scope.splitItems = []
         getBoard()
