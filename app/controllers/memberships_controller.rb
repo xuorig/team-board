@@ -19,8 +19,8 @@ class MembershipsController < ApplicationController
       #Create an empty user shell with email so we can activate his account later when he logs in
       @user = User.new
       @user.email = safe_params[:email]
-      if @user.save!
-        UserNotifier.send_signup_email(current_user, @user).deliver_later
+      if @user.save
+        UserNotifier.send_signup_email(current_user, @user).deliver_now
       end
     end
     @membership = Membership.new({:team_id => safe_params[:team_id], :user_id => @user.id})
