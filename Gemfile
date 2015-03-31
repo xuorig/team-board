@@ -25,9 +25,13 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'sass'
 gem 'bower-rails'
 gem 'angular-rails-templates'
+
+gem 'devise'
 gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
+
+
 # gem 'unicorn' # uncomment for Windows
 gem 'tzinfo-data' # install for Windows
 gem 'font-awesome-sass'
@@ -38,7 +42,7 @@ gem 'puma'
 gem 'redis'
 
 # Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
+gem 'bcrypt', '~> 3.1.7'
 
 # Use Unicorn as the app server
 # gem 'unicorn'

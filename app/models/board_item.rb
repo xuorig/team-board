@@ -16,7 +16,12 @@ class BoardItem < ActiveRecord::Base
   after_save :notify_board_change
 
   def notify_board_change
-    self.board.notify_board_change({:board_item => self.id})
+    if (self.position_changed? or self.ui_column_changed?)
+      notif = {:position_changed => true}
+    else
+      notif = {:board_item => self.id}
+    end
+    self.board.notify_board_change(notif)
   end
 
 end

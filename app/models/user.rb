@@ -1,4 +1,8 @@
 class User < ActiveRecord::Base
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :trackable, :validatable,
+         :omniauthable, :omniauth_providers => [:google_oauth2, :facebook]
+
   validates :email, presence: true
   validates :email, uniqueness: true
 
@@ -47,21 +51,16 @@ class User < ActiveRecord::Base
   end
 
   def self.from_omniauth(auth)
-    existingRecord = where(email: auth.info.email)
-    if existingRecord.blank? or existingRecord.first.provider == nil
-      user = existingRecord.first || User.new
+    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       user.provider = auth.provider 
       user.uid      = auth.uid
       user.oauth_token = auth.credentials.token
       user.oauth_expires_at = Time.at(auth.credentials.expires_at)
       user.save
-      user.active   = true
       user.name     = auth.info.name
       user.email    = auth.info.email
+      user.password = Devise.friendly_token[0,20]
       user.save!
-      return user
-    else
-      return existingRecord.first
     end
   end
 end

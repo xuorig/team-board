@@ -38,8 +38,9 @@
           </a>
         </li>
         <li class="sidebar-submenu-item">
-          <a class="signoutlink" href="signout">
+          <%= link_to(destroy_user_session_path, :method => :delete)  do %> 
             <i class="glyphicon glyphicon-off"></i> Log Out
+          <% end %>
           </a>
         </li>
       </ul>
