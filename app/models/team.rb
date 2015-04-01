@@ -11,6 +11,10 @@ class Team < ActiveRecord::Base
   has_many :invitation_teams
   has_many :invitations, :through => :invitation_teams
 
+  def pending_invites
+    self.invitations.where({:accepted => false}).all
+  end
+
   def all_users
     (self.users + self.managers) << self.owner
   end

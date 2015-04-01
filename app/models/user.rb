@@ -50,6 +50,21 @@ class User < ActiveRecord::Base
     BoardItem.where(:board_id => self.boards.map(&:id))
   end
 
+  def accept_invite invite_token
+    @invitation = Invitation.where({:token => invite_token}).first
+    @invitation_teams = InvitationTeam.where({:invitation_id => @invitation.id}).all
+    @invitation_teams.each do |invitation_team|
+      byebug
+      if invitation_team.as_manager
+        invitation_team.team.managers << self
+      else
+        invitation_team.team.users << self
+      end
+    end
+    @invitation.accepted = true
+    @invitation.save!
+  end
+
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       user.provider = auth.provider 

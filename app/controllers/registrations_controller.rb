@@ -6,15 +6,13 @@ class RegistrationsController < Devise::RegistrationsController
 
   def create
     build_resource(sign_up_params)
-    if params[:invite_token]
-      @invitation = Invitation.where({:token => params[:invite_token]}).first
-      @invitation.teams.each do |team|
-        team.users << resource
-      end
-      @invitation.accepted = true
-      @invitation.save!
+    @invite_token = params[:invite_token]
+    if @invite_token
+      verify_token @invite_token
+      resource.accept_invite @invite_token
     end
     resource.save
+
     yield resource if block_given?
     if resource.persisted?
       if resource.active_for_authentication?

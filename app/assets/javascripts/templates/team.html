@@ -63,8 +63,18 @@
             <i class="team-icon glyphicon glyphicon-pawn"></i>
           </div>
           <div class="col-md-10 col-xs-8">
-            <p class="name" ng-if="!user.active">Invited User</p>
             <p class="name">{{user.name}}</p>
+            <p class="description">{{user.email}}</p>
+          </div>
+          </a>
+        </div>
+        <div class="row tb-list-item small first" ng-repeat="user in team.pendingInvites">
+          <a href="">
+          <div class="col-md-2 col-xs-4 icon-col">
+            <i class="team-icon glyphicon glyphicon-time"></i>
+          </div>
+          <div class="col-md-10 col-xs-8">
+            <p class="name">Invited User</p>
             <p class="description">{{user.email}}</p>
           </div>
           </a>

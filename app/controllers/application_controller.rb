@@ -7,6 +7,27 @@ class ApplicationController < ActionController::Base
   before_filter :authenticate_user!
   layout :layout_by_resource
 
+  def invite_user as_manager
+    @invitation = Invitation.where({:email => safe_params[:email]}).first_or_create do |invitation|
+      invitation.email = safe_params[:email]
+      invitation.save!
+    end
+    InvitationTeam.create!(:as_manager => as_manager, :team_id => safe_params[:team_id], 
+                              :invitation_id => @invitation.id)
+    UserNotifier.send_signup_email(current_user, @invitation, safe_params[:email]).deliver_now
+    return @invitation
+  end
+
+  def verify_token invite_token
+    if Invitation.where({:token => invite_token}).blank?
+      raise "Invalid Token"
+    else
+      if Invitation.where({:token => invite_token}).first.accepted
+        raise "Already Claimed Token"
+      end
+    end
+  end
+
   protected
 
   def configure_permitted_parameters

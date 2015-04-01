@@ -10,7 +10,7 @@ class TeamsController < ApplicationController
   # GET /teams/:id.json
   def show
     team = current_user.all_teams.find(params[:id]).to_json(:current_user => current_user,
-                                                          :include => [:owner, :users, :managers, :projects])
+                                                          :include => [:owner, :users, :managers, :projects, :pending_invites])
     render json: team
   end
 

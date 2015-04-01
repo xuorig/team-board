@@ -16,16 +16,14 @@ class MembershipsController < ApplicationController
     if not user.blank?
       @user = user.first
       @membership = Membership.new({:team_id => safe_params[:team_id], :user_id => @user.id})
-      @membership.save!
+    @membership.save!
       render json: @membership, status: 201
     else
-      @invitation = Invitation.where({:email => safe_params[:email]}).first_or_create do |invitation|
-        invitation.email = safe_params[:email]
-      end
-      @invitation.teams << Team.where({:id => safe_params[:team_id]}).first
-      if @invitation.save!
-        UserNotifier.send_signup_email(current_user, @invitation, safe_params[:email]).deliver_now
+      @invitation = invite_user false
+      if @invitation
         render json: @invitation, status: 201
+      else
+        render json: @invitation.errors, status: 400
       end
     end
 

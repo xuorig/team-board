@@ -15,21 +15,18 @@ class ManagershipsController < ApplicationController
     user = User.where(email: safe_params[:email])
     if not user.blank?
       user = user.first
+      @managership = Managership.new({:team_id => safe_params[:team_id], :manager_id => user.id})
+      @managership.save!
+      render json: @managership, status: 201
     else
-      #Create an empty user shell with email so we can activate his account later when he logs in
-      user = User.new
-      user.email = safe_params[:email]
-      user.save!
+      @invitation = invite_user true
+      if @invitation
+        render json: @invitation, status: 201
+      else
+        render json: @invitation.errors, status: 400
+      end
     end
 
-    # if a membership already exists for that user and team, remove it and replace it by a managership
-    existingMembersShip = Membership.where({team_id: safe_params[:team_id], user_id: user.id})
-    if !existingMembersShip.blank?
-      existingMembersShip.first.delete()
-    end
-    @managership = Managership.new({:team_id => safe_params[:team_id], :manager_id => user.id})
-    @managership.save!
-    render json: @managership, status: 201
   end
 
   def destroy
