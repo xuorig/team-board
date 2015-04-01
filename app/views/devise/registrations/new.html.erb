@@ -5,10 +5,13 @@
     <p class="bg-danger">
     <%= devise_error_messages! %>
     </p>
+    <% if @invite_token != nil %>
+      <%= hidden_field_tag :invite_token, @invite_token %>
+    <% end %>
 
     <div class="form-group field">
       <%= f.label :name %><br />
-      <%= f.email_field :name, autofocus: true, class: "form-control" %>
+      <%= f.text_field :name, autofocus: true, class: "form-control" %>
     </div>
 
     <div class="form-group field">
@@ -35,7 +38,7 @@
   <% end %>
 
   <div>
-  <%= link_to "Sign in with Google", "/users/auth/google_oauth2", id: "sign_in", class: "btn tb-btn btn-sign-up" %>
+  <%= link_to "Sign in with Google", "/users/auth/google_oauth2?token=#{@invite_token}", id: "sign_in", class: "btn tb-btn btn-sign-up" %>
   </div>
   <div>
   <%= link_to "Sign in with Facebook", "/users/auth/facebook", id: "sign_in_facebook", class: "btn tb-btn btn-sign-up" %>
