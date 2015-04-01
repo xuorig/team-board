@@ -25,6 +25,7 @@ Rails.application.routes.draw do
     resources :users, defaults: { format: 'json' }
     resources :memberships, defaults: { format: 'json' }
     resources :managerships, defaults: { format: 'json'}
+    resources :files, defaults: { format: 'json'}
   end
 
   #Catch all route for angularjs
