@@ -54,7 +54,6 @@ class User < ActiveRecord::Base
     @invitation = Invitation.where({:token => invite_token}).first
     @invitation_teams = InvitationTeam.where({:invitation_id => @invitation.id}).all
     @invitation_teams.each do |invitation_team|
-      byebug
       if invitation_team.as_manager
         invitation_team.team.managers << self
       else

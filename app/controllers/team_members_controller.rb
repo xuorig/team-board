@@ -1,3 +1,0 @@
-class TeamMembersController < ApplicationController
-
-end

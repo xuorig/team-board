@@ -10,7 +10,6 @@ class CallbacksController < Devise::OmniauthCallbacksController
   def callback_method
     @invite_token = request.env["omniauth.params"]["token"]
     if @invite_token
-      byebug
       verify_token @invite_token
     end
 
