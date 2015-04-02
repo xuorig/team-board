@@ -53,8 +53,8 @@ RSpec.describe User, :type => :model do
     team_manager = create(:team_manager)
     expect(team_manager.managed_teams).not_to be_empty
     expect(team_manager.owned).to be_empty
-    expect(team_manager.teams).not_to be_empty
-    expect(team_manager.teams).to include(*team_manager.managed_teams)
+    expect(team_manager.all_teams).not_to be_empty
+    expect(team_manager.all_teams).to include(*team_manager.managed_teams)
   end
 
   it 'has teams when is team member' do
@@ -78,16 +78,15 @@ RSpec.describe User, :type => :model do
   it 'can be found from omniauth' do
     auth = OmniAuth::AuthHash.new
     auth.info = OmniAuth::AuthHash::InfoHash.new
-    user = create(:user)
-    auth.info["email"] = user.email
+    auth.credentials = {:token => "nimportequoi", :expires_at => Time.now}
+    auth.info["email"] = "omniauthemail@omni.com"
     user_from_auth = User.from_omniauth(auth)
-
-    expect(user).to eq(user_from_auth)
+    expect(user_from_auth).to be_valid
   end
 
   it 'can not have duplicate email' do
-    user1 = create(:user, email:"myemail")
-    user2 = build(:user, email: "myemail")
+    user1 = create(:user, email:"myemail@email.com")
+    user2 = build(:user, email: "myemail@email.com")
 
     expect(user2).not_to be_valid
   end
