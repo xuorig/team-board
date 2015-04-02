@@ -6,6 +6,7 @@ FactoryGirl.define do
     email "user@test.com"
     oauth_token "MyString"
     oauth_expires_at "2015-01-11 16:09:03"
+    password "allo1234"
 
     # Teams
     factory :team_member do

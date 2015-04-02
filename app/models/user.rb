@@ -1,4 +1,8 @@
 class User < ActiveRecord::Base
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :trackable, :validatable,
+         :omniauthable, :omniauth_providers => [:google_oauth2, :facebook]
+
   validates :email, presence: true
   validates :email, uniqueness: true
 
@@ -46,27 +50,53 @@ class User < ActiveRecord::Base
     BoardItem.where(:board_id => self.boards.map(&:id))
   end
 
+  def new_teams
+    Invitation.where(:email => self.email).all.sum("new")
+  end
+
+  def remove_new_invites
+    invite = Invitation.where(:email => self.email)
+    if invite.blank?
+      # Hasnt been invited
+    else
+      @invite = invite.first
+      @invite.new = 0
+      @invite.save!
+    end
+  end
+
+  def accept_invite invite_token
+    @invitation = Invitation.where({:token => invite_token}).first
+    @invitation_teams = InvitationTeam.where({:invitation_id => @invitation.id}).all
+    @invitation_teams.each do |invitation_team|
+      if invitation_team.as_manager
+        byebug
+        invitation_team.team.managers << self
+      else
+        invitation_team.team.users << self
+      end
+    end
+    @invitation.accepted = true
+    @invitation.save!
+  end
+
   def self.from_omniauth(auth)
-    existingRecord = where(email: auth.info.email)
-    if existingRecord.blank? or existingRecord.first.provider == nil
-      user = existingRecord.first || User.new
+    @user = where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       user.provider = auth.provider 
       user.uid      = auth.uid
       user.oauth_token = auth.credentials.token
       user.oauth_expires_at = Time.at(auth.credentials.expires_at)
       user.save
-      user.active   = true
       user.name     = auth.info.name
       user.email    = auth.info.email
+      user.password = Devise.friendly_token[0,20]
       user.save!
       return user
-    else
-      # refresh access token after user relogin.
-      # TODO refresh tokens and Tokens model that refreshes itself
-      user = existingRecord.first
-      user.oauth_token = auth.credentials.token
-      user.save
-      return user
     end
+    
+    @user.oauth_token = auth.credentials.token
+    @user.save!
+    return @user
+
   end
 end

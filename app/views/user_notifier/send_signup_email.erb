@@ -472,7 +472,7 @@
                       <td valign="top" class="bodyContent">
                         <h1>You've been invited to teamboard!</h1>
                         <h3>The best way to manage projects and tasks with your team</h3>
-                        <p>Hello! <strong><%= @inviter.name %></strong> has invited you to join his team on <a href="http://teamboardapp.com" style="color: #2980b9; text-decoration: none;">TeamBoard</a>. All you need to do now is <a href="http://teamboardapp.com" style="color: #2980b9; text-decoration: none;">sign in</a> and start working!</p>
+                        <p>Hello! <strong><%= @inviter.name %></strong> has invited you to join his team on <a href="http://teamboardapp.com" style="color: #2980b9; text-decoration: none;">TeamBoard</a>. All you need to do now is head to <%= link_to nil, @invitation.url %> and start working!</p>
 
                         <p>We hope to see you soon at <a href="http://teamboardapp.com" style="color: #2980b9; text-decoration: none;">TeamBoard</a></p>
 

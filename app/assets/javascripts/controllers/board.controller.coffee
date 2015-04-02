@@ -27,10 +27,13 @@ angular
 
           source.addEventListener 'changed', (e) ->
             data = JSON.parse(e.data).change
+            console.log data
             if data.board_item
               $scope.$broadcast('update-'+data.board_item)
             else if data.hb
               # DO NOTHING
+            else if data.position_changed
+              getBoard()
             else if data.board
               getBoard()
         )

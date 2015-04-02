@@ -39,9 +39,14 @@
           <div class="col-md-2 col-xs-4 icon-col">
             <i class="team-icon glyphicon glyphicon-king"></i>
           </div>
-          <div class="col-md-10 col-xs-8">
+          <div class="col-md-6 col-xs-8">
             <p class="name">{{team.owner.name}} <!-- a ng-if="team.isOwner" class="transfer hidden-link" href="#">Transfer Ownership</a--></p>
             <p class="description">{{team.owner.email}}</p>
+          </div>
+          <div class="col-md-4 col-xs-8 user-links">
+            <a href="" class="promote-link" ng-click="">
+              Transfer Ownership
+            </a>
           </div>
           </a>
         </div>
@@ -50,10 +55,17 @@
           <div class="col-md-2 col-xs-4 icon-col">
             <i class="team-icon glyphicon glyphicon-knight"></i>
           </div>
-          <div class="col-md-10 col-xs-8">
-            <p class="name" ng-if="!manager.active">Invited User</p>
+          <div class="col-md-6 col-xs-8">
             <p class="name">{{manager.name}}</p>
             <p class="description">{{manager.email}}</p>
+          </div>
+          <div class="col-md-4 col-xs-8 user-links">
+            <a href="" class="promote-link" ng-click="demoteManager(manager.id, manager.email)">
+              Demote Manager
+            </a>
+            <a href="" class="remove-link" ng-click="onRemoveManager(manager.id)">
+              Remove Manager
+            </a>
           </div>
           </a>
         </div>
@@ -62,9 +74,27 @@
           <div class="col-md-2 col-xs-4 icon-col">
             <i class="team-icon glyphicon glyphicon-pawn"></i>
           </div>
-          <div class="col-md-10 col-xs-8">
-            <p class="name" ng-if="!user.active">Invited User</p>
+          <div class="col-md-6 col-xs-8">
             <p class="name">{{user.name}}</p>
+            <p class="description">{{user.email}}</p>
+          </div>
+          <div class="col-md-4 col-xs-8 user-links">
+            <a href="" class="promote-link" ng-click="addManagerToTeam(user.email)">
+              Promote to Manager
+            </a>
+            <a href="" class="remove-link" ng-click="onRemoveUser(user.id)">
+              Remove User
+            </a>
+          </div>
+          </a>
+        </div>
+        <div class="row tb-list-item small first" ng-repeat="user in team.pendingInvites">
+          <a href="">
+          <div class="col-md-2 col-xs-4 icon-col">
+            <i class="team-icon glyphicon glyphicon-time"></i>
+          </div>
+          <div class="col-md-10 col-xs-8">
+            <p class="name">Invited User</p>
             <p class="description">{{user.email}}</p>
           </div>
           </a>

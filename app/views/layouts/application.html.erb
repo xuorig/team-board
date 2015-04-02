@@ -38,8 +38,9 @@
           </a>
         </li>
         <li class="sidebar-submenu-item">
-          <a class="signoutlink" href="signout">
+          <%= link_to(destroy_user_session_path, :method => :delete)  do %> 
             <i class="glyphicon glyphicon-off"></i> Log Out
+          <% end %>
           </a>
         </li>
       </ul>
@@ -51,7 +52,7 @@
       <a href="#/projects"><i class="glyphicon glyphicon-th-list"></i> Projects</a>
     </li>
     <li ng-class="{current: isCurrentPath('/teams')}" class="sidebar-item">
-      <a href="#/teams"><i class="glyphicon glyphicon-globe"></i> My Teams</a>
+      <a href="#/teams" ng-click="removeBadge()"><i class="glyphicon glyphicon-globe"></i> My Teams <span ng-if="newTeams" class="badge">{{ newTeams }}</span></a>
     </li>
     <li ng-class="{current: isCurrentPath('/tasks')}" class="sidebar-item">
       <a href="#/tasks"><i class="glyphicon glyphicon-list-alt"></i> My Tasks</a>

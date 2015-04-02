@@ -1,5 +1,11 @@
 class TeamsController < ApplicationController
   before_filter :authenticate_user!
+  before_filter :remove_new_invites, :only => [:index]
+
+  def remove_new_invites
+    current_user.remove_new_invites
+  end
+
   # GET /teams
   # GET /teams.json
   def index
@@ -10,7 +16,7 @@ class TeamsController < ApplicationController
   # GET /teams/:id.json
   def show
     team = current_user.all_teams.find(params[:id]).to_json(:current_user => current_user,
-                                                          :include => [:owner, :users, :managers, :projects])
+                                                          :include => [:owner, :users, :managers, :projects, :pending_invites])
     render json: team
   end
 

@@ -32,6 +32,7 @@ angular
           $scope.item.noteContent = bi.noteContent
           $scope.item.color = bi.color
           $scope.item.dueDate = bi.dueDate
+          getComments()
           return
 
       updateItem = (newVal) ->
@@ -73,9 +74,12 @@ angular
         new CommentNested({
           boardItemId: $scope.item.id,
           content: $scope.newComment
-        }).create()
+        })
+        .create()
+        .then ((note) ->
+          getComments()
+        )
 
-        getComments()
         $scope.newComment = null
 
       $scope.calendar = {}

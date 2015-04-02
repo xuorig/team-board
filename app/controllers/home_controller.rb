@@ -1,9 +1,5 @@
 class HomeController < ApplicationController
+  skip_before_filter :authenticate_user!, :only => [:index]
   def index
-    if current_user.nil?
-      render :layout => "splash"
-    else
-      render :layout => "application"
-    end
   end
 end

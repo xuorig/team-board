@@ -39,10 +39,10 @@ angular
         if $scope.addForms.newUserForm.newUser.$error.email || !$scope.addForms.newUser
           return
         email = $scope.addForms.newUser
-        if $scope.addForms.addAsManager then addManagerToTeam(email) else addUserToTeam(email)
+        if $scope.addForms.addAsManager then $scope.addManagerToTeam(email) else $scope.addUserToTeam(email)
         $scope.addForms.newUser = null
 
-      addUserToTeam = (email) ->
+      $scope.addUserToTeam = (email) ->
         new Membership({
           team_id: $routeParams.team_id,
           email: email
@@ -56,7 +56,7 @@ angular
           return
 
 
-      addManagerToTeam = (email) ->
+      $scope.addManagerToTeam = (email) ->
         new Managership({
           team_id: $routeParams.team_id,
           email: email
@@ -89,6 +89,7 @@ angular
           team_id: $routeParams.team_id,
           manager_id: user_id
         }).then ((managerships) ->
+          console.log managerships
           managerships[0].delete().then ((result) ->
             getTeam()
           ), (error) ->
@@ -97,6 +98,10 @@ angular
         ), (error) ->
           console.log(error)
           return
+
+      $scope.demoteManager = (user_id, user_email) ->
+        $scope.onRemoveManager user_id
+        $scope.addUserToTeam user_email
 
       init()
   ])

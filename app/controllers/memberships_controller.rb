@@ -15,17 +15,18 @@ class MembershipsController < ApplicationController
     user = User.where(email: safe_params[:email])
     if not user.blank?
       @user = user.first
+      @membership = Membership.new({:team_id => safe_params[:team_id], :user_id => @user.id})
+    @membership.save!
+      render json: @membership, status: 201
     else
-      #Create an empty user shell with email so we can activate his account later when he logs in
-      @user = User.new
-      @user.email = safe_params[:email]
-      if @user.save
-        UserNotifier.send_signup_email(current_user, @user).deliver_now
+      @invitation = invite_user false
+      if @invitation
+        render json: @invitation, status: 201
+      else
+        render json: @invitation.errors, status: 400
       end
     end
-    @membership = Membership.new({:team_id => safe_params[:team_id], :user_id => @user.id})
-    @membership.save!
-    render json: @membership, status: 201
+
   end
 
   def destroy
