@@ -1,0 +1,13 @@
+@import "variables";
+
+.modal-body, .modal-header {
+  .tb-blue {
+    color: $teamboardBlue;
+  }
+  h1, h2, h3 {
+    color: $teamboardBlack;
+  }
+  h2 {
+    margin-top: 0px;
+  }
+}

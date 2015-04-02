@@ -54,6 +54,10 @@ class User < ActiveRecord::Base
     Invitation.where(:email => self.email).all.sum("new")
   end
 
+  def first_login
+    return self.sign_in_count == 1
+  end
+
   def remove_new_invites
     invite = Invitation.where(:email => self.email)
     if invite.blank?
@@ -93,7 +97,7 @@ class User < ActiveRecord::Base
       user.save!
       return user
     end
-    
+
     @user.oauth_token = auth.credentials.token
     @user.save!
     return @user

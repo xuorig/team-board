@@ -1,7 +1,7 @@
 angular
   .module('teamboard.controllers')
-  .controller("DashboardController", [ '$scope', 'CurrentUser', 'Board', 'Comment', 'BoardItem'
-    ($scope, CurrentUser, Board, Comment, BoardItem)->
+  .controller('DashboardController', [ '$scope', 'CurrentUser', 'Board', 'Comment', 'BoardItem', '$modal'
+    ($scope, CurrentUser, Board, Comment, BoardItem, $modal)->
       init = () ->
         $scope.currentUser = null
         $scope.boards = []
@@ -10,6 +10,14 @@ angular
 
         CurrentUser.getUser().then (data) ->
           $scope.currentUser = data
+          if data.firstLogin
+            modalInstance = $modal.open(
+              templateUrl: 'firstloginmodal.html'
+              controller: 'ModalInstanceCtrl'
+              size: 'lg'
+              resolve: name: ->
+                $scope.currentUser.name
+            )
 
         Board.query({recently_updated: true, limit: 5}).then ((results) ->
           $scope.boards = results

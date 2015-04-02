@@ -14,7 +14,12 @@ class UsersController < ApplicationController
 
   def show
     if params[:id] == 'me' && current_user
-      @user = current_user.to_json(:methods => :new_teams)
+      if cookies[:first_time_done]
+        @user = current_user.to_json(:methods => [:new_teams])
+      else
+        @user = current_user.to_json(:methods => [:new_teams, :first_login])
+        cookies[:first_time_done] = "yes"
+      end
     end
     raise ActiveRecord::RecordNotFound unless @user
     render json: @user, :status => 200
