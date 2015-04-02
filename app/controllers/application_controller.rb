@@ -12,6 +12,8 @@ class ApplicationController < ActionController::Base
       invitation.email = safe_params[:email]
       invitation.save!
     end
+    @invitation.new += 1
+    @invitation.save!
     InvitationTeam.create!(:as_manager => as_manager, :team_id => safe_params[:team_id], 
                               :invitation_id => @invitation.id)
     UserNotifier.send_signup_email(current_user, @invitation, safe_params[:email]).deliver_now

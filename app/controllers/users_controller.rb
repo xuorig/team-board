@@ -14,7 +14,7 @@ class UsersController < ApplicationController
 
   def show
     if params[:id] == 'me' && current_user
-      @user = current_user
+      @user = current_user.to_json(:methods => :new_teams)
     end
     raise ActiveRecord::RecordNotFound unless @user
     render json: @user, :status => 200

@@ -1,5 +1,11 @@
 class TeamsController < ApplicationController
   before_filter :authenticate_user!
+  before_filter :remove_new_invites, :only => [:index]
+
+  def remove_new_invites
+    current_user.remove_new_invites
+  end
+
   # GET /teams
   # GET /teams.json
   def index

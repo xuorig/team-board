@@ -44,7 +44,7 @@
             <p class="description">{{team.owner.email}}</p>
           </div>
           <div class="col-md-4 col-xs-8 user-links">
-            <a href="" class="promote-link" ng-click="promoteToManager(user.email)">
+            <a href="" class="promote-link" ng-click="">
               Transfer Ownership
             </a>
           </div>
@@ -56,15 +56,14 @@
             <i class="team-icon glyphicon glyphicon-knight"></i>
           </div>
           <div class="col-md-6 col-xs-8">
-            <p class="name" ng-if="!manager.active">Invited User</p>
             <p class="name">{{manager.name}}</p>
             <p class="description">{{manager.email}}</p>
           </div>
           <div class="col-md-4 col-xs-8 user-links">
-            <a href="" class="promote-link" ng-click="demoteManager(user.email)">
+            <a href="" class="promote-link" ng-click="demoteManager(manager.id, manager.email)">
               Demote Manager
             </a>
-            <a href="" class="remove-link" ng-click="onRemoveManager(user.id)">
+            <a href="" class="remove-link" ng-click="onRemoveManager(manager.id)">
               Remove Manager
             </a>
           </div>

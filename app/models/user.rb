@@ -50,11 +50,27 @@ class User < ActiveRecord::Base
     BoardItem.where(:board_id => self.boards.map(&:id))
   end
 
+  def new_teams
+    Invitation.where(:email => self.email).all.sum("new")
+  end
+
+  def remove_new_invites
+    invite = Invitation.where(:email => self.email)
+    if invite.blank?
+      # Hasnt been invited
+    else
+      @invite = invite.first
+      @invite.new = 0
+      @invite.save!
+    end
+  end
+
   def accept_invite invite_token
     @invitation = Invitation.where({:token => invite_token}).first
     @invitation_teams = InvitationTeam.where({:invitation_id => @invitation.id}).all
     @invitation_teams.each do |invitation_team|
       if invitation_team.as_manager
+        byebug
         invitation_team.team.managers << self
       else
         invitation_team.team.users << self

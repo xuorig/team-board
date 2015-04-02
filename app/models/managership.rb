@@ -7,7 +7,7 @@ class Managership < ActiveRecord::Base
 
   after_create :verify_existing_membership
 
-  def verify_existing_memberhip
+  def verify_existing_membership
     # if a membership already exists for that user and team, remove it and replace it by a managership
     existingMembersShip = Membership.where({team_id: self.team_id, user_id: self.manager_id})
     if !existingMembersShip.blank?

@@ -119,7 +119,17 @@
   transition: all 0.2s cubic-bezier(0.7, 0, 0.175, 1) 0s;
 }
 
+.badge {
+  position: absolute;
+  top: 17px;
+  left: 130px;
+}
 
+.sidebar-item {
+  a {
+    position: relative;
+  }
+}
 
 @media(max-width:767px) {
   .ham-menu-active {
