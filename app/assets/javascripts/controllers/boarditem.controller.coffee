@@ -1,10 +1,11 @@
 angular
   .module('teamboard.controllers')
-  .controller("BoardItemController", [ '$scope', '$routeParams', '_', 'BoardItem', 'CommentNested', 'Comment', 'SweetAlert'
-    ($scope, $routeParams, _, BoardItem, CommentNested, Comment, SweetAlert)->
+  .controller("BoardItemController", [ '$scope', '$routeParams', '_', 'Team', 'BoardItem', 'CommentNested', 'Comment', 'SweetAlert', '$modal'
+    ($scope, $routeParams, _, Team, BoardItem, CommentNested, Comment, SweetAlert, $modal)->
       init = () ->
         $scope.$watch 'item', ((newVal, oldVal) ->
           if !_.isEqual(oldVal, newVal)
+            console.log 'update item !!!'
             updateItem(newVal)
         ), true
 
@@ -16,6 +17,23 @@ angular
         $scope.toShowComments = []
         $scope.commentOptions = {}
         getComments()
+
+      $scope.onAssignMembers = () ->
+        Team.get($scope.board.team.id).then ((team) ->
+          modalInstance = $modal.open(
+            templateUrl: 'firstloginmodal.html'
+            controller: 'AssignMembersController'
+            size: 'sm'
+            resolve: info: ->
+              {
+                teamUsers: team.allUsers
+                itemId: $scope.item.id
+              }
+          )
+          return
+        ), (error) ->
+          return
+
 
       getComments = () ->
         CommentNested.query({}, {boardItemId: $scope.item.id}).then ((results) ->

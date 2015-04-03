@@ -40,15 +40,18 @@ class BoardItemsController < ApplicationController
 
   def update
     @item = BoardItem.find(params[:id])
-    if safe_params[:ui_column] != @item.ui_column     
-      @item.remove_from_list
-      @item.save
-      @item.ui_column = safe_params[:ui_column]
-      @item.save
-    end
-    if safe_params[:position] != @item.position
-      @item.insert_at(safe_params[:position])
-      @item.save
+    if safe_params[:ui_column] != @item.ui_column or safe_params[:position] != @item.position
+      if safe_params[:ui_column] != @item.ui_column
+        @item.remove_from_list
+        @item.save
+        @item.ui_column = safe_params[:ui_column]
+        @item.save
+      end
+      if safe_params[:position] != @item.position
+        @item.insert_at(safe_params[:position])
+        @item.save
+      end
+      @item.board.notify_board_change({:position_changed => true})
     end
 
     respond_to do |format|

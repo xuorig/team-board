@@ -16,6 +16,10 @@ class Board < ActiveRecord::Base
     end
   end
 
+  def team
+    self.project.team
+  end
+
   def on_board_change
     ActiveRecord::Base.connection_pool.with_connection do |connection|
       conn = connection.instance_variable_get(:@connection)

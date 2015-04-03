@@ -9,7 +9,9 @@ class AssignmentsController < ApplicationController
 
   # POST /teams
   def create
-    @assignment = Assignment.create!({:assignee_id => safe_params[:user_id], :board_item_id => safe_params[:board_item_id]})
+    safe_params[:user_ids].each do |user_id|
+      @assignment = Assignment.create!({:assignee_id => user_id, :board_item_id => safe_params[:board_item_id]})
+    end
     render json: @assignment, status: 201
   end
 
@@ -25,6 +27,6 @@ class AssignmentsController < ApplicationController
   end
 
   def safe_params
-    params.require(:assignment).permit(:assignee_id, :board_item_id)
+    params.require(:assignment).permit(:board_item_id, :user_ids => [])
   end
 end

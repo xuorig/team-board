@@ -29,7 +29,7 @@ class BoardsController < ApplicationController
 
     @board.on_board_change do |change|
       change = JSON.parse change
-      sse.write({change: change})
+      sse.write({change: change, user: current_user.id})
     end
 
     rescue IOError, ClientDisconnected
@@ -54,7 +54,7 @@ class BoardsController < ApplicationController
     @board = Board.find(params[:id])
     # Check if user is allwowed to see board
     if @board.project.all_users.include?(current_user)
-      @board = @board.to_json(:include => [:items])
+      @board = @board.to_json(:include => [:items, :team])
       render json: @board, :status => 200
     else
       render :nothing => true, :status => 404

@@ -17,11 +17,10 @@ class BoardItem < ActiveRecord::Base
 
   def notify_board_change
     if (self.position_changed? or self.ui_column_changed?)
-      notif = {:position_changed => true}
+      # DONT NOTIFY ON POSITION CHANGES
     else
-      notif = {:board_item => self.id}
+      self.board.notify_board_change({:board_item => self.id})
     end
-    self.board.notify_board_change(notif)
   end
 
 end

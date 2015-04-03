@@ -46,6 +46,9 @@
                     <div ng-click="changeNoteColor('yellow')" class="color-square yellow-square"></div>
                   </div>
                 </span>
+                <a href ng-click="onAssignMembers()">
+                    <i class="glyphicon glyphicon-star"></i> Assign Members
+                </a>
               </div>
               <div class="note-details" ng-if="olderComments.length > 0 && !commentOptions.showComments">
                 <a href="" ng-click="commentOptions.showComments = ! commentOptions.showComments"><i class="glyphicon glyphicon-comment"></i> Show {{ olderComments.length }} more comments</a> 
@@ -87,4 +90,26 @@
       </div>
     </div>
   </div>
+</div>
+
+<div>
+  <script type="text/ng-template" id="firstloginmodal.html">
+    <div class="modal-body">
+        <h3>Available Users</h3>
+          <div class="member" ng-repeat="user in users">
+          <label>
+            <input
+              type="checkbox"
+              name="selectedMembers[]"
+              value="{{user.id}}"
+              ng-checked="selection.indexOf(user.id) > -1"
+              ng-click="toggleSelection(user.id)"
+            > {{ user.name }}
+          </label>
+          </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn tb-btn" ng-click="assign()">Assign {{ selection.length }} Members</button>
+    </div>
+  </script>
 </div>
