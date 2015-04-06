@@ -1,0 +1,31 @@
+<div class="row new-team">
+  <div class="col-md-12 col-sm-12">
+    <div class="section-header">
+      <h1>New Board</h1>
+      <h2>Add a new board to your project and get creative!</h2>
+    </div>
+
+    <div class="row">
+      <div class="col-md-4">
+        <form name="newBoardForm" ng-submit="createBoard()">
+          <!-- NAME -->
+          <div class="form-group">
+            <label>Board Name</label>
+            <input type="text" name="name" class="form-control" placeholder="My precious project" ng-model="formData.name" required>
+            <span class="help-block"></span>
+          </div>
+
+          <div class="form-group">
+            <label>Description</label>
+            <input type="text" name="description" class="form-control" placeholder="One does not simply create a project." ng-model="formData.description" required>
+            <span class="help-block"></span>
+          </div>
+
+          <button ng-disabled="newBoardForm.$invalid" type="submit" class="btn tb-btn create-team-btn">
+            Create Board!
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

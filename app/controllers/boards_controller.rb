@@ -6,6 +6,7 @@ class BoardsController < ApplicationController
   before_filter :authenticate_user!
   before_filter :get_project
   before_filter :set_num
+  before_filter :check_privileges!, only: [:create]
 
   def set_num
     @limit = params[:limit]
@@ -14,11 +15,19 @@ class BoardsController < ApplicationController
   def get_project
     if params[:project_id]
       project = Project.find(params[:project_id])
-      if project.users.include?(current_user)
+      if project.all_users.include?(current_user)
         @project = project
       else
         @project = nil
       end
+    end
+  end
+
+  def check_privileges!
+    if @project.team.owner == current_user or @project.team.managers.include?(current_user)
+      return
+    else
+      raise "Must be manager or owner to create a board"
     end
   end
 
@@ -54,7 +63,7 @@ class BoardsController < ApplicationController
     @board = Board.find(params[:id])
     # Check if user is allwowed to see board
     if @board.project.all_users.include?(current_user)
-      @board = @board.to_json(:include => [:items, :team])
+      @board = @board.to_json(:include => {:items => {:include => :assignees}, :team => {}})
       render json: @board, :status => 200
     else
       render :nothing => true, :status => 404
@@ -62,7 +71,11 @@ class BoardsController < ApplicationController
   end
 
   def create
-    @new_board = Board.new(:name => safe_params[:name])
+    @new_board = Board.new(:name => safe_params[:name], 
+      :description => safe_params[:description], :project_id => safe_params[:project_id])
+    @new_board.owner = current_user
+    @new_board.save!
+    render json: @board, :status => 201
   end
 
   def destroy
@@ -77,7 +90,7 @@ class BoardsController < ApplicationController
   end
 
   def safe_params
-    params.require(:board).permit(:name, :description)
+    params.require(:board).permit(:name, :description, :project_id)
   end
 
   private

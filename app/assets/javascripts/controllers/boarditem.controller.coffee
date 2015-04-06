@@ -28,6 +28,7 @@ angular
               {
                 teamUsers: team.allUsers
                 itemId: $scope.item.id
+                assignees: $scope.item.assignees
               }
           )
           return

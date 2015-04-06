@@ -23,6 +23,10 @@ angular.module('teamboard').config([ '$routeProvider', '$locationProvider',
         templateUrl: "board.html",
         controller: "BoardController" 
       })
+      .when('/projects/:project_id/boards/new', {
+        templateUrl: "newboard.html",
+        controller: "NewBoardController" 
+      })
       # PROJECTS
       .when('/projects', {
         templateUrl: "projects.html",

@@ -47,7 +47,9 @@
                   </div>
                 </span>
                 <a href ng-click="onAssignMembers()">
-                    <i class="glyphicon glyphicon-star"></i> Assign Members
+                    <i class="glyphicon glyphicon-user"></i> 
+                    <span ng-if="item.assignees.length > 0">{{ item.assignees.length }} users assigned</span>
+                    <span ng-if="item.assignees.length == 0">Assign Members</span>
                 </a>
               </div>
               <div class="note-details" ng-if="olderComments.length > 0 && !commentOptions.showComments">
@@ -95,6 +97,14 @@
 <div>
   <script type="text/ng-template" id="firstloginmodal.html">
     <div class="modal-body">
+        <h3>Assigned Users</h3>
+          <div class="member" ng-repeat="user in assignees">
+          <label>
+            <input
+              type="checkbox"
+            > {{ user.name }}
+          </label>
+          </div>          
         <h3>Available Users</h3>
           <div class="member" ng-repeat="user in users">
           <label>

@@ -1,9 +1,12 @@
 angular
   .module('teamboard.controllers')
-  .controller("AssignMembersController", ['$scope', '$modalInstance', 'Assignment', 'info'
-    ($scope, $modalInstance, Assignment, info) ->
-      $scope.users = info.teamUsers
-
+  .controller("AssignMembersController", ['$scope', '$modalInstance', 'Assignment', '_', 'info'
+    ($scope, $modalInstance, Assignment, _, info) ->
+      $scope.assignees = info.assignees
+      $scope.users = _.filter(info.teamUsers, (user) ->
+        !_.findWhere($scope.assignees, id: user.id)
+      )
+      console.log $scope.users
       # selected members
       $scope.selection = []
 
