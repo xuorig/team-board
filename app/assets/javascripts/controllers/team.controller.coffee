@@ -1,17 +1,20 @@
 angular
   .module('teamboard.controllers')
-  .controller("TeamController", [ '$scope','$location','$resource','$routeParams','CurrentUser','Membership','Managership','Team','SweetAlert',
-    ($scope, $location, $resource, $routeParams, CurrentUser, Membership, Managership, Team, SweetAlert)->
+  .controller("TeamController", [ '$scope','$location','$resource','$routeParams',
+    'CurrentUser','Membership','Managership','Team','SweetAlert', '_',
+    ($scope, $location, $resource, $routeParams, CurrentUser, Membership, Managership, Team, SweetAlert, _)->
 
       init = () ->
         $scope.addForms = {}
-        getTeam()
         CurrentUser.getUser().then (data) ->
           $scope.currentUser = data
+          getTeam()
 
       getTeam = () ->
         Team.get($routeParams.team_id).then ((results) ->
           $scope.team = results
+          $scope.currentIsManagerOrOwner = (_.findWhere($scope.team.managers, {id: $scope.currentUser.id}) or 
+                                            $scope.team.owner.id == $scope.currentUser.id)
           return
         ), (error) ->
           return

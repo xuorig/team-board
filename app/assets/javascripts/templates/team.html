@@ -43,7 +43,7 @@
             <p class="name">{{team.owner.name}} <!-- a ng-if="team.isOwner" class="transfer hidden-link" href="#">Transfer Ownership</a--></p>
             <p class="description">{{team.owner.email}}</p>
           </div>
-          <div class="col-md-4 col-xs-8 user-links">
+          <div class="col-md-4 col-xs-8 user-links" ng-if="currentIsManagerOrOwner">
             <a href="" class="promote-link" ng-click="">
               Transfer Ownership
             </a>
@@ -59,7 +59,7 @@
             <p class="name">{{manager.name}}</p>
             <p class="description">{{manager.email}}</p>
           </div>
-          <div class="col-md-4 col-xs-8 user-links">
+          <div class="col-md-4 col-xs-8 user-links" ng-if="currentIsManagerOrOwner">
             <a href="" class="promote-link" ng-click="demoteManager(manager.id, manager.email)">
               Demote Manager
             </a>
@@ -78,7 +78,7 @@
             <p class="name">{{user.name}}</p>
             <p class="description">{{user.email}}</p>
           </div>
-          <div class="col-md-4 col-xs-8 user-links">
+          <div class="col-md-4 col-xs-8 user-links" ng-if="currentIsManagerOrOwner">
             <a href="" class="promote-link" ng-click="addManagerToTeam(user.email)">
               Promote to Manager
             </a>
@@ -105,7 +105,7 @@
             <i ng-if="!addForms.addAsManager" class="team-icon glyphicon glyphicon-pawn"></i>
             <i ng-if="addForms.addAsManager" class="team-icon glyphicon glyphicon-knight"></i>
           </div>
-          <div class="col-md-10 col-xs-8">
+          <div class="col-md-10 col-xs-8" ng-if="currentIsManagerOrOwner">
             <form class="form" name="addForms.newUserForm" ng-submit="onAddUser()">
               <div class="new-member-container form-group" ng-class="{'has-error': addForms.newUserForm.newUser.$error.email}">
                 <input type="email" name="newUser" class="form-control new-member" 
