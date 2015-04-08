@@ -27,7 +27,7 @@ class User < ActiveRecord::Base
 
   # Combine self projects + team projects
   def combined_projects
-    self.projects + self.managed_teams.map(&:projects).flatten(1) + self.teams.map(&:projects).flatten(1) + self.owned_projects
+    self.projects + self.owned_projects + self.all_teams.map(&:projects)
   end
 
   def all_projects
