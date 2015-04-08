@@ -74,7 +74,6 @@ class User < ActiveRecord::Base
     @invitation_teams = InvitationTeam.where({:invitation_id => @invitation.id}).all
     @invitation_teams.each do |invitation_team|
       if invitation_team.as_manager
-        byebug
         invitation_team.team.managers << self
       else
         invitation_team.team.users << self
