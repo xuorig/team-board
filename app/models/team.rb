@@ -20,7 +20,7 @@ class Team < ActiveRecord::Base
   end
 
   def owner_managers
-    self.managers << self.owner
+    self.managers + [self.owner]
   end
 
   def as_json(options = { })

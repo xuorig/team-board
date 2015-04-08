@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   def index
     if params[:email]
       @user = User.where(email: params[:email])
-      if @user.blank? or not @user.first.active
+      if @user.blank?
         render :nothing => true, :status => 404
       else
         render :nothing => true, :status => 200
