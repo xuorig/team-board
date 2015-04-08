@@ -73,6 +73,7 @@ class BoardItemsController < ApplicationController
 
   def destroy
     @item = BoardItem.find(params[:id])
+    @board = @item.board
     respond_to do |format|
       if @item.destroy
         @board.notify_board_change({:data => {:new_item => true}, :user_id => current_user.id})
