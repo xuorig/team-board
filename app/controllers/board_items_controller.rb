@@ -75,7 +75,7 @@ class BoardItemsController < ApplicationController
     @item = BoardItem.find(params[:id])
     respond_to do |format|
       if @item.destroy
-        @board.notify_board_change({:data => {:new_item => true}, :userId => current_user.id})
+        @board.notify_board_change({:data => {:new_item => true}, :user_id => current_user.id})
         format.json { head :no_content, status: :ok }
       else
         format.json { render json: @item.errors, status: :unprocessable_entity }
