@@ -71,6 +71,7 @@ class BoardsController < ApplicationController
   end
 
   def create
+    raise TeamBoard::InvalidAccess unless @project.team.owner_managers.include?(current_user)
     @new_board = Board.new(:name => safe_params[:name], 
       :description => safe_params[:description], :project_id => safe_params[:project_id])
     @new_board.owner = current_user
@@ -79,14 +80,10 @@ class BoardsController < ApplicationController
   end
 
   def destroy
+    raise TeamBoard::InvalidAccess unless @project.team.owner_managers.include?(current_user)
     @board = @project.boards.find(params[:id])
-    respond_to do |format|
-      if @board.destroy
-        format.json { head :no_content, status: :ok }
-      else
-        format.json { render json: @team.errors, status: :unprocessable_entity }
-      end
-    end
+    @board.destroy
+    head :no_content, status: :ok
   end
 
   def safe_params

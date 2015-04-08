@@ -78,7 +78,8 @@ angular
           noteContent: "No Content",
           position: nextPos,
           uiColumn: 0,
-          boardId: $routeParams.board_id
+          boardId: $routeParams.board_id,
+          assignees: []
         }
 
         new BoardItemNested(newItem).create().then ((createdItem) ->

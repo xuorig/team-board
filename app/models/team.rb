@@ -19,6 +19,10 @@ class Team < ActiveRecord::Base
     (self.users + self.managers) << self.owner
   end
 
+  def owner_managers
+    self.managers << self.owner
+  end
+
   def as_json(options = { })
       h = super(options)
       h[:isOwner] = options[:current_user] == self.owner

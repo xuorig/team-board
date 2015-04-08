@@ -41,12 +41,12 @@ class TeamsController < ApplicationController
 
   def destroy
     @team = current_user.all_teams.find(params[:id])
-    respond_to do |format|
-      if @team.destroy
-        format.json { head :no_content, status: :ok }
-      else
-        format.json { render json: @team.errors, status: :unprocessable_entity }
-      end
+    raise TeamBoard::InvalidAccess unless @team.owner == current_user
+
+    if @team.destroy
+      head :no_content, status => :ok
+    else
+      render json: @team.errors, :status => :unprocessable_entity
     end
   end
 

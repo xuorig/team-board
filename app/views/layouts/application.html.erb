@@ -6,6 +6,7 @@
   <base href="/" />
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= favicon_link_tag 'favicon.ico' %>
   <%= csrf_meta_tags %>
 </head>
 <body ng-app="teamboard" style="background-color: #f2f2f2 !important;" ng-strict-di>
@@ -25,18 +26,6 @@
         <%= current_user.name %>
       </a>
       <ul class="sidebar-submenu">
-        <li class="sidebar-submenu-item">
-          <a href="#/profile">
-            <i class="glyphicon glyphicon-user"></i>
-            Profile
-          </a>
-        </li>
-        <li class="sidebar-submenu-item">
-          <a href="#/settings">
-            <i class="glyphicon glyphicon-cog"></i>
-            Settings
-          </a>
-        </li>
         <li class="sidebar-submenu-item">
           <%= link_to(destroy_user_session_path, :method => :delete)  do %> 
             <i class="glyphicon glyphicon-off"></i> Log Out
