@@ -11,20 +11,4 @@ class BoardItem < ActiveRecord::Base
 
   scope :due_soon, -> { where("board_items.due_date IS NOT NULL").where(:due_date => DateTime.now..1.week.from_now) }
 
-  after_create :notify_board_change_create_destroy
-  after_destroy :notify_board_change_destroy
-  after_save :notify_board_change
-
-  def notify_board_change
-    if (self.position_changed? or self.ui_column_changed?)
-      # DONT NOTIFY ON POSITION CHANGES
-    else
-      self.board.notify_board_change({:board_item => self.id})
-    end
-  end
-
-  def notify_board_change_create_destroy
-    self.board.notify_board_change({:new_item => true})
-  end
-
 end

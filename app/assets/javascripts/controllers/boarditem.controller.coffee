@@ -5,7 +5,6 @@ angular
       init = () ->
         $scope.$watch 'item', ((newVal, oldVal) ->
           if !_.isEqual(oldVal, newVal)
-            console.log 'update item !!!'
             updateItem(newVal)
         ), true
 

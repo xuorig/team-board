@@ -51,11 +51,12 @@ class BoardItemsController < ApplicationController
         @item.insert_at(safe_params[:position])
         @item.save
       end
-      @item.board.notify_board_change({:position_changed => true})
+      @item.board.notify_board_change({:data => {:position_changed => true}, :user_id => current_user.id})
     end
 
     respond_to do |format|
       if @item.update!(safe_params.except([:ui_column, :position]))
+        @item.board.notify_board_change({:data => {:board_item => @item.id}, :user_id => current_user.id})
         format.json { render json: @item, status: :ok }
       else
         format.json { render json: @item.errors, status: :unprocessable_entity }
@@ -66,6 +67,7 @@ class BoardItemsController < ApplicationController
   def create
     @item = BoardItem.new(safe_params)
     @board.items << @item
+    @board.notify_board_change(:data => {:new_item => true}, :user_id => current_user.id)
     render json: @item, :status => 201
   end
 
@@ -73,6 +75,7 @@ class BoardItemsController < ApplicationController
     @item = BoardItem.find(params[:id])
     respond_to do |format|
       if @item.destroy
+        @board.notify_board_change(:new_item => true, :userId => current_user.id)
         format.json { head :no_content, status: :ok }
       else
         format.json { render json: @item.errors, status: :unprocessable_entity }

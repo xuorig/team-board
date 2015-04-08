@@ -38,7 +38,7 @@ class BoardsController < ApplicationController
 
     @board.on_board_change do |change|
       change = JSON.parse change
-      sse.write({change: change, user: current_user.id})
+      sse.write({change: change["data"], user: change["user_id"]})
     end
 
     rescue IOError, ClientDisconnected

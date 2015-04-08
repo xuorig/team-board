@@ -32,13 +32,11 @@ angular
           source.addEventListener 'changed', (e) ->
             data = JSON.parse(e.data).change
             user = JSON.parse(e.data).user
-            if data.board_item
-              $scope.$broadcast('update-'+data.board_item)
-            else if data.hb or user == $scope.currentUser.id
-              console.log('do nothin')
+            if data.hb or user == $scope.currentUser.id
               # DO NOTHING
+            else if data.board_item
+              $scope.$broadcast('update-'+data.board_item)
             else if data.position_changed or data.new_item
-              console.log('new item')
               getBoard()
         )
         # TO DO: POLLING FOR BROWSERS THAT DONT SUPPORT EVENTSOURCE

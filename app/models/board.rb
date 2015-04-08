@@ -6,10 +6,7 @@ class Board < ActiveRecord::Base
   belongs_to :owner, :class_name => "User"
   has_many :items, :class_name => "BoardItem"
 
-  after_save :notify_board_change
-  after_create :notify_board_change
-
-  def notify_board_change(change = {:board => true})
+  def notify_board_change(change)
     ActiveRecord::Base.connection_pool.with_connection do |connection|
       conn = connection.instance_variable_get(:@connection)
       conn.async_exec "NOTIFY #{channel}, '#{change.to_json}'"
