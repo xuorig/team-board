@@ -33,7 +33,7 @@ angular
               # DO NOTHING
             else if data.position_changed
               getBoard()
-            else if data.board
+            else if data.newItem
               getBoard()
         )
         # TO DO: POLLING FOR BROWSERS THAT DONT SUPPORT EVENTSOURCE
