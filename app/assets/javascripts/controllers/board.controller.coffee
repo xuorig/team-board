@@ -1,8 +1,9 @@
 angular
   .module('teamboard.controllers')
-  .controller("BoardController", [ '$scope','$timeout', '$location','$resource','$routeParams','Board','BoardItemNested', 'BoardItem', 'SweetAlert', '_',
-    ($scope, $timeout, $location, $resource, $routeParams, Board, BoardItemNested, BoardItem, SweetAlert, _) ->
-      
+  .controller("BoardController", [ '$scope','$timeout', '$location','$resource','$routeParams','Board',
+    'BoardItemNested', 'BoardItem', 'SweetAlert', '_', 'CurrentUser'
+    ($scope, $timeout, $location, $resource, $routeParams, Board, BoardItemNested, BoardItem, SweetAlert, _, CurrentUser) ->
+      $scope.currentUser = null
       init = () ->
         # UI SORTABLE OPTIONS
         $scope.sortableOptions = {
@@ -18,6 +19,9 @@ angular
             $scope.updateItemPosition(ui.item.sortable.model, destinationListIndex, newPosition)
         }
 
+        CurrentUser.getUser().then (data) ->
+          $scope.currentUser = data
+
         # SERVER SENT EVENTS
         $timeout( () ->
           source = new EventSource('/api/boards/' + $routeParams.board_id + '/events')
@@ -27,13 +31,14 @@ angular
 
           source.addEventListener 'changed', (e) ->
             data = JSON.parse(e.data).change
+            user = JSON.parse(e.data).user
             if data.board_item
               $scope.$broadcast('update-'+data.board_item)
-            else if data.hb
+            else if data.hb or user == $scope.currentUser.id
+              console.log('do nothin')
               # DO NOTHING
-            else if data.position_changed
-              getBoard()
-            else if data.newItem
+            else if data.position_changed or data.new_item
+              console.log('new item')
               getBoard()
         )
         # TO DO: POLLING FOR BROWSERS THAT DONT SUPPORT EVENTSOURCE
@@ -61,7 +66,6 @@ angular
 
       $scope.updateItemPosition = (item, column, pos) ->
         BoardItem.get(item.id).then (boardItem) ->
-          console.log 'update pos'
           boardItem.position = pos
           boardItem.uiColumn = column
           boardItem.update()
