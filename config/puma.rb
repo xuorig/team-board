@@ -26,7 +26,7 @@ end
 def create_heartbeat
   heartbeat = Thread.new do
     begin
-      hb = {"hb": true}
+      hb = {:data => {:hb => true}, :user_id => nil}
       ActiveRecord::Base.connection_pool.with_connection do |connection|
         conn = connection.instance_variable_get(:@connection)
         loop do
