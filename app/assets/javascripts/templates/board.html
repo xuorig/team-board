@@ -26,8 +26,8 @@
           <li ng-controller="BoardItemController" ng-model="item" ng-repeat="item in col">
             <div ng-class="item.color" class="note-item">
               <div class="delete-note" ng-click="deleteNote()">x</div>
-              <h3 editable-text="item.title" class="note-title">{{ item.title }}</h3>
-              <p editable-textarea="item.noteContent" class="note-content">{{ item.noteContent }}</p>
+              <h3 editable-text="item.title" class="note-title" ng-bind-html="item.title | linky"></h3>
+              <p editable-textarea="item.noteContent" class="note-content" ng-bind-html="item.noteContent | linky"></p>
               <div class="note-details">
                 <a href="" datepicker-popup="dd-MMMM-yyyy" ng-model="item.dueDate" is-open="calendar.opened" min-date="calendar.minDate" max-date="'2015-06-22'" datepicker-options="calendar.dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" ng-click="calendar.open($event)">
                   <i class="glyphicon glyphicon-calendar"></i>

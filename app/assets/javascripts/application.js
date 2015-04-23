@@ -29,4 +29,5 @@
 //= require fullcalendar/gcal
 //= require angular-ui-calendar/src/calendar
 //= require humane-js/humane
+//= require angular-sanitize/angular-sanitize
 //= require_tree .

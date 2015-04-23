@@ -11,6 +11,7 @@ angular.module('teamboard',[
   'ui.sortable',
   'ui.calendar',
   'xeditable',
+  'ngSanitize',
 ])
 
 angular.module('teamboard').config ["$httpProvider", ($httpProvider) ->

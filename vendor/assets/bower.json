@@ -14,6 +14,7 @@
     "angular-ui-sortable": "latest",
     "angular-xeditable": "latest",
     "angular-ui-calendar": "latest",
-    "humane-js": "latest"
+    "humane-js": "latest",
+    "angular-sanitize": "latest"
   }
 }
