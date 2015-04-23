@@ -27,6 +27,18 @@
       </a>
       <ul class="sidebar-submenu">
         <li class="sidebar-submenu-item">
+          <a href="#/profile">
+            <i class="glyphicon glyphicon-user"></i>
+            Profile
+          </a>
+        </li>
+        <li class="sidebar-submenu-item">
+          <a href="#/settings">
+            <i class="glyphicon glyphicon-cog"></i>
+            Settings
+          </a>
+        </li>
+        <li class="sidebar-submenu-item">
           <%= link_to(destroy_user_session_path, :method => :delete)  do %> 
             <i class="glyphicon glyphicon-off"></i> Log Out
           <% end %>

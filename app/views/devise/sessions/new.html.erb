@@ -1,6 +1,6 @@
 <h2 class="tagline">TeamBoard is a new way to organise tasks, ideas and reminders and share them with your team.</h2>
 <div class="col-md-4 col-md-offset-4 col-xs-12" style="text-align: left;">
-  <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <%= form_for(resource, as: resource_name, url: user_session_path) do |f| %>
     <p class="bg-danger">
     <%= devise_error_messages! %>
     </p>
@@ -22,7 +22,6 @@
 
     <div class="form-group">
       <%= link_to "Sign in with Google", "/users/auth/google_oauth2", id: "sign_in", class: "btn tb-btn btn-sign-up", style: "margin-right: 30px;" %>
-      <%= link_to "Sign in with Facebook", "/users/auth/facebook", id: "sign_in_facebook", class: "btn tb-btn btn-sign-up" %>
     </div>
 
   <% end %>
