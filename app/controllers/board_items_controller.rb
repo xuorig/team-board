@@ -2,14 +2,25 @@ class BoardItemsController < ApplicationController
   before_filter :authenticate_user!
   before_filter :get_board
   before_filter :get_limit
+  before_filter :check_privileges!, only: [:create, :update, :destroy]
+
+  def check_privileges!
+    get_board
+    if @board.project.team.nil? or @board.project.team.owner == current_user or @board.project.team.managers.include?(current_user)
+      return
+    else
+      raise "Must be manager or owner to modify board items"
+    end
+  end
 
   def get_limit
     @limit = params[:limit] or nil
   end
 
   def get_board
-    if params[:board_id]
-      board = Board.find(params[:board_id])
+    if params[:board_id] or params[:board_item][:board_id]
+      b_id = params[:board_id] || params[:board_item][:board_id]
+      board = Board.find(b_id)
       if board.project.all_users.include?(current_user)
         @board = board
       else

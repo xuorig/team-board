@@ -87,7 +87,7 @@ class BoardsController < ApplicationController
   end
 
   def safe_params
-    params.require(:board).permit(:name, :description, :project_id)
+    params.require(:board).permit(:name, :description, :readonly, :project_id)
   end
 
   private
