@@ -63,6 +63,8 @@ angular
           return
 
       $scope.deleteNote = () ->
+        if $scope.isReadOnly
+          return
         SweetAlert.swal {
           title: 'Careful!'
           text: 'Are you sure you want to delete this note?'

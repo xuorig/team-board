@@ -18,8 +18,17 @@
   }
 }
 
+.edit-content-link {
+  display: inline-block;
+  color: $teamboardBlack;
+  font-size: 14px;
+}
+
 .context-menu.open {
   display: block;
+}
+.note-content {
+  display: inline-block;
 }
 
 /* COLOR PICKER */

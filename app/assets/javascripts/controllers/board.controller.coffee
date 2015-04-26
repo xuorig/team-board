@@ -12,34 +12,18 @@ angular
           connectWith: ".item-column",
           cursor: "pointer",
           stop: (e, ui) ->
+            if $scope.isReadOnly
+              return
             destinationListIndex = $scope.splitItems.indexOf(ui.item.sortable.droptargetModel)
             destinationIndex = $scope.splitItems[destinationListIndex].indexOf(ui.item.sortable.model)
             numOfitems = $scope.splitItems[destinationListIndex].length
             newPosition = numOfitems - destinationIndex
             $scope.updateItemPosition(ui.item.sortable.model, destinationListIndex, newPosition)
+          update: (e, ui) ->
+            if $scope.isReadOnly
+              ui.item.sortable.cancel()
+          cancel: ".note-content"
         }
-
-        CurrentUser.getUser().then (data) ->
-          $scope.currentUser = data
-
-        # SERVER SENT EVENTS
-        $timeout( () ->
-          source = new EventSource('/api/boards/' + $routeParams.board_id + '/events')
-
-          $scope.$on '$destroy', () ->
-            source.close()
-
-          source.addEventListener 'changed', (e) ->
-            data = JSON.parse(e.data).change
-            user = JSON.parse(e.data).user
-            if data.hb or user == $scope.currentUser.id
-              # DO NOTHING
-            else if data.board_item
-              $scope.$broadcast('update-'+data.board_item)
-            else if data.position_changed or data.new_item
-              getBoard()
-        )
-        # TO DO: POLLING FOR BROWSERS THAT DONT SUPPORT EVENTSOURCE
 
         $scope.splitItems = []
         getBoard()
@@ -58,9 +42,37 @@ angular
         Board.get($routeParams.board_id).then ((results) ->
           $scope.board = results
           $scope.splitItems = splitItemsInColumns($scope.board.items, 3)
-          return
+          CurrentUser.getUser().then (data) ->
+            $scope.currentUser = data
+            $scope.isReadOnly = isReadOnly(data, results)
+            if not $scope.isReadOnly
+              setUpSSE()
+            return
         ), (error) ->
           return
+
+      isReadOnly = (user, board) ->
+        board.readonly && board.team.owner.id != user.id
+
+      setUpSSE = () ->
+        # SERVER SENT EVENTS
+        $timeout( () ->
+          source = new EventSource('/api/boards/' + $routeParams.board_id + '/events')
+
+          $scope.$on '$destroy', () ->
+            source.close()
+
+          source.addEventListener 'changed', (e) ->
+            data = JSON.parse(e.data).change
+            user = JSON.parse(e.data).user
+            if data.hb or user == $scope.currentUser.id
+              # DO NOTHING
+            else if data.board_item
+              $scope.$broadcast('update-'+data.board_item)
+            else if data.position_changed or data.new_item
+              getBoard()
+        )
+        # TO DO: POLLING FOR BROWSERS THAT DONT SUPPORT EVENTSOURCE
 
       $scope.updateItemPosition = (item, column, pos) ->
         BoardItem.get(item.id).then (boardItem) ->

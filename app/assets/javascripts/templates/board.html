@@ -19,16 +19,22 @@
     </div>
 
     <!-- Column 1 -->
-    <div class="row" ng-right-click="onRightClick($event)">
+    <div class="row">
 
       <div class="col-md-4 items" ng-repeat="col in splitItems">
         <ul ui-sortable="sortableOptions" ng-model="col" class="item-column">
           <li ng-controller="BoardItemController" ng-model="item" ng-repeat="item in col">
             <div ng-class="item.color" class="note-item">
               <div class="delete-note" ng-click="deleteNote()">x</div>
-              <h3 editable-text="item.title" class="note-title" ng-bind-html="item.title | linky"></h3>
-              <p editable-textarea="item.noteContent" class="note-content" ng-bind-html="item.noteContent | linky"></p>
-              <div class="note-details">
+              <h3 ng-if="!isReadOnly" editable-text="item.title" class="note-title" ng-bind-html="item.title | linky"></h3>
+              <p ng-if="!isReadOnly" editable-textarea="item.noteContent" class="note-content" e-form="textBtnForm" ng-bind-html="item.noteContent | linky"></p>
+              <h3 ng-if="isReadOnly" class="note-title" ng-bind-html="item.title | linky"></h3>
+              <p ng-if="isReadOnly"  class="note-content" ng-bind-html="item.noteContent | linky"></p>
+              <a ng-if="!isReadOnly" href="" class="edit-content-link" ng-click="textBtnForm.$show()" ng-hide="textBtnForm.$visible">
+                <i class="glyphicon glyphicon-edit"></i> Edit Content
+              </a>
+
+              <div ng-if="!isReadOnly" class="note-details">
                 <a href="" datepicker-popup="dd-MMMM-yyyy" ng-model="item.dueDate" is-open="calendar.opened" min-date="calendar.minDate" max-date="'2015-06-22'" datepicker-options="calendar.dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" ng-click="calendar.open($event)">
                   <i class="glyphicon glyphicon-calendar"></i>
                   <span ng-if="item.dueDate"><strong> Due for: </strong>{{item.dueDate | date:"EEEE, MMM dd"}}</span>
@@ -62,7 +68,7 @@
               <div ng-class="{ 'hidden': ! commentOptions.showComments }" class="note-comments">
                 <div class="row" ng-repeat="comment in olderComments">
                   <div class="col-md-12 comment">
-                    <p class="comment-content"><strong>{{ comment.user.name }}</strong> {{ comment.content }}</p>
+                    <p class="comment-content"><strong>{{ comment.user.name }}</strong> <span ng-bind-html="comment.content | linky"></span></p>
                     <p class="comment-date">{{ comment.createdAt | date:"EEEE, MMM dd 'at' H:mm" }}</p>
                   </div>
                 </div>
@@ -70,16 +76,16 @@
               <div class="note-comments">
                 <div class="row" ng-repeat="comment in toShowComments">
                   <div class="col-md-12 comment">
-                    <p class="comment-content"><strong>{{ comment.user.name }}</strong> {{ comment.content }}</p>
+                    <p class="comment-content"><strong>{{ comment.user.name }}</strong> <span ng-bind-html="comment.content | linky"></span></p>
                     <p class="comment-date">{{ comment.createdAt | date:"EEEE, MMM dd 'at' H:mm" }}</p>
                   </div>
                 </div>
               </div>
               <div class="row">
-                <div class="col-md-1">
+                <div ng-if="!isReadOnly" class="col-md-1">
                   <i class="user-icon glyphicon glyphicon-user"></i>
                 </div>
-                <div class="col-md-10">
+                <div ng-if="!isReadOnly" class="col-md-10">
                   <form ng-submit="postComment()">
                     <input type="text" name="newComment" class="form-control new-member" 
                     placeholder="Type your comment here..." ng-model="newComment">

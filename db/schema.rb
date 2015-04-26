@@ -66,14 +66,6 @@ ActiveRecord::Schema.define(version: 20150423172038) do
     t.integer  "board_item_id"
   end
 
-  create_table "google_files", force: :cascade do |t|
-    t.integer  "owner_id",   null: false
-    t.integer  "team_id"
-    t.integer  "parent_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "invitation_teams", force: :cascade do |t|
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false

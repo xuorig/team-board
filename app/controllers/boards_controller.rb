@@ -63,7 +63,7 @@ class BoardsController < ApplicationController
     @board = Board.find(params[:id])
     # Check if user is allwowed to see board
     if @board.project.all_users.include?(current_user)
-      @board = @board.to_json(:include => {:items => {:include => :assignees}, :team => {}})
+      @board = @board.to_json(:include => {:items => {:include => :assignees}, :team => {:include => :owner}})
       render json: @board, :status => 200
     else
       render :nothing => true, :status => 404
@@ -73,7 +73,7 @@ class BoardsController < ApplicationController
   def create
     raise TeamBoard::InvalidAccess unless @project.team.owner_managers.include?(current_user)
     @new_board = Board.new(:name => safe_params[:name], 
-      :description => safe_params[:description], :project_id => safe_params[:project_id])
+      :description => safe_params[:description], :project_id => safe_params[:project_id], :readonly => true)
     @new_board.owner = current_user
     @new_board.save!
     render json: @board, :status => 201
