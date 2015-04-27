@@ -22,7 +22,6 @@ angular
           update: (e, ui) ->
             if $scope.isReadOnly
               ui.item.sortable.cancel()
-          cancel: ".note-content"
         }
 
         $scope.splitItems = []

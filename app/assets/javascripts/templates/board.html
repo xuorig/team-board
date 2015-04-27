@@ -20,19 +20,20 @@
 
     <!-- Column 1 -->
     <div class="row">
-
       <div class="col-md-4 items" ng-repeat="col in splitItems">
         <ul ui-sortable="sortableOptions" ng-model="col" class="item-column">
           <li ng-controller="BoardItemController" ng-model="item" ng-repeat="item in col">
             <div ng-class="item.color" class="note-item">
               <div class="delete-note" ng-click="deleteNote()">x</div>
-              <h3 ng-if="!isReadOnly" editable-text="item.title" class="note-title" ng-bind-html="item.title | linky"></h3>
-              <p ng-if="!isReadOnly" editable-textarea="item.noteContent" class="note-content" e-form="textBtnForm" ng-bind-html="item.noteContent | linky"></p>
+              <div ng-if="!isReadOnly">
+                <h3 editable-text="item.title" class="note-title" ng-bind-html="item.title | linky"></h3>
+                <p editable-textarea="item.noteContent" class="note-content" e-form="textBtnForm" ng-bind-html="item.noteContent | linky"></p>
+                <a href="" class="edit-content-link" ng-click="textBtnForm.$show()" ng-hide="textBtnForm.$visible">
+                  <i class="glyphicon glyphicon-edit"></i> Edit Content
+                </a>
+              </div>
               <h3 ng-if="isReadOnly" class="note-title" ng-bind-html="item.title | linky"></h3>
               <p ng-if="isReadOnly"  class="note-content" ng-bind-html="item.noteContent | linky"></p>
-              <a ng-if="!isReadOnly" href="" class="edit-content-link" ng-click="textBtnForm.$show()" ng-hide="textBtnForm.$visible">
-                <i class="glyphicon glyphicon-edit"></i> Edit Content
-              </a>
 
               <div ng-if="!isReadOnly" class="note-details">
                 <a href="" datepicker-popup="dd-MMMM-yyyy" ng-model="item.dueDate" is-open="calendar.opened" min-date="calendar.minDate" max-date="'2015-06-22'" datepicker-options="calendar.dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" ng-click="calendar.open($event)">
